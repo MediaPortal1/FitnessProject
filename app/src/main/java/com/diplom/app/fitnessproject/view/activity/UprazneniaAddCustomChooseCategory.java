@@ -17,6 +17,7 @@ import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.view.adapter.RadioListAdapter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCustom;
 
+
 public class UprazneniaAddCustomChooseCategory extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private DataBaseModelUpraznenia db;
     private DataBaseConnection connection;
