@@ -1,35 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    //TODO: Сделать для каждого экрана такой же с выдилением
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_main"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="Главная"
+            android:checked="true"/>//ТУТ ВКЛЮЧЕНА, ПОТОМ СДЕЛАТЬ ТАК ДЛЯ КАЖДОГО ЭКРАНА
+            />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_programs"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:enabled="false"
+            android:title="Програмы тренировок" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_upraznenia"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Упражнения" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_process"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:enabled="false"
+            android:title="Тренировочный процес" />
+        <item
+            android:id="@+id/nav_food"
+            android:icon="@drawable/ic_menu_manage"
+            android:enabled="false"
+            android:title="Режим и питание" />
+        <item
+            android:id="@+id/timer"
+            android:icon="@drawable/ic_menu_manage"
+            android:enabled="false"
+            android:title="Таймер и секундомер" />
+        <item
+            android:id="@+id/statistic"
+            android:icon="@drawable/ic_menu_manage"
+            android:enabled="false"
+
+            android:title="Статистика и советы" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Прочее">
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:icon="@drawable/ic_menu_manage"
+                android:enabled="false"
+                android:title="Настройки" />
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Send" />-->
         </menu>
     </item>
 

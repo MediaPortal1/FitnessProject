@@ -1,9 +1,75 @@
 <resources>
     <string name="app_name">Fitness Project</string>
     <string name="title_activity_main">main</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+    <!-- MENU TITLES-->
+    <string name="addMenuBtn">Добавить</string>
+    <!-- Activity Titles-->
+    <string name="main_title">Главный экран</string>
+    <string name="upraznenia_title">Упражнения</string>
+    <string name="upraznenia_add_title">Добавить упражнение</string>
+    <!-- FRAGMENTS-->
+    <string name="tab_title_upraznenia">Упражнения</string>
+    <string name="tab_title_upraznenia_history">История упражнений</string>
+    <string name="fragment_epmty">Здесь пока пусто</string>
+    <string name="add_comment">Добавить комментарий</string>
+    <string name="makeitself">Создать вручную</string>
+    <string name="upraznenia_add_category">Выберите категорию</string>
+    <!-- IN FRAGMENTS AND ACTIVITY-->
+    <string name="upraznenia_add_textiew_exmple">напр. Жим штанги</string>
+    <string name="ckeckmenubtn">Check</string>
+    <string name="category">Категория</string>
+    <string name="comment">Комментарий</string>
+    <string name="measure">Мера</string>
+    <string name="rest">Отдых</string>
+    <string name="norest">нету времени отдыха</string>
+    <string name="nocomment">нету комментария</string>
+    <string name="nomeasure">не указана мера</string>
+    <string name="nocategory">не указана категория</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Отмена</string>
+    <!-- UPRAZNENIA CAT ARRAY-->
+    <array name="upraznenia_cat_array">
+        <item>Кардио</item>
+        <item>Многосуставное</item>
+        <item>Ноги</item>
+        <item>Бицепс</item>
+        <item>Голень</item>
+        <item>Грудь</item>
+        <item>Плечи</item>
+        <item>Предплечья</item>
+        <item>Пресс</item>
+        <item>Спина</item>
+        <item>Трицепс</item>
+    </array>
+    <array name="upraznenia_measure_array">
+        <item>Вес</item>
+        <item>Время</item>
+        <item>Повторения</item>
+        <item>Повторения, лев</item>
+        <item>Повторения, прав</item>
+        <item>Расстояние</item>
+    </array>
+    <array name="upraznenia_measure_short_array">
+        <item>кг</item>
+        <item>мин</item>
+        <item>раз</item>
+        <item>раз</item>
+        <item>раз</item>
+        <item>м</item>
+    </array>
+    <array name="upraznenia_list_names">
+        <item>Жим лежа на горизонтальной скамье</item>
+        <item>Присед со штангой</item>
+        <item>Становая тяга</item>
+    </array>
+    <array name="upraznenia_list_cats">
+        <item>Грудь</item>
+        <item>Ноги</item>
+        <item>Спина</item>
+    </array>
+    <string name="base_upra">Базовое упражнение</string>
+    <!-- -->
 </resources>
