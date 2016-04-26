@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/upraznenia_add_custom_edittext"
-            android:hint="@string/upraznenia_add_textiew_exmple"
+            android:hint="@string/textview.example.add.upraznenia"
             android:textColorHint="@color/lightgray"
             android:textColor="@color/white"
             android:theme="@style/EditTextLightGray"

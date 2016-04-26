@@ -8,24 +8,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.PagesViewPresenter;
 import com.diplom.app.fitnessproject.presenter.UprazneniaAddPresenter;
-import com.diplom.app.fitnessproject.view.adapter.FragmentPages;
-import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
-import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCommentDialog;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCustom;
 
-public class UprazneniaAddActivity extends AppCompatActivity{
+public class UprazneniaAddFragment extends AppCompatActivity{
     private PagesViewPresenter pagesViewPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.upraznenia_add_layout);
+        setContentView(R.layout.fragment_add_upraznenia);
         Toolbar toolbar=(Toolbar)findViewById(R.id.upraznenia_add_toolbar);
-        toolbar.setTitle(getString(R.string.upraznenia_add_title));
+        toolbar.setTitle(getString(R.string.title_add_upraznenia));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         pagesViewPresenter=new UprazneniaAddPresenter(getSupportFragmentManager(),getResources());
@@ -43,6 +39,7 @@ public class UprazneniaAddActivity extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //TODO: Тут ошибка вылазит. Предположительно NullPointer
         Intent intent=new Intent();
         UprazneniaAddCustom fragment=(UprazneniaAddCustom)pagesViewPresenter.getTabPagerAdapter().getItem(0);
         intent.putExtra("name",fragment.getName());

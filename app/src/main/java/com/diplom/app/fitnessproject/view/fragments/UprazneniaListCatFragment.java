@@ -7,15 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.view.adapter.FragmentPages;
-import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
 
 public class UprazneniaListCatFragment extends Fragment implements FragmentPages{
     private String title;
@@ -29,7 +26,7 @@ public class UprazneniaListCatFragment extends Fragment implements FragmentPages
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.upraznenia_fragment_cat_lists,null);
+        View view=inflater.inflate(R.layout.fragment_catlist_upraznenia_,null);
         TextView txtView=(TextView)view.findViewById(R.id.upraznenia_fragment_cat_text);
         txtView.setText(title);
         ListView listView=(ListView)view.findViewById(R.id.upraznenia_cat_listview);

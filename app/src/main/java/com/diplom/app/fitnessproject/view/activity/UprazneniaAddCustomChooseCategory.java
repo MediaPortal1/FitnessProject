@@ -15,7 +15,6 @@ import android.widget.ListView;
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.view.adapter.RadioListAdapter;
-import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCustom;
 
 
 public class UprazneniaAddCustomChooseCategory extends AppCompatActivity implements AdapterView.OnItemClickListener{
@@ -26,11 +25,11 @@ public class UprazneniaAddCustomChooseCategory extends AppCompatActivity impleme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.upraznenia_add_custom_category);
+        setContentView(R.layout.activity_upraznenia_add_custom_category);
         Toolbar toolbar=(Toolbar)findViewById(R.id.upraznenia_add_custom_category_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.upraznenia_add_category));
+        getSupportActionBar().setTitle(getString(R.string.chosecategory_upraznenia));
         connection=new DataBaseConnection();
         listView=(ListView)findViewById(R.id.upraznenia_add_custom_category_listview);
         connection.execute();
@@ -56,7 +55,7 @@ public class UprazneniaAddCustomChooseCategory extends AppCompatActivity impleme
         @Override
         protected void onPostExecute(Cursor cursor) {
             super.onPostExecute(cursor);
-            adapter=new RadioListAdapter(getApplicationContext(),R.layout.upraznenia_add_custom_category_listitem,cursor,new String[]{"NAME"},new int[]{R.id.upraznenia_add_custom_category_text
+            adapter=new RadioListAdapter(getApplicationContext(),R.layout.listitem_upraznenia_add_custom_category,cursor,new String[]{"NAME"},new int[]{R.id.upraznenia_add_custom_category_text
             },BIND_AUTO_CREATE);
             listView.setAdapter(adapter);
         }

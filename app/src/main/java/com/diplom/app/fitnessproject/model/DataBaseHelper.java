@@ -29,15 +29,15 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 "MEASURE TEXT," +
                 "REST INTEGER);");
         String items[],items2[];
-        items=context.getResources().getStringArray(R.array.upraznenia_list_names);
-        items2=context.getResources().getStringArray(R.array.upraznenia_list_cats);
+        items=context.getResources().getStringArray(R.array.list_names_upraznenia);
+        items2=context.getResources().getStringArray(R.array.list_cats_upraznenia);
         long id;
         for (int i=0;i<items.length;i++){
             ContentValues contentValues=new ContentValues();
             contentValues.put("NAME",items[i]);
             contentValues.put("CAT",items2[i]);
-            contentValues.put("COMMENT",context.getString(R.string.base_upra));
-            contentValues.put("MEASURE",context.getResources().getStringArray(R.array.upraznenia_measure_short_array)[0]);
+            contentValues.put("COMMENT",context.getString(R.string.baseupr));
+            contentValues.put("MEASURE",context.getResources().getStringArray(R.array.measureshort_array_upraznenia)[0]);
             contentValues.put("REST",90);
             id=db.insert("UPRAZNENIA", null, contentValues);
         }
@@ -45,7 +45,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         db.execSQL("CREATE TABLE UPRAZNENIA_CAT(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT);");
-        items=context.getResources().getStringArray(R.array.upraznenia_cat_array);
+        items=context.getResources().getStringArray(R.array.cat_array_upraznenia);
         for(String item:items){
             ContentValues contentValues=new ContentValues();
             contentValues.put("NAME",item);
@@ -56,8 +56,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT," +
                 "SHORT_NAME TEXT);");
-        items=context.getResources().getStringArray(R.array.upraznenia_measure_array);
-        items2=context.getResources().getStringArray(R.array.upraznenia_measure_short_array);
+        items=context.getResources().getStringArray(R.array.measure_array_upraznenia);
+        items2=context.getResources().getStringArray(R.array.measureshort_array_upraznenia);
             for(int i=0;i<items.length;i++) {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("NAME", items[i]);

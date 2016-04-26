@@ -1,6 +1,5 @@
 package com.diplom.app.fitnessproject.view.fragments;
 
-import android.app.FragmentManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.view.adapter.FragmentPages;
-import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
 
 import java.util.ArrayList;
 
@@ -28,7 +26,7 @@ public class UprazneniaListFragment extends Fragment implements FragmentPages{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
-        View view=inflater.inflate(R.layout.uprazneniz_fragment_all,null);
+        View view=inflater.inflate(R.layout.fragment_all_uprazneniz,null);
         ArrayList<String> catlist=new ArrayList<String>();
         Cursor cats=db.getUprazneniaCats();
         cats.moveToFirst();

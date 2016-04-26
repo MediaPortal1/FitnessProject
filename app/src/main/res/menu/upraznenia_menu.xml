@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 <item android:id="@+id/addMenuBtn"
-    android:title="@string/addMenuBtn"
+    android:title="@string/add.menu.button"
     app:showAsAction="never"
     android:icon="@mipmap/pluscircle"
     android:orderInCategory="1"

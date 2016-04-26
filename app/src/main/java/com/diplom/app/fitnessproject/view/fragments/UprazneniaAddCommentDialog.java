@@ -1,12 +1,8 @@
 package com.diplom.app.fitnessproject.view.fragments;
 
-import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +26,8 @@ public class UprazneniaAddCommentDialog extends DialogFragment implements View.O
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.upraznenia_add_custom_comment,null);
-        getDialog().setTitle(getString(R.string.add_comment));
+        View view=inflater.inflate(R.layout.fragment_upraznenia_add_custom_comment,null);
+        getDialog().setTitle(getString(R.string.add_fragment));
     view.findViewById(R.id.upraznenia_add_custom_comment_okbtn).setOnClickListener(this);
     view.findViewById(R.id.upraznenia_add_custom_comment_cancelbtn).setOnClickListener(this);
         textView=(EditText)view.findViewById(R.id.upraznenia_add_custom_comment_edittext);

@@ -1,6 +1,5 @@
 package com.diplom.app.fitnessproject.view.fragments;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,9 +21,9 @@ public class UprazneniaListFragmentEmpty extends Fragment implements FragmentPag
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.upraznenia_fragment_list_empty,null);
+        View view=inflater.inflate(R.layout.fragment_list_empty_upraznenia,null);
         TextView txtView=(TextView)view.findViewById(R.id.txtViewEmptyText);
-        txtView.setText(getResources().getString(R.string.fragment_epmty));
+        txtView.setText(getResources().getString(R.string.empty_fragment));
         return view;
     }
 

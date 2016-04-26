@@ -18,7 +18,6 @@ import com.diplom.app.fitnessproject.presenter.NavigationPresenter;
 import com.diplom.app.fitnessproject.presenter.NavigationPresenterImpl;
 import com.diplom.app.fitnessproject.presenter.PagesViewPresenter;
 import com.diplom.app.fitnessproject.presenter.UprazneniaPresenter;
-import com.github.clans.fab.FloatingActionButton;
 
 public class UprazneniaActivity extends AppCompatActivity
         implements android.support.design.widget.NavigationView.OnNavigationItemSelectedListener,NavView,View.OnClickListener{
@@ -30,13 +29,13 @@ public class UprazneniaActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.upraznenia);
+        setContentView(R.layout.activity_upraznenia);
         Toolbar toolbar = (Toolbar) findViewById(R.id.upraznenia_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.upraznenia_title));
+        getSupportActionBar().setTitle(getString(R.string.title_upraznenia));
         drawer = (DrawerLayout) findViewById(R.id.upraznenia_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.open_navigationdrawer, R.string.close_navigationdrawer);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         android.support.design.widget.NavigationView navigationView = (android.support.design.widget.NavigationView) findViewById(R.id.upraznenia_nav_view);
@@ -100,6 +99,6 @@ public class UprazneniaActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        startActivityForResult(new Intent(this,UprazneniaAddActivity.class),1);
+        startActivityForResult(new Intent(this,UprazneniaAddFragment.class),1);
     }
 }
