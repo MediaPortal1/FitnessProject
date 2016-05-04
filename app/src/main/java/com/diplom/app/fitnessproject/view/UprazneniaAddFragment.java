@@ -16,6 +16,7 @@ import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCustom;
 
 public class UprazneniaAddFragment extends AppCompatActivity{
     private PagesViewPresenter pagesViewPresenter;
+    private ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +26,7 @@ public class UprazneniaAddFragment extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         pagesViewPresenter=new UprazneniaAddPresenter(getSupportFragmentManager(),getResources());
-        ViewPager viewPager=(ViewPager)findViewById(R.id.upraznenia_add_viewpager);
+        viewPager=(ViewPager)findViewById(R.id.upraznenia_add_viewpager);
         viewPager.setAdapter(pagesViewPresenter.getTabPagerAdapter());
         TabLayout tabLayout=(TabLayout)findViewById(R.id.upraznenia_add_tablayout);
         tabLayout.setupWithViewPager(viewPager);
@@ -41,13 +42,15 @@ public class UprazneniaAddFragment extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         //TODO: Тут ошибка вылазит. Предположительно NullPointer
         Intent intent=new Intent();
-        UprazneniaAddCustom fragment=(UprazneniaAddCustom)pagesViewPresenter.getTabPagerAdapter().getItem(0);
+        UprazneniaAddCustom fragment=(UprazneniaAddCustom)pagesViewPresenter.getTabListFragments().get(0);
+        //
         intent.putExtra("name",fragment.getName());
         intent.putExtra("comment",fragment.getComment());
         intent.putExtra("measure",fragment.getMeasure());
         intent.putExtra("category",fragment.getCategory());
         intent.putExtra("rest",fragment.getRest());
         setResult(RESULT_OK,intent);
+        finish();
         return super.onOptionsItemSelected(item);
     }
 

@@ -2,10 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-<item android:id="@+id/addMenuBtn"
-    android:title="@string/add.menu.button"
+<item android:id="@+id/addUprMenuBtn"
+    android:title="@string/addupr.menu.button"
     app:showAsAction="never"
-    android:icon="@mipmap/pluscircle"
     android:orderInCategory="1"
+    />
+<item android:id="@+id/addComplMenuBtn"
+    android:title="@string/addcompl.menu.button"
+    app:showAsAction="never"
+    android:orderInCategory="2"
     />
 </menu>

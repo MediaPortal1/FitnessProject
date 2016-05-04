@@ -5,7 +5,10 @@
     <string name="close.navigationdrawer">Close navigation drawer</string>
     <string name="setting.action">Settings</string>
     <!-- MENU TITLES-->
-    <string name="add.menu.button">Добавить</string>
+    <string name="addupr.menu.button">Добавить упражнение</string>
+    <string name="addcompl.menu.button">Добавить комплекс</string>
+    <string name="delete.menu.button">Удалить</string>
+    <string name="change.menu.button">Редактировать</string>
     <!-- Activity Titles-->
     <string name="title.main">Главный экран</string>
     <string name="title.upraznenia">Упражнения</string>
@@ -17,6 +20,8 @@
     <string name="add.fragment">Добавить комментарий</string>
     <string name="makeitself">Создать вручную</string>
     <string name="chosecategory.upraznenia">Выберите категорию</string>
+    <string name="measure.upraznenia">Выберите меру</string>
+    <string name="changecat.upraznenia">Изменить категорию</string>
     <!-- IN FRAGMENTS AND ACTIVITY-->
     <string name="textview.example.add.upraznenia">напр. Жим штанги</string>
     <string name="checkmenu.button">Check</string>
@@ -30,8 +35,10 @@
     <string name="nocategory">не указана категория</string>
     <string name="ok">Ok</string>
     <string name="cancel">Отмена</string>
+    <string name="rest.fromto">от 0 до 600 секунд</string>
+    <string name="rest.upraznenia">Введите время отдыха в секундах(от 0 до 600)</string>
     <!-- UPRAZNENIA CAT ARRAY-->
-    <array name="cat.array.upraznenia">
+    <array name="cat_array_upraznenia">
         <item>Кардио</item>
         <item>Многосуставное</item>
         <item>Ноги</item>
@@ -44,7 +51,7 @@
         <item>Спина</item>
         <item>Трицепс</item>
     </array>
-    <array name="measure.array.upraznenia">
+    <array name="measure_array_upraznenia">
         <item>Вес</item>
         <item>Время</item>
         <item>Повторения</item>
@@ -52,7 +59,7 @@
         <item>Повторения, прав</item>
         <item>Расстояние</item>
     </array>
-    <array name="measureshort.array.upraznenia">
+    <array name="measureshort_array_upraznenia">
         <item>кг</item>
         <item>мин</item>
         <item>раз</item>
@@ -60,12 +67,12 @@
         <item>раз</item>
         <item>м</item>
     </array>
-    <array name="list.names.upraznenia">
+    <array name="list_names_upraznenia">
         <item>Жим лежа на горизонтальной скамье</item>
         <item>Присед со штангой</item>
         <item>Становая тяга</item>
     </array>
-    <array name="list.cats.upraznenia">
+    <array name="list_cats_upraznenia">
         <item>Грудь</item>
         <item>Ноги</item>
         <item>Спина</item>

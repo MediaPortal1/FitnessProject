@@ -58,14 +58,14 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 "SHORT_NAME TEXT);");
         items=context.getResources().getStringArray(R.array.measure_array_upraznenia);
         items2=context.getResources().getStringArray(R.array.measureshort_array_upraznenia);
-            for(int i=0;i<items.length;i++) {
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("NAME", items[i]);
-                contentValues.put("SHORT_NAME", items2[i]);
-                db.insert("MEASURE", null, contentValues);
-            }
+        for(int i=0;i<items.length;i++) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("NAME", items[i]);
+            contentValues.put("SHORT_NAME", items2[i]);
+            db.insert("MEASURE", null, contentValues);
+        }
     }
-        //---
+    //---
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

@@ -1,6 +1,8 @@
 package com.diplom.app.fitnessproject.view;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.diplom.app.fitnessproject.R;
+import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.presenter.NavigationPresenter;
 import com.diplom.app.fitnessproject.presenter.NavigationPresenterImpl;
 import com.diplom.app.fitnessproject.presenter.PagesViewPresenter;
@@ -25,6 +28,9 @@ public class UprazneniaActivity extends AppCompatActivity
     private NavigationPresenter navigationPresenter;
     private PagesViewPresenter pagesViewPresenter;
     private ViewPager viewPager;
+    private static final int ADD_UPR=1;
+    private static final int ADD_COMPL=2;
+    private DataBaseModelUpraznenia db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,7 @@ public class UprazneniaActivity extends AppCompatActivity
         viewPager.setAdapter(pagesViewPresenter.getTabPagerAdapter());
         tabLayout.setupWithViewPager(viewPager);
         findViewById(R.id.upraznenia_fab_button).setOnClickListener(this);
+        db=new DataBaseModelUpraznenia(this);
     }
 
     @Override
@@ -74,6 +81,15 @@ public class UprazneniaActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+
+            case R.id.addUprMenuBtn:
+                startActivityForResult(new Intent(this,UprazneniaAddFragment.class),1);
+                return true;
+            case R.id.addComplMenuBtn:
+
+                return true;
+        }
         return navigationPresenter.optionMenuClickListener(item.getItemId());
     }
 
@@ -100,5 +116,39 @@ public class UprazneniaActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         startActivityForResult(new Intent(this,UprazneniaAddFragment.class),1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case ADD_UPR:
+                if (resultCode == RESULT_OK) {
+                DataBaseConnection dataBaseConnection =new DataBaseConnection(db);
+                    dataBaseConnection.execute(data);
+            }
+                break;
+            case ADD_COMPL:
+
+                break;
+        }
+    }
+    private class DataBaseConnection extends AsyncTask<Intent,Void,Void>{
+        private DataBaseModelUpraznenia db;
+        public DataBaseConnection(DataBaseModelUpraznenia database) {
+            this.db=database;
+        }
+
+        @Override
+        protected Void doInBackground(Intent... params) {
+            ContentValues cv=new ContentValues();
+            cv.put("NAME",params[0].getStringExtra("name"));
+            cv.put("CAT",params[0].getStringExtra("category"));
+            cv.put("COMMENT",params[0].getStringExtra("comment"));
+            cv.put("MEASURE",params[0].getStringExtra("measure"));
+            cv.put("REST",params[0].getIntExtra("rest",60));
+            db.insertToDB("UPRAZNENIA",cv);
+            return null;
+        }
     }
 }

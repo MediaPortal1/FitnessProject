@@ -1,5 +1,6 @@
 package com.diplom.app.fitnessproject.model;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
@@ -15,6 +16,9 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
     public Cursor getUprazneniaCats(){
         return db.query("UPRAZNENIA_CAT",null,null,null,null,null,null,null);
     }
+    public Cursor getUprazneniaMeasures(){
+        return db.query("MEASURE",null,null,null,null,null,null,null);
+    }
     public boolean isCatEmpty(String cat){
         if(getUprazneniaByCat(cat).getCount()>0)return false;
         else return true;
@@ -23,4 +27,13 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
         if(super.queryAllfromDB("UPRAZNENIA").getCount()>0) return false;
         else return true;
     }
+    public void changeCat(String cat,String name){
+        ContentValues cv=new ContentValues();
+        cv.put("NAME",cat);
+        db.update("UPRAZNENIA_CAT",cv,"NAME=?",new String[]{name});
+    }
+    public void deleteCat(String name){
+        db.delete("UPRAZNENIA_CAT","NAME=?",new String[]{name});
+    }
+
 }

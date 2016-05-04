@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ok"
-            android:id="@+id/upraznenia_add_custom_comment_okbtn"
+            android:id="@+id/okbtn_upraznenia_add_custom_addtext"
             android:layout_gravity="center_vertical"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -28,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:id="@+id/upraznenia_add_custom_comment_cancelbtn"
+            android:id="@+id/cancelbtn_upraznenia_add_custom_addtext"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/upraznenia_add_custom_comment_okbtn" />
+            android:layout_toEndOf="@+id/okbtn_upraznenia_add_custom_addtext" />
     </RelativeLayout>
 </LinearLayout>

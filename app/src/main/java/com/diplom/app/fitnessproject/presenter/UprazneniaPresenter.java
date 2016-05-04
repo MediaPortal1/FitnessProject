@@ -9,6 +9,8 @@ import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaListFragment;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaListFragmentEmpty;
 
+import java.util.List;
+
 /**
  * Created by Poltavets on 28.03.2016.
  */
@@ -61,4 +63,9 @@ public class UprazneniaPresenter implements PagesViewPresenter{
         tabPagerAdapter=null;
     }
 
+    @Override
+    public List<Fragment> getTabListFragments() {
+        //ЕСЛИ ПОНАДОБИТСЯ, ДОБАВИТЬ private List<Fragment>
+        return null;
+    }
 }

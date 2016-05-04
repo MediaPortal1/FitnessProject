@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,15 +90,19 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Adapt
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position){
             case 0:
-                UprazneniaAddCommentDialog dialog=new UprazneniaAddCommentDialog();
-                dialog.show(getChildFragmentManager(),"comment");
+                UprazneniaAddCommentDialog commentDialog=new UprazneniaAddCommentDialog();
+                commentDialog.show(getChildFragmentManager(),"comment");
                 break;
             case 1:
                 startActivityForResult(new Intent(getContext(), UprazneniaAddCustomChooseCategory.class),CATEGORY);
                 break;
             case 2:
+                UprazneniaAddMeasure measure=new UprazneniaAddMeasure();
+                measure.show(getChildFragmentManager(),"measure");
                 break;
             case 3:
+                UprazneniaAddTimeDialog rest=new UprazneniaAddTimeDialog();
+                rest.show(getChildFragmentManager(),"rest");
                 break;
         }
     }
@@ -111,7 +116,9 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Adapt
     }
 
     public String getName() {
+        if(textView.getText()!=null)
         return textView.getText().toString();
+            else return " ";
     }
 
     public int getRest() {
@@ -136,6 +143,11 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Adapt
                 list.get(2).put("subtext",obj);
                 simpleAdapter.notifyDataSetChanged();
                 break;
+            case REST:
+                rest=Integer.parseInt(obj);
+                list.get(3).put("subtext",obj);
+                simpleAdapter.notifyDataSetChanged();
+                break;
 
         }
     }
@@ -143,12 +155,21 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Adapt
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
-            case CATEGORY:
-                category=data.getStringExtra("category");
-                list.get(1).put("subtext",category);
-                simpleAdapter.notifyDataSetChanged();
-                break;
+        if(resultCode== AppCompatActivity.RESULT_OK) {
+            switch (requestCode) {
+                case CATEGORY:
+                    category = data.getStringExtra("category");
+                    list.get(1).put("subtext", category);
+                    simpleAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
+        else if(resultCode==AppCompatActivity.RESULT_CANCELED){
+            switch (requestCode) {
+                case CATEGORY:
+                    category="";
+            }
+
         }
     }
 }

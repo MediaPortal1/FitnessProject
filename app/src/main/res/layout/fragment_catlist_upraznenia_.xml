@@ -9,11 +9,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/upraznenia_fragment_cat_text"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp" />
 
     <ListView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/upraznenia_cat_listview" />
 </LinearLayout>
