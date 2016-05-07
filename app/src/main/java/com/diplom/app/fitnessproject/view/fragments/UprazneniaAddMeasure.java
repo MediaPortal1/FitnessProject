@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -18,9 +17,6 @@ import android.widget.ListView;
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.presenter.OnDialogResult;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView.OnItemClickListener{
@@ -57,7 +53,7 @@ public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView
         @Override
         protected void onPostExecute(Cursor cursor) {
             super.onPostExecute(cursor);
-            CursorAdapter adapter=new SimpleCursorAdapter(getContext(),R.layout.listitem_upraznenia,cursor,new String[]{"NAME","SHORT_NAME"},new int[]{R.id.textView_largeText_Uprazenia,R.id.textView_smallText_Upraznenia}, Adapter.IGNORE_ITEM_VIEW_TYPE);
+            CursorAdapter adapter=new SimpleCursorAdapter(getContext(),R.layout.lisview_two_items,cursor,new String[]{"NAME","SHORT_NAME"},new int[]{R.id.textview_big_listitem_twoitems,R.id.textview_small_listitem_twoitems}, Adapter.IGNORE_ITEM_VIEW_TYPE);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(UprazneniaAddMeasure.this);
         }

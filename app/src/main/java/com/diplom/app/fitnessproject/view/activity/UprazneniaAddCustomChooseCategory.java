@@ -76,7 +76,7 @@ public class UprazneniaAddCustomChooseCategory extends AppCompatActivity impleme
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==R.menu.menu_check) {
+        if(item.getItemId()==R.id.menu_ckeck) {
             Cursor cursor;
             cursor = (Cursor) adapter.getItem(listView.getCheckedItemPosition());
             Intent intent = new Intent();

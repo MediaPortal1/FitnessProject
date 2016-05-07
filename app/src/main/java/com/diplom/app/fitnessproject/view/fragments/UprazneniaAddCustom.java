@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +85,22 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Adapt
         simpleAdapter=new SimpleAdapter(getContext(),list,R.layout.listitem_upraznenia_add_custom,new String[]{"icon","text","subtext"},new int[]{R.id.upraznenia_add_custom_listitem_img,R.id.upraznenia_add_custom_listitem_text,R.id.upraznenia_add_custom_listitem_subtext});
         listView.setAdapter(simpleAdapter);
         textView=(TextView)view.findViewById(R.id.upraznenia_add_custom_edittext);
+        textView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            name=s.toString();
+            }
+        });
         listView.setOnItemClickListener(this);
         return view;
     }
@@ -116,9 +135,7 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Adapt
     }
 
     public String getName() {
-        if(textView.getText()!=null)
-        return textView.getText().toString();
-            else return " ";
+        return name;
     }
 
     public int getRest() {

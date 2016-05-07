@@ -21,4 +21,8 @@
     <item name="colorControlActivated">@color/lightgray</item>
     <item name="colorControlHighlight">@color/lightgray</item>
     </style>
+    <style name="FragmentNiceBackground">
+        <item name="android:colorBackground">@color/nicebackground</item>
+        <item name="android:background">@color/nicebackground</item>
+    </style>
 </resources>
