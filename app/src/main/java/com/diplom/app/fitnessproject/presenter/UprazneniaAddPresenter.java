@@ -1,11 +1,11 @@
 package com.diplom.app.fitnessproject.presenter;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.diplom.app.fitnessproject.R;
+import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewPresenter;
 import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCustom;
 

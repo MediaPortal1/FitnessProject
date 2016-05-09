@@ -5,19 +5,17 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
-import com.diplom.app.fitnessproject.presenter.ChangeColumn;
-import com.diplom.app.fitnessproject.presenter.ListChangedNotify;
+import com.diplom.app.fitnessproject.presenter.interfaces.ChangeColumn;
+import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
 import com.diplom.app.fitnessproject.view.adapter.RadioListAdapter;
 import com.diplom.app.fitnessproject.view.adapter.UprazneniaCatRadioListAdapter;
 

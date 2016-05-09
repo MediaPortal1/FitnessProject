@@ -1,4 +1,4 @@
-package com.diplom.app.fitnessproject.presenter;
+package com.diplom.app.fitnessproject.presenter.interfaces;
 
 import android.support.v4.app.Fragment;
 
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Poltavets on 28.03.2016.
  */
-public interface PagesViewPresenter {
+public interface PagesViewPresenter  extends PresenterParent{
     TabPagerAdapter getTabPagerAdapter();
     void closePresenter();
     List<Fragment> getTabListFragments();

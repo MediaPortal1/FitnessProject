@@ -2,7 +2,6 @@ package com.diplom.app.fitnessproject.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,14 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.NavigationPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.NavigationPresenter;
 import com.diplom.app.fitnessproject.presenter.NavigationPresenterImpl;
+import com.diplom.app.fitnessproject.view.interfaces.NavView;
 
 public class MainActivity extends AppCompatActivity
         implements android.support.design.widget.NavigationView.OnNavigationItemSelectedListener,NavView {
     private DrawerLayout drawer;
     private NavigationPresenter navigationPresenter;
-    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

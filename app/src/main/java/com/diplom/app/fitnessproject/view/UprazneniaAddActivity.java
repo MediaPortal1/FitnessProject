@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.PagesViewPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewPresenter;
 import com.diplom.app.fitnessproject.presenter.UprazneniaAddPresenter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCustom;
 
@@ -45,11 +45,11 @@ public class UprazneniaAddActivity extends AppCompatActivity{
             Intent intent = new Intent();
             UprazneniaAddCustom fragment = (UprazneniaAddCustom) pagesViewPresenter.getTabListFragments().get(0);
             //
-            intent.putExtra("name", fragment.getName());
-            intent.putExtra("comment", fragment.getComment());
-            intent.putExtra("measure", fragment.getMeasure());
-            intent.putExtra("category", fragment.getCategory());
-            intent.putExtra("rest", fragment.getRest());
+            intent.putExtra("name", fragment.getUpraznenieInfo().getName());
+            intent.putExtra("comment", fragment.getUpraznenieInfo().getComment());
+            intent.putExtra("measure", fragment.getUpraznenieInfo().getMeasure());
+            intent.putExtra("category", fragment.getUpraznenieInfo().getCategory());
+            intent.putExtra("rest", fragment.getUpraznenieInfo().getRest());
             setResult(RESULT_OK, intent);
             finish();
                 return true;

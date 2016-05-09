@@ -1,9 +1,10 @@
 package com.diplom.app.fitnessproject.view.adapter;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
 
 import java.util.ArrayList;
 

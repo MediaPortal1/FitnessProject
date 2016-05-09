@@ -16,6 +16,12 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
     public Cursor getUprazneniaCats(){
         return db.query("UPRAZNENIA_CAT",null,null,null,null,null,null,null);
     }
+    public Cursor getUprazneniabyName(String name){
+        return db.query("UPRAZNENIA",null,"NAME=?",new String[]{name},null,null,null,null);
+    }
+    public Cursor getUprazneniabyId(long id){
+        return db.query("UPRAZNENIA",null,"_ID=?",new String[]{Long.toString(id)},null,null,null,null);
+    }
     public Cursor getUprazneniaMeasures(){
         return db.query("MEASURE",null,null,null,null,null,null,null);
     }
@@ -25,6 +31,10 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
     }
     public boolean isUprazneniaEmpty(){
         if(super.queryAllfromDB("UPRAZNENIA").getCount()>0) return false;
+        else return true;
+    }
+    public boolean isComplexEmpty(){
+        if(super.queryAllfromDB("COMPLEX").getCount()>0) return false;
         else return true;
     }
     public void changeCat(String cat,String name){

@@ -1,29 +1,31 @@
 package com.diplom.app.fitnessproject.view.fragments;
 
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.widget.CursorAdapter;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
-import com.diplom.app.fitnessproject.presenter.OnDialogResult;
+import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
+import com.diplom.app.fitnessproject.presenter.interfaces.PresenterParent;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomInterface;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddCustomPresenter;
+import com.diplom.app.fitnessproject.view.interfaces.DialogMeasurePresenterSetter;
+import com.diplom.app.fitnessproject.view.interfaces.ParentView;
 
 
-public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView.OnItemClickListener{
-    private DataBaseConnection connection;
-    private DataBaseModelUpraznenia db;
+public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView.OnItemClickListener,DialogResultSetter,DialogMeasurePresenterSetter{
     private ListView listView;
     private Cursor cursor;
+    private OnDialogResult result;
+    private UprazneniaAddCustomInterface presenter;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,27 +39,11 @@ public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView
         getDialog().setTitle(getString(R.string.measure_upraznenia));
         View view=inflater.inflate(R.layout.fragment_upraznenia_add_custom_measure,null);
         listView=(ListView)view.findViewById(R.id.listView_upraznenia_add_custom_measure);
-        connection=new DataBaseConnection();
-        connection.execute();
-
+        listView.setOnItemClickListener(UprazneniaAddMeasure.this);
+        presenter.setMeasureCursor();
         return view;
     }
-    private class DataBaseConnection extends AsyncTask<Void,Void,Cursor> {
-        @Override
-        protected Cursor doInBackground(Void... params) {
-            db=new DataBaseModelUpraznenia(getContext());
-            cursor=db.getUprazneniaMeasures();
-            return cursor;
-        }
 
-        @Override
-        protected void onPostExecute(Cursor cursor) {
-            super.onPostExecute(cursor);
-            CursorAdapter adapter=new SimpleCursorAdapter(getContext(),R.layout.lisview_two_items,cursor,new String[]{"NAME","SHORT_NAME"},new int[]{R.id.textview_big_listitem_twoitems,R.id.textview_small_listitem_twoitems}, Adapter.IGNORE_ITEM_VIEW_TYPE);
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener(UprazneniaAddMeasure.this);
-        }
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -71,8 +57,27 @@ public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView
                 break;
             }
         }while(cursor.moveToNext());
-        ((OnDialogResult)getParentFragment()).onResultDialog(UprazneniaAddCustom.MEASURE,(name+" ("+shortname+")"));
+        result.onResultDialog(UprazneniaAddCustomPresenter.MEASURE,(name+" ("+shortname+")"));
         dismiss();
     }
 
+    @Override
+    public void setDialogResult(OnDialogResult dialogResult) {
+        this.result=dialogResult;
+    }
+
+    @Override
+    public void setPresenter(PresenterParent presenter) {
+        this.presenter=(UprazneniaAddCustomInterface)presenter;
+    }
+
+    @Override
+    public void setListAdapter(BaseAdapter adapter) {
+        listView.setAdapter(adapter);
+    }
+
+    @Override
+    public void setCursor(Cursor cursor) {
+        this.cursor=cursor;
+    }
 }

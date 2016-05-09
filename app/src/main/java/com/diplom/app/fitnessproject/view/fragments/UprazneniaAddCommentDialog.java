@@ -2,18 +2,15 @@ package com.diplom.app.fitnessproject.view.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.OnDialogResult;
+import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddCustomPresenter;
 
 
-public class UprazneniaAddCommentDialog extends DialogTextFragment{
+public class UprazneniaAddCommentDialog extends DialogTextFragment implements DialogResultSetter{
+    private OnDialogResult result;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +20,11 @@ public class UprazneniaAddCommentDialog extends DialogTextFragment{
     @Override
     protected void ButtonOkAction() {
         super.ButtonOkAction();
-        ((OnDialogResult)getParentFragment()).onResultDialog(UprazneniaAddCustom.COMMENT,textView.getText().toString());
+       result.onResultDialog(UprazneniaAddCustomPresenter.COMMENT,textView.getText().toString());
     }
 
+    @Override
+    public void setDialogResult(OnDialogResult dialogResult) {
+        this.result=dialogResult;
+    }
 }

@@ -1,8 +1,6 @@
 package com.diplom.app.fitnessproject.view;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -14,24 +12,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
-import com.diplom.app.fitnessproject.presenter.NavigationPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.NavigationPresenter;
 import com.diplom.app.fitnessproject.presenter.NavigationPresenterImpl;
-import com.diplom.app.fitnessproject.presenter.PagesViewPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewPresenter;
 import com.diplom.app.fitnessproject.presenter.UprazneniaPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaInterface;
+import com.diplom.app.fitnessproject.view.interfaces.NavView;
 
 public class UprazneniaActivity extends AppCompatActivity
         implements android.support.design.widget.NavigationView.OnNavigationItemSelectedListener,NavView,View.OnClickListener{
     private DrawerLayout drawer;
     private NavigationPresenter navigationPresenter;
     private PagesViewPresenter pagesViewPresenter;
+    private UprazneniaInterface preseter;
     private ViewPager viewPager;
     private static final int ADD_UPR=1;
     private static final int ADD_COMPL=2;
-    private DataBaseModelUpraznenia db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +50,10 @@ public class UprazneniaActivity extends AppCompatActivity
         viewPager=(ViewPager)findViewById(R.id.pager_upraznenia);
         TabLayout tabLayout=(TabLayout)findViewById(R.id.tablayout_upraznenia);
         pagesViewPresenter =new UprazneniaPresenter(this,getSupportFragmentManager());
+        preseter=(UprazneniaInterface) pagesViewPresenter;
         viewPager.setAdapter(pagesViewPresenter.getTabPagerAdapter());
         tabLayout.setupWithViewPager(viewPager);
         findViewById(R.id.upraznenia_fab_button).setOnClickListener(this);
-        db=new DataBaseModelUpraznenia(this);
     }
 
     @Override
@@ -108,10 +107,6 @@ public class UprazneniaActivity extends AppCompatActivity
     public void startNavActivity(Class classitem) {
         startActivity(new Intent(getApplicationContext(), classitem));
     }
-    public void initFragmentAdapter(){
-        //1 FRAGMENT
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -124,8 +119,7 @@ public class UprazneniaActivity extends AppCompatActivity
         switch (requestCode) {
             case ADD_UPR:
                 if (resultCode == RESULT_OK) {
-                DataBaseConnection dataBaseConnection =new DataBaseConnection(db);
-                    dataBaseConnection.execute(data);
+                    preseter.addUpraznenie(data);
             }
                 break;
             case ADD_COMPL:
@@ -133,34 +127,5 @@ public class UprazneniaActivity extends AppCompatActivity
                 break;
         }
     }
-    private class DataBaseConnection extends AsyncTask<Intent,Void,Boolean>{
-        private DataBaseModelUpraznenia db;
-        public DataBaseConnection(DataBaseModelUpraznenia database) {
-            this.db=database;
-        }
 
-        @Override
-        protected Boolean doInBackground(Intent... params) {
-            ContentValues cv=new ContentValues();
-            cv.put("NAME",params[0].getStringExtra("name"));
-            cv.put("CAT",params[0].getStringExtra("category"));
-            cv.put("COMMENT",params[0].getStringExtra("comment"));
-            cv.put("MEASURE",params[0].getStringExtra("measure"));
-            cv.put("REST",params[0].getIntExtra("rest",60));
-            if(params[0].getStringExtra("name")!=null && params[0].getStringExtra("category")!=null) db.insertToDB("UPRAZNENIA",cv);
-            else return false;
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-            if(aBoolean==false){
-                Toast.makeText(getApplicationContext(),getString(R.string.notempty_addupraznenia),Toast.LENGTH_SHORT).show();
-            }
-            else{
-                Toast.makeText(getApplicationContext(),getString(R.string.addsuccess_addupraznenia),Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }

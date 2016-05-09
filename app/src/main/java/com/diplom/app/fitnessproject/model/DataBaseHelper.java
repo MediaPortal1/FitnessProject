@@ -64,6 +64,19 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             contentValues.put("SHORT_NAME", items2[i]);
             db.insert("MEASURE", null, contentValues);
         }
+        db.execSQL("CREATE TABLE COMPLEX(" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "NAME TEXT,"+
+                "DESCRIPTION TEXT"+
+                ");");
+        db.execSQL("CREATE TABLE COMPLEX_UPRAZNENIA(" +
+                "UPRAZNENIE INTEGER," +
+                "COMPLEX INTEGER"+
+                ");");
+        ContentValues contentValues=new ContentValues();
+        contentValues.put("NAME","TEST COMPLEX");
+        contentValues.put("DESCRIPTION","TEST DESCRIPTON");
+        db.insert("COMPLEX",null,contentValues);
     }
     //---
 

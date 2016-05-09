@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.ContextSetter;
-import com.diplom.app.fitnessproject.presenter.OnDialogResult;
-import com.diplom.app.fitnessproject.presenter.StringSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.ContextSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
+import com.diplom.app.fitnessproject.presenter.interfaces.StringSetter;
 
 import java.util.HashMap;
 import java.util.Map;

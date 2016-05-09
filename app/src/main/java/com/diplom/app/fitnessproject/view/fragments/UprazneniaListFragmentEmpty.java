@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.view.adapter.FragmentPages;
+import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
 public class UprazneniaListFragmentEmpty extends Fragment implements FragmentPages{
     private String title;
 

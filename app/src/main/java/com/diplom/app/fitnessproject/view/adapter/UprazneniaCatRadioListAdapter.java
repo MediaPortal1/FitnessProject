@@ -2,17 +2,16 @@ package com.diplom.app.fitnessproject.view.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.ChangeColumn;
-import com.diplom.app.fitnessproject.presenter.ContextSetter;
-import com.diplom.app.fitnessproject.presenter.ListChangedNotify;
-import com.diplom.app.fitnessproject.presenter.StringSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.ChangeColumn;
+import com.diplom.app.fitnessproject.presenter.interfaces.ContextSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
+import com.diplom.app.fitnessproject.presenter.interfaces.StringSetter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaCatChangeDialog;
 
 public class UprazneniaCatRadioListAdapter extends RadioListAdapter{

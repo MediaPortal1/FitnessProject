@@ -3,14 +3,15 @@ package com.diplom.app.fitnessproject.presenter;
 import android.support.v4.widget.DrawerLayout;
 
 import com.diplom.app.fitnessproject.R;
+import com.diplom.app.fitnessproject.presenter.interfaces.NavigationPresenter;
 import com.diplom.app.fitnessproject.view.MainActivity;
-import com.diplom.app.fitnessproject.view.NavView;
+import com.diplom.app.fitnessproject.view.interfaces.NavView;
 import com.diplom.app.fitnessproject.view.UprazneniaActivity;
 
 /**
  * Created by Poltavets on 26.03.2016.
  */
-public class NavigationPresenterImpl implements NavigationPresenter{
+public class NavigationPresenterImpl implements NavigationPresenter {
     private DrawerLayout drawer;
     private NavView navView;
 

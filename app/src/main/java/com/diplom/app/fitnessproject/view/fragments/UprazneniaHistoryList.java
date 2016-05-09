@@ -1,6 +1,5 @@
 package com.diplom.app.fitnessproject.view.fragments;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.view.adapter.FragmentPages;
+import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
 
 /**
  * Created by Poltavets on 26.03.2016.
