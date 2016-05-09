@@ -25,7 +25,7 @@
         <activity android:name=".view.UprazneniaActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".view.UprazneniaAddFragment">
+        <activity android:name=".view.UprazneniaAddActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.UprazneniaActivity" />
@@ -34,7 +34,7 @@
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.UprazneniaAddFragment" />
+                android:value=".view.UprazneniaAddActivity" />
         </activity>
     </application>
 

@@ -14,7 +14,7 @@ import com.diplom.app.fitnessproject.presenter.PagesViewPresenter;
 import com.diplom.app.fitnessproject.presenter.UprazneniaAddPresenter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCustom;
 
-public class UprazneniaAddFragment extends AppCompatActivity{
+public class UprazneniaAddActivity extends AppCompatActivity{
     private PagesViewPresenter pagesViewPresenter;
     private ViewPager viewPager;
     @Override
@@ -24,7 +24,7 @@ public class UprazneniaAddFragment extends AppCompatActivity{
         Toolbar toolbar=(Toolbar)findViewById(R.id.upraznenia_add_toolbar);
         toolbar.setTitle(getString(R.string.title_add_upraznenia));
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         pagesViewPresenter=new UprazneniaAddPresenter(getSupportFragmentManager(),getResources());
         viewPager=(ViewPager)findViewById(R.id.upraznenia_add_viewpager);
         viewPager.setAdapter(pagesViewPresenter.getTabPagerAdapter());
@@ -40,18 +40,21 @@ public class UprazneniaAddFragment extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //TODO: Тут ошибка вылазит. Предположительно NullPointer
-        Intent intent=new Intent();
-        UprazneniaAddCustom fragment=(UprazneniaAddCustom)pagesViewPresenter.getTabListFragments().get(0);
-        //
-        intent.putExtra("name",fragment.getName());
-        intent.putExtra("comment",fragment.getComment());
-        intent.putExtra("measure",fragment.getMeasure());
-        intent.putExtra("category",fragment.getCategory());
-        intent.putExtra("rest",fragment.getRest());
-        setResult(RESULT_OK,intent);
-        finish();
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.menu_ckeck:
+            Intent intent = new Intent();
+            UprazneniaAddCustom fragment = (UprazneniaAddCustom) pagesViewPresenter.getTabListFragments().get(0);
+            //
+            intent.putExtra("name", fragment.getName());
+            intent.putExtra("comment", fragment.getComment());
+            intent.putExtra("measure", fragment.getMeasure());
+            intent.putExtra("category", fragment.getCategory());
+            intent.putExtra("rest", fragment.getRest());
+            setResult(RESULT_OK, intent);
+            finish();
+                return true;
+        }
+                    return super.onOptionsItemSelected(item);
     }
 
 }

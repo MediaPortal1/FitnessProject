@@ -32,8 +32,16 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
         cv.put("NAME",cat);
         db.update("UPRAZNENIA_CAT",cv,"NAME=?",new String[]{name});
     }
+    public void changeUpraznenie(String from,String to){
+        ContentValues cv=new ContentValues();
+        cv.put("NAME",from);
+        db.update("UPRAZNENIA",cv,"NAME=?",new String[]{to});
+    }
     public void deleteCat(String name){
         db.delete("UPRAZNENIA_CAT","NAME=?",new String[]{name});
+    }
+    public void deleteUpraznenie(String name){
+        db.delete("UPRAZNENIA","NAME=?",new String[]{name});
     }
 
 }

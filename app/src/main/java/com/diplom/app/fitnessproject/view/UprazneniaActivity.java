@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
@@ -31,7 +32,6 @@ public class UprazneniaActivity extends AppCompatActivity
     private static final int ADD_UPR=1;
     private static final int ADD_COMPL=2;
     private DataBaseModelUpraznenia db;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +84,7 @@ public class UprazneniaActivity extends AppCompatActivity
         switch (item.getItemId()){
 
             case R.id.addUprMenuBtn:
-                startActivityForResult(new Intent(this,UprazneniaAddFragment.class),1);
+                startActivityForResult(new Intent(this,UprazneniaAddActivity.class),1);
                 return true;
             case R.id.addComplMenuBtn:
 
@@ -115,7 +115,7 @@ public class UprazneniaActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        startActivityForResult(new Intent(this,UprazneniaAddFragment.class),1);
+        startActivityForResult(new Intent(this,UprazneniaAddActivity.class),1);
     }
 
     @Override
@@ -133,22 +133,34 @@ public class UprazneniaActivity extends AppCompatActivity
                 break;
         }
     }
-    private class DataBaseConnection extends AsyncTask<Intent,Void,Void>{
+    private class DataBaseConnection extends AsyncTask<Intent,Void,Boolean>{
         private DataBaseModelUpraznenia db;
         public DataBaseConnection(DataBaseModelUpraznenia database) {
             this.db=database;
         }
 
         @Override
-        protected Void doInBackground(Intent... params) {
+        protected Boolean doInBackground(Intent... params) {
             ContentValues cv=new ContentValues();
             cv.put("NAME",params[0].getStringExtra("name"));
             cv.put("CAT",params[0].getStringExtra("category"));
             cv.put("COMMENT",params[0].getStringExtra("comment"));
             cv.put("MEASURE",params[0].getStringExtra("measure"));
             cv.put("REST",params[0].getIntExtra("rest",60));
-            db.insertToDB("UPRAZNENIA",cv);
-            return null;
+            if(params[0].getStringExtra("name")!=null && params[0].getStringExtra("category")!=null) db.insertToDB("UPRAZNENIA",cv);
+            else return false;
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            if(aBoolean==false){
+                Toast.makeText(getApplicationContext(),getString(R.string.notempty_addupraznenia),Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getApplicationContext(),getString(R.string.addsuccess_addupraznenia),Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

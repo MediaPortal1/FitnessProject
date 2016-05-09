@@ -148,21 +148,22 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Adapt
     }
 
     @Override
-    public void onResultDialog(int DIALOG_CODE,String obj) {
+    public void onResultDialog(int DIALOG_CODE,Object obj) {
+        String textObj=obj.toString();
         switch (DIALOG_CODE){
             case COMMENT:
-                comment=obj;
-                list.get(0).put("subtext",obj);
+                comment=textObj;
+                list.get(0).put("subtext",textObj);
                 simpleAdapter.notifyDataSetChanged();
                 break;
             case MEASURE:
-                measure=obj;
-                list.get(2).put("subtext",obj);
+                measure=textObj;
+                list.get(2).put("subtext",textObj);
                 simpleAdapter.notifyDataSetChanged();
                 break;
             case REST:
-                rest=Integer.parseInt(obj);
-                list.get(3).put("subtext",obj);
+                rest=Integer.parseInt(textObj);
+                list.get(3).put("subtext",textObj);
                 simpleAdapter.notifyDataSetChanged();
                 break;
 

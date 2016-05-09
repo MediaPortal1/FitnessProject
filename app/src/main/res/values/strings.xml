@@ -22,6 +22,7 @@
     <string name="chosecategory.upraznenia">Выберите категорию</string>
     <string name="measure.upraznenia">Выберите меру</string>
     <string name="changecat.upraznenia">Изменить категорию</string>
+    <string name="changeupr.upraznenia">Изменить название упражнения</string>
     <!-- IN FRAGMENTS AND ACTIVITY-->
     <string name="textview.example.add.upraznenia">напр. Жим штанги</string>
     <string name="checkmenu.button">Check</string>
@@ -37,6 +38,8 @@
     <string name="cancel">Отмена</string>
     <string name="rest.fromto">от 0 до 600 секунд</string>
     <string name="rest.upraznenia">Время отдыха (в сек)</string>
+    <string name="notempty.addupraznenia">Название или категория не могут быть пустые</string>
+    <string name="addsuccess.addupraznenia">Упражнение добавлено</string>
     <!-- UPRAZNENIA CAT ARRAY-->
     <array name="cat_array_upraznenia">
         <item>Кардио</item>
