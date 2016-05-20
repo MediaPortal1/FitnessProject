@@ -6,7 +6,6 @@ import android.widget.BaseAdapter;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomInterface;
 
 
-public interface DialogMeasurePresenterSetter  extends PresenterSetter {
-    void setListAdapter(BaseAdapter adapter);
+public interface DialogMeasurePresenterSetter  extends PresenterSetter, AdapterSetter {
     void setCursor(Cursor cursor);
 }

@@ -23,7 +23,7 @@ public class UprazneniaHistoryList extends Fragment implements FragmentPages {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.upraznenia_history_list,null);
+        View view=inflater.inflate(R.layout.fragment_upraznenia_history_list,null);
         return view;
     }
 

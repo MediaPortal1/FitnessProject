@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Poltavets on 28.03.2016.
  */
-public interface PagesViewPresenter  extends PresenterParent{
+public interface PagesViewInteface extends PresenterParent{
     TabPagerAdapter getTabPagerAdapter();
     void closePresenter();
     List<Fragment> getTabListFragments();

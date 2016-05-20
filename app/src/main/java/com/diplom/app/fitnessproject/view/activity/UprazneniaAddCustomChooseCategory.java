@@ -27,14 +27,16 @@ public class UprazneniaAddCustomChooseCategory extends AppCompatActivity impleme
     private RadioListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upraznenia_add_custom_category);
-        Toolbar toolbar=(Toolbar)findViewById(R.id.upraznenia_add_custom_category_toolbar);
+
+        Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar_category_choose);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.chosecategory_upraznenia));
         connection=new DataBaseConnection();
-        listView=(ListView)findViewById(R.id.upraznenia_add_custom_category_listview);
+        listView=(ListView)findViewById(R.id.listview_category_choose);
         connection.execute();
         listView.setOnItemClickListener(this);
     }
@@ -59,7 +61,7 @@ public class UprazneniaAddCustomChooseCategory extends AppCompatActivity impleme
         @Override
         protected void onPostExecute(Cursor cursor) {
             super.onPostExecute(cursor);
-            adapter=new UprazneniaCatRadioListAdapter(UprazneniaAddCustomChooseCategory.this,R.layout.listitem_upraznenia_add_custom_category,cursor,new String[]{"NAME"},new int[]{R.id.upraznenia_add_custom_category_text
+            adapter=new UprazneniaCatRadioListAdapter(UprazneniaAddCustomChooseCategory.this,R.layout.listitem_upraznenia_add_custom_category,cursor,new String[]{"NAME"},new int[]{R.id.textView_add_custom_category
             },BIND_AUTO_CREATE);
             listView.setAdapter(adapter);
         }
@@ -98,8 +100,8 @@ public class UprazneniaAddCustomChooseCategory extends AppCompatActivity impleme
     }
 
     @Override
-    public void changeColumn(String change, String name) {
-        db.changeCat(change,name);
+    public void changeColumn(String from, String to) {
+        db.changeCat(from, to);
     }
 
     @Override

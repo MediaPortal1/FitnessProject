@@ -69,14 +69,31 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 "NAME TEXT,"+
                 "DESCRIPTION TEXT"+
                 ");");
-        db.execSQL("CREATE TABLE COMPLEX_UPRAZNENIA(" +
-                "UPRAZNENIE INTEGER," +
-                "COMPLEX INTEGER"+
-                ");");
+         /*
+        INSERT COMPLEX
+         */
         ContentValues contentValues=new ContentValues();
-        contentValues.put("NAME","TEST COMPLEX");
+        contentValues.put("NAME","TEST");
         contentValues.put("DESCRIPTION","TEST DESCRIPTON");
         db.insert("COMPLEX",null,contentValues);
+        //
+
+        db.execSQL("CREATE TABLE COMPLEX_UPRAZNENIA(" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "UPRAZNENIE TEXT," +
+                "COMPLEX TEXT"+
+                ");");
+       /*
+       INSERT COMPLEX_UPRAZNENIA
+        */
+        items=context.getResources().getStringArray(R.array.list_names_upraznenia);
+        for(int i=0;i<items.length;i++) {
+            contentValues = new ContentValues();
+            contentValues.put("UPRAZNENIE", items[i]);
+            contentValues.put("COMPLEX", "TEST");
+            db.insert("COMPLEX_UPRAZNENIA", null, contentValues);
+        }
+
     }
     //---
 

@@ -11,19 +11,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.interfaces.NavigationPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.NavigationInterface;
 import com.diplom.app.fitnessproject.presenter.NavigationPresenterImpl;
 import com.diplom.app.fitnessproject.view.interfaces.NavView;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 public class MainActivity extends AppCompatActivity
         implements android.support.design.widget.NavigationView.OnNavigationItemSelectedListener,NavView {
     private DrawerLayout drawer;
-    private NavigationPresenter navigationPresenter;
+    private NavigationInterface navigationPresenter;
+    private MaterialCalendarView calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //---INIT---
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationPresenter=new NavigationPresenterImpl(drawer,(NavView)this);
         navigationView.setCheckedItem(R.id.nav_main);
+        calendar=(MaterialCalendarView)findViewById(R.id.calendarview_main);
         //---
 
     }

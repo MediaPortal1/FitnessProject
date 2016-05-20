@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="70dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="40dp"
+        android:paddingTop="40dp"
+        android:background="?attr/colorPrimary"
+
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText.add.superset.complex.upraznenia"
+            android:hint="@string/textview.example.add.complex"
+            android:textColorHint="@color/lightgray"
+            android:textColor="@color/white"
+            android:theme="@style/EditTextLightGray"
+            />
+    </RelativeLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView.add.superset.complex.upraznenia"
+        tools:listitem="@layout/listitem_upraznenia_add_custom"
+        android:layout_gravity="center_horizontal"
+        android:choiceMode="singleChoice" />
+</LinearLayout>

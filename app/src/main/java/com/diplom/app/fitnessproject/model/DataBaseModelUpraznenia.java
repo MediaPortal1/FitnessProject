@@ -10,6 +10,9 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
     public DataBaseModelUpraznenia(Context context) {
         super(context);
     }
+    public Cursor getAllUpraznenia(){
+        return db.query("UPRAZNENIA",null,null,null,null,null,"NAME ASC");
+    }
     public Cursor getUprazneniaByCat(String cat){
         return db.query("UPRAZNENIA",null,"CAT=?",new String[]{cat},null,null,null);
     }
@@ -24,6 +27,15 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
     }
     public Cursor getUprazneniaMeasures(){
         return db.query("MEASURE",null,null,null,null,null,null,null);
+    }
+    public Cursor getComplexList(){
+        return db.query("COMPLEX",null,null,null,null,null,null,null);
+    }
+    public Cursor getUprazneniaofComplex(String complex){
+        return db.query("COMPLEX_UPRAZNENIA",null,"COMPLEX=?",new String[]{complex},null,null,null,null);
+    }
+    public Cursor getComplexbyName(String name){
+        return db.query("COMPLEX",null,"NAME=?",new String[]{name},null,null,null,null);
     }
     public boolean isCatEmpty(String cat){
         if(getUprazneniaByCat(cat).getCount()>0)return false;
@@ -44,8 +56,8 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
     }
     public void changeUpraznenie(String from,String to){
         ContentValues cv=new ContentValues();
-        cv.put("NAME",from);
-        db.update("UPRAZNENIA",cv,"NAME=?",new String[]{to});
+        cv.put("NAME",to);
+        db.update("UPRAZNENIA",cv,"NAME=?",new String[]{from});
     }
     public void deleteCat(String name){
         db.delete("UPRAZNENIA_CAT","NAME=?",new String[]{name});

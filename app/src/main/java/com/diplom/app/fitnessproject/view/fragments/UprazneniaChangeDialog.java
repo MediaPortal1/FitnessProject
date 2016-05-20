@@ -3,6 +3,7 @@ package com.diplom.app.fitnessproject.view.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.EditText;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.interfaces.ContextSetter;
@@ -14,9 +15,11 @@ import java.util.Map;
 
 
 public class UprazneniaChangeDialog extends DialogTextFragment implements ContextSetter,StringSetter{
-    private String from,to;
+
+    private String from;
     private Context context;
     private OnDialogResult result;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +30,7 @@ public class UprazneniaChangeDialog extends DialogTextFragment implements Contex
     protected void ButtonOkAction() {
         Map<String,String> map=new HashMap<>();
         map.put("from",from);
-        map.put("to",to);
+        map.put("to",editText.getText().toString());
        result.onResultDialog(UprazneniaListFragment.CHANGE_DIALOG,map);
     }
 

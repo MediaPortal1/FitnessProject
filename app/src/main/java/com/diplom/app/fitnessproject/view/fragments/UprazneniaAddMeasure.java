@@ -16,9 +16,8 @@ import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.interfaces.PresenterParent;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomInterface;
-import com.diplom.app.fitnessproject.presenter.UprazneniaAddCustomPresenter;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddFragmentCustomPresenter;
 import com.diplom.app.fitnessproject.view.interfaces.DialogMeasurePresenterSetter;
-import com.diplom.app.fitnessproject.view.interfaces.ParentView;
 
 
 public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView.OnItemClickListener,DialogResultSetter,DialogMeasurePresenterSetter{
@@ -57,7 +56,7 @@ public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView
                 break;
             }
         }while(cursor.moveToNext());
-        result.onResultDialog(UprazneniaAddCustomPresenter.MEASURE,(name+" ("+shortname+")"));
+        result.onResultDialog(UprazneniaAddFragmentCustomPresenter.MEASURE,(name+" ("+shortname+")"));
         dismiss();
     }
 
@@ -72,7 +71,7 @@ public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView
     }
 
     @Override
-    public void setListAdapter(BaseAdapter adapter) {
+    public void setAdapter(BaseAdapter adapter) {
         listView.setAdapter(adapter);
     }
 

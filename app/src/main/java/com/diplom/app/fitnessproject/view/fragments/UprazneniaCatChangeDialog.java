@@ -33,7 +33,7 @@ public class UprazneniaCatChangeDialog extends DialogTextFragment implements Vie
     protected void ButtonOkAction() {
         super.ButtonOkAction();
        DataBaseConnection connection=new DataBaseConnection();
-        connection.execute(textView.getText().toString());
+        connection.execute(editText.getText().toString());
         ((ListChangedNotify)context).adapterUpdate();
 
     }

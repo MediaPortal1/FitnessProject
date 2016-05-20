@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class UprazneniaAddCustomPresenter implements UprazneniaAddCustomInterface,OnDialogResult,AdapterView.OnItemClickListener,UprazneniaInfoGetter {
+public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustomInterface,OnDialogResult,AdapterView.OnItemClickListener,UprazneniaInfoGetter {
     private Context context;
     private ArrayList<Map<String,Object>> list;
     private FragmentAddUpraznenieCustomView viewFragment;
@@ -44,7 +44,7 @@ public class UprazneniaAddCustomPresenter implements UprazneniaAddCustomInterfac
     private Cursor measureCursor;
     private DialogMeasurePresenterSetter measureview;
 
-    public UprazneniaAddCustomPresenter(Context context,FragmentAddUpraznenieCustomView view,FragmentManager fm) {
+    public UprazneniaAddFragmentCustomPresenter(Context context, FragmentAddUpraznenieCustomView view, FragmentManager fm) {
     this.context=context;
     this.viewFragment =view;
     this.fm=fm;
@@ -77,7 +77,7 @@ public class UprazneniaAddCustomPresenter implements UprazneniaAddCustomInterfac
         return list;
     }
     private void initAdapter(){
-        simpleAdapter=new SimpleAdapter(context,list,R.layout.listitem_upraznenia_add_custom,new String[]{"icon","text","subtext"},new int[]{R.id.upraznenia_add_custom_listitem_img,R.id.upraznenia_add_custom_listitem_text,R.id.upraznenia_add_custom_listitem_subtext});
+        simpleAdapter=new SimpleAdapter(context,list,R.layout.listitem_upraznenia_add_custom,new String[]{"icon","text","subtext"},new int[]{R.id.imageview_listitem_add_upraznenia,R.id.textView_listitem_add_upraznenia,R.id.textView_subtext_listitem_add_upraznenia});
     }
     @Override
     public void onResultDialog(int DIALOG_CODE,Object obj) {
@@ -198,7 +198,7 @@ public class UprazneniaAddCustomPresenter implements UprazneniaAddCustomInterfac
         protected void onPostExecute(Cursor cursor) {
             super.onPostExecute(cursor);
             CursorAdapter adapter=new SimpleCursorAdapter(context,R.layout.lisview_two_items,cursor,new String[]{"NAME","SHORT_NAME"},new int[]{R.id.textview_big_listitem_twoitems,R.id.textview_small_listitem_twoitems}, Adapter.IGNORE_ITEM_VIEW_TYPE);
-            measureview.setListAdapter(adapter);
+            measureview.setAdapter(adapter);
             measureview.setCursor(cursor);
         }
     }

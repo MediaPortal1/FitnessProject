@@ -9,11 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.UprazneniaPresenter;
-import com.diplom.app.fitnessproject.presenter.interfaces.PresenterParent;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaListInterface;
-import com.diplom.app.fitnessproject.view.interfaces.ParentView;
-import com.diplom.app.fitnessproject.view.interfaces.PresenterSetter;
 import com.diplom.app.fitnessproject.view.interfaces.UprazneniaInfoSetter;
 
 

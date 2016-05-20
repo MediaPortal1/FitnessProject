@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomInterface;
-import com.diplom.app.fitnessproject.presenter.UprazneniaAddCustomPresenter;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddFragmentCustomPresenter;
 import com.diplom.app.fitnessproject.view.activity.UprazneniaAddCustomChooseCategory;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentAddUpraznenieCustomView;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
@@ -46,8 +46,8 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Fragm
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.activity_upraznenia_add_fragment_custom,null);
-        presenter=new UprazneniaAddCustomPresenter(getContext(),this,getChildFragmentManager());
+        View view=inflater.inflate(R.layout.fragment_upraznenia_add_fragment_custom,null);
+        presenter=new UprazneniaAddFragmentCustomPresenter(getContext(),this,getChildFragmentManager());
         listView=(ListView)view.findViewById(R.id.upraznenia_add_custom_listview);
         listView.setAdapter(presenter.getListAdapter());
         textView=(TextView)view.findViewById(R.id.upraznenia_add_custom_edittext);
@@ -85,9 +85,10 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Fragm
 
     @Override
     public void startActivityCat() {
-        startActivityForResult(new Intent(getContext(), UprazneniaAddCustomChooseCategory.class),UprazneniaAddCustomPresenter.CATEGORY);
+        startActivityForResult(new Intent(getContext(), UprazneniaAddCustomChooseCategory.class), UprazneniaAddFragmentCustomPresenter.CATEGORY);
     }
     public UprazneniaInfoGetter getUpraznenieInfo(){
      return presenter.getUprazneniaInfo();
     }
+
 }

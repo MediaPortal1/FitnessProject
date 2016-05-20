@@ -14,27 +14,33 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
-import com.diplom.app.fitnessproject.presenter.interfaces.NavigationPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.NavigationInterface;
 import com.diplom.app.fitnessproject.presenter.NavigationPresenterImpl;
-import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewPresenter;
-import com.diplom.app.fitnessproject.presenter.UprazneniaPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
+import com.diplom.app.fitnessproject.presenter.UprazneniaActivityPresenter;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaInterface;
 import com.diplom.app.fitnessproject.view.interfaces.NavView;
 
 public class UprazneniaActivity extends AppCompatActivity
-        implements android.support.design.widget.NavigationView.OnNavigationItemSelectedListener,NavView,View.OnClickListener{
+        implements android.support.design.widget.NavigationView.OnNavigationItemSelectedListener,
+        NavView,View.OnClickListener{
+
     private DrawerLayout drawer;
-    private NavigationPresenter navigationPresenter;
-    private PagesViewPresenter pagesViewPresenter;
+    private NavigationInterface navigationPresenter;
+    private PagesViewInteface pagesViewPresenter;
     private UprazneniaInterface preseter;
     private ViewPager viewPager;
     private static final int ADD_UPR=1;
     private static final int ADD_COMPL=2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upraznenia);
+
+        /*
+        INIT
+         */
         Toolbar toolbar = (Toolbar) findViewById(R.id.upraznenia_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.title_upraznenia));
@@ -49,11 +55,16 @@ public class UprazneniaActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_upraznenia);
         viewPager=(ViewPager)findViewById(R.id.pager_upraznenia);
         TabLayout tabLayout=(TabLayout)findViewById(R.id.tablayout_upraznenia);
-        pagesViewPresenter =new UprazneniaPresenter(this,getSupportFragmentManager());
+
+        //PRESENTER
+        pagesViewPresenter =new UprazneniaActivityPresenter(this,getSupportFragmentManager());
         preseter=(UprazneniaInterface) pagesViewPresenter;
+        //
+
         viewPager.setAdapter(pagesViewPresenter.getTabPagerAdapter());
         tabLayout.setupWithViewPager(viewPager);
         findViewById(R.id.upraznenia_fab_button).setOnClickListener(this);
+        //
     }
 
     @Override
@@ -110,7 +121,15 @@ public class UprazneniaActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        startActivityForResult(new Intent(this,UprazneniaAddActivity.class),1);
+            switch (viewPager.getCurrentItem()) {
+                case 0:
+                    startActivityForResult(new Intent(this, UprazneniaAddActivity.class), 1);
+                    break;
+                case 1:
+                    startActivityForResult(new Intent(this, UprazneniaAddComplex.class), 2);
+                    break;
+            }
+
     }
 
     @Override

@@ -4,29 +4,25 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.View;
-import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
-import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaInterface;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaComplexListFragment;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
 import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaListFragment;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaListFragmentEmpty;
+import com.diplom.app.fitnessproject.view.interfaces.FragmentPagesUseDb;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Poltavets on 28.03.2016.
- */
-public class UprazneniaPresenter implements PagesViewPresenter,UprazneniaInterface{
+
+public class UprazneniaActivityPresenter implements PagesViewInteface,UprazneniaInterface{
     private Context context;
     private DataBaseModelUpraznenia dataBaseModel;
     private TabPagerAdapter tabPagerAdapter;
@@ -34,7 +30,7 @@ public class UprazneniaPresenter implements PagesViewPresenter,UprazneniaInterfa
     private UprazneniaInterface presenter;
     private ArrayList<Fragment> fragmentpages;
 
-    public UprazneniaPresenter(Context context, android.support.v4.app.FragmentManager fm) {
+    public UprazneniaActivityPresenter(Context context, android.support.v4.app.FragmentManager fm) {
         this.context=context;
         dataBaseModel=new DataBaseModelUpraznenia(context);
         tabPagerAdapter=new TabPagerAdapter(fm);
@@ -59,7 +55,7 @@ public class UprazneniaPresenter implements PagesViewPresenter,UprazneniaInterfa
             fragmentPages=(FragmentPages)fragment;
             fragmentPages.setTitle(context.getString(R.string.title_tab_upraznenia));
             UprazneniaListFragment uprazneniaListFragment=(UprazneniaListFragment)fragment;
-            ((UprazneniaListFragment) fragment).setDb(dataBaseModel);
+            ((FragmentPagesUseDb) fragment).setDataBase(dataBaseModel);
             tabPagerAdapter.addFragment((FragmentPages) fragment);
         }
         //2 FRAGMENT
@@ -75,6 +71,7 @@ public class UprazneniaPresenter implements PagesViewPresenter,UprazneniaInterfa
             fragmentpages.add(fragment);
             fragmentPages=(FragmentPages)fragment;
             fragmentPages.setTitle(context.getString(R.string.title_tab_complex));
+            ((FragmentPagesUseDb)fragment).setDataBase(dataBaseModel);
             tabPagerAdapter.addFragment((FragmentPages) fragment);
         }
 
@@ -82,7 +79,7 @@ public class UprazneniaPresenter implements PagesViewPresenter,UprazneniaInterfa
         fragment=new UprazneniaListFragmentEmpty();
         fragmentpages.add(fragment);
         fragmentPages=(FragmentPages)fragment;
-        fragmentPages.setTitle("Ещё-что-то");
+        fragmentPages.setTitle(context.getString(R.string.title_tab_history));
         tabPagerAdapter.addFragment((FragmentPages)fragment);
         return tabPagerAdapter;
     }
@@ -100,13 +97,13 @@ public class UprazneniaPresenter implements PagesViewPresenter,UprazneniaInterfa
 
     @Override
     public void addUpraznenie(Intent data) {
-        DataBaseConnection dataBaseConnection =new DataBaseConnection(dataBaseModel);
+        DataBaseConnectionAddUpraznenie dataBaseConnection =new DataBaseConnectionAddUpraznenie(dataBaseModel);
         dataBaseConnection.execute(data);
     }
 
-    private class DataBaseConnection extends AsyncTask<Intent,Void,Boolean> {
+    private class DataBaseConnectionAddUpraznenie extends AsyncTask<Intent,Void,Boolean> {
         private DataBaseModelUpraznenia db;
-        public DataBaseConnection(DataBaseModelUpraznenia database) {
+        public DataBaseConnectionAddUpraznenie(DataBaseModelUpraznenia database) {
             this.db=database;
         }
 

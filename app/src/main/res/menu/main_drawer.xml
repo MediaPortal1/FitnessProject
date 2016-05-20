@@ -11,8 +11,8 @@
         <item
             android:id="@+id/nav_programs"
             android:icon="@drawable/ic_menu_gallery"
-            android:enabled="false"
-            android:title="Програмы тренировок" />
+            android:enabled="true"
+            android:title="Программы тренировок" />
         <item
             android:id="@+id/nav_upraznenia"
             android:icon="@drawable/ic_menu_slideshow"

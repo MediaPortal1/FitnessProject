@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
-import com.diplom.app.fitnessproject.presenter.UprazneniaAddCustomPresenter;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddFragmentCustomPresenter;
 
 
 public class UprazneniaAddCommentDialog extends DialogTextFragment implements DialogResultSetter{
@@ -20,7 +20,7 @@ public class UprazneniaAddCommentDialog extends DialogTextFragment implements Di
     @Override
     protected void ButtonOkAction() {
         super.ButtonOkAction();
-       result.onResultDialog(UprazneniaAddCustomPresenter.COMMENT,textView.getText().toString());
+       result.onResultDialog(UprazneniaAddFragmentCustomPresenter.COMMENT, editText.getText().toString());
     }
 
     @Override

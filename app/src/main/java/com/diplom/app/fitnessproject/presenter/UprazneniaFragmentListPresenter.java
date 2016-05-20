@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UprazneniaListPresenter implements UprazneniaListInterface,ChangeColumn,OnDialogResult,ListChangedNotify,ExpandableListView.OnChildClickListener,View.OnClickListener {
+public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,ChangeColumn,OnDialogResult,ListChangedNotify,ExpandableListView.OnChildClickListener,View.OnClickListener {
     private Context context;
     private ArrayList<ArrayList<String>> arraycat;
     private SimpleExpandableListAdapter adapter;
@@ -32,10 +32,10 @@ public class UprazneniaListPresenter implements UprazneniaListInterface,ChangeCo
     private DataBaseModelUpraznenia db;
     private FragmentListView view;
 
-    public UprazneniaListPresenter(Context context, FragmentManager fm,FragmentListView view) {
+    public UprazneniaFragmentListPresenter(Context context, FragmentManager fm, FragmentListView view, DataBaseModelUpraznenia db) {
         this.context = context;
         this.fm = fm;
-        db=new DataBaseModelUpraznenia(context);
+        this.db=db;
         this.view=view;
         adapterUpdate();
     }
@@ -55,10 +55,10 @@ public class UprazneniaListPresenter implements UprazneniaListInterface,ChangeCo
             }
         }
         arraycat=new ArrayList<>();
-        DataBaseConnection connection=new DataBaseConnection();
+        DataBaseConnectionGetUprazneniaList connection=new DataBaseConnectionGetUprazneniaList();
         connection.execute(notemptycats);
     }
-    private class DataBaseConnection extends AsyncTask<ArrayList<String>, Void, Void> {
+    private class DataBaseConnectionGetUprazneniaList extends AsyncTask<ArrayList<String>, Void, Void> {
 
         @Override
         protected Void doInBackground(ArrayList<String>... params) {
@@ -91,12 +91,12 @@ public class UprazneniaListPresenter implements UprazneniaListInterface,ChangeCo
                 сhildCatList.add(сhildCatItemList);
             }
             String childFrom[] = new String[] { "cat" };
-            int childTo[] = new int[] { R.id.textView_largeText_Uprazenia };
+            int childTo[] = new int[] { R.id.textView_listitem_child_complex};
             adapter = new UprazneniaExpandableListAdapter(
                     context, groupCatList,
                     android.R.layout.simple_expandable_list_item_1, groupfrom,
                     groupto, сhildCatList, R.layout.listitem_upraznenia,
-                    childFrom, childTo,db,UprazneniaListPresenter.this,UprazneniaListPresenter.this,fm,UprazneniaListPresenter.this);
+                    childFrom, childTo,db,UprazneniaFragmentListPresenter.this,UprazneniaFragmentListPresenter.this,fm,UprazneniaFragmentListPresenter.this);
             return null;
         }
 
@@ -114,8 +114,8 @@ public class UprazneniaListPresenter implements UprazneniaListInterface,ChangeCo
     }
 
     @Override
-    public void changeColumn(String change, String name) {
-        db.changeUpraznenie(change,name);
+    public void changeColumn(String from, String to) {
+        db.changeUpraznenie(from, to);
         adapterUpdate();
     }
 
@@ -149,7 +149,7 @@ public class UprazneniaListPresenter implements UprazneniaListInterface,ChangeCo
     @Override
     public void onClick(View v) {
         UpraznenieInfoDialog dialog=new UpraznenieInfoDialog();
-        TextView txtview=(TextView)v.findViewById(R.id.textView_largeText_Uprazenia);
+        TextView txtview=(TextView)v.findViewById(R.id.textView_listitem_child_complex);
         Cursor cursor=db.getUprazneniabyName(txtview.getText().toString());
         cursor.moveToFirst();
         String name=cursor.getString(cursor.getColumnIndex("NAME"));

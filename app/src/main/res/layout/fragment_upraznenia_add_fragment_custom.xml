@@ -24,7 +24,6 @@
             android:textColorHint="@color/lightgray"
             android:textColor="@color/white"
             android:theme="@style/EditTextLightGray"
-
             />
     </RelativeLayout>
     <ListView

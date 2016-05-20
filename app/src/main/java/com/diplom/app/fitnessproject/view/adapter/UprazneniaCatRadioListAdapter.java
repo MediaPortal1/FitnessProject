@@ -14,9 +14,10 @@ import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
 import com.diplom.app.fitnessproject.presenter.interfaces.StringSetter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaCatChangeDialog;
 
-public class UprazneniaCatRadioListAdapter extends RadioListAdapter{
+public class UprazneniaCatRadioListAdapter extends RadioListAdapter implements View.OnClickListener{
     public UprazneniaCatRadioListAdapter(Context applicationContext, int simple_list_item_1, Cursor cursor, String[] strings, int[] ints, int bindAutoCreate) {
         super(applicationContext, simple_list_item_1, cursor, strings, ints, bindAutoCreate);
+        setClickListener(this);
     }
 
     @Override

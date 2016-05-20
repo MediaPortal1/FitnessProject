@@ -19,8 +19,6 @@ import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.interfaces.StringSetter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaChangeDialog;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +45,7 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         View v=super.getChildView(groupPosition, childPosition, isLastChild, convertView, parent);
         final ImageButton img=(ImageButton) v.findViewById(R.id.imageButton_listitem_upraznenia);
-        final TextView txtview=(TextView) v.findViewById(R.id.textView_largeText_Uprazenia);
+        final TextView txtview=(TextView) v.findViewById(R.id.textView_listitem_child_complex);
 
         img.setOnClickListener(new View.OnClickListener() {
             @Override

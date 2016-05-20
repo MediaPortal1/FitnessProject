@@ -10,22 +10,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewPresenter;
-import com.diplom.app.fitnessproject.presenter.UprazneniaAddPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddActivityPresenter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCustom;
 
 public class UprazneniaAddActivity extends AppCompatActivity{
-    private PagesViewPresenter pagesViewPresenter;
+    private PagesViewInteface pagesViewPresenter;
     private ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_add_upraznenia);
+        setContentView(R.layout.activity_add_upraznenia);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.upraznenia_add_toolbar);
         toolbar.setTitle(getString(R.string.title_add_upraznenia));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        pagesViewPresenter=new UprazneniaAddPresenter(getSupportFragmentManager(),getResources());
+        pagesViewPresenter=new UprazneniaAddActivityPresenter(getSupportFragmentManager(),getResources());
         viewPager=(ViewPager)findViewById(R.id.upraznenia_add_viewpager);
         viewPager.setAdapter(pagesViewPresenter.getTabPagerAdapter());
         TabLayout tabLayout=(TabLayout)findViewById(R.id.upraznenia_add_tablayout);

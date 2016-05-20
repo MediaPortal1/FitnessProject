@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
-import com.diplom.app.fitnessproject.presenter.UprazneniaAddCustomPresenter;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddFragmentCustomPresenter;
 
 public class UprazneniaAddTimeDialog extends DialogTextFragment implements DialogResultSetter{
     private OnDialogResult result;
@@ -24,16 +24,16 @@ public class UprazneniaAddTimeDialog extends DialogTextFragment implements Dialo
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=super.onCreateView(inflater, container, savedInstanceState);
-        textView.setHint(getString(R.string.rest_fromto));
-        textView.setInputType(InputType.TYPE_CLASS_NUMBER);
-        textView.setEms(3);
+        editText.setHint(getString(R.string.rest_fromto));
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        editText.setEms(3);
         return v;
     }
 
     @Override
     protected void ButtonOkAction() {
         super.ButtonOkAction();
-       result.onResultDialog(UprazneniaAddCustomPresenter.REST,textView.getText().toString());
+       result.onResultDialog(UprazneniaAddFragmentCustomPresenter.REST, editText.getText().toString());
     }
 
     @Override

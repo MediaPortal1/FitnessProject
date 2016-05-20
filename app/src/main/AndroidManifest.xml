@@ -14,11 +14,9 @@
             android:screenOrientation="portrait"
             android:name=".view.MainActivity"
             android:label="@string/title.activity.main"
-            android:theme="@style/AppTheme.NoActionBar"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -35,6 +33,20 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.UprazneniaAddActivity" />
+        </activity>
+        <activity android:name=".view.UprazneniaAddComplex">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.UprazneniaActivity" />
+        </activity>
+        <activity android:name=".view.activity.UprazneniaAllList"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.UprazneniaAddComplex" />
+        </activity>
+        <activity android:name=".view.TrainingsActivity">
+
         </activity>
     </application>
 
