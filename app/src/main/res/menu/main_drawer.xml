@@ -28,9 +28,9 @@
             android:enabled="false"
             android:title="Режим и питание" />
         <item
-            android:id="@+id/timer"
+            android:id="@+id/nav_timer"
             android:icon="@drawable/ic_menu_manage"
-            android:enabled="false"
+            android:enabled="true"
             android:title="Таймер и секундомер" />
         <item
             android:id="@+id/statistic"

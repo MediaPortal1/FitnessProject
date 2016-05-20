@@ -16,6 +16,7 @@
     <string name="title.add.complex">Добавить комлпекс упражнений</string>
     <string name="title.choose.upraznenie">Добавить комлпекс упражнений</string>
     <string name="title.trainings">Тренировочные програмы</string>
+    <string name="title.secundary">Таймер и секундомер</string>
     <!-- FRAGMENTS-->
     <string name="title.tab.upraznenia">Упражнения</string>
     <string name="title.tab.complex">Комплексы упражнений</string>
@@ -31,6 +32,8 @@
     <string name="changecat.upraznenia">Изменить категорию</string>
     <string name="changeupr.upraznenia">Изменить название упражнения</string>
     <string name="trainings.myprograms">Мои программы</string>
+    <string name="title.timer">Таймер</string>
+    <string name="title.timepicker">Секундомер</string>
     <!-- IN FRAGMENTS AND ACTIVITY-->
     <string name="textview.example.add.upraznenia">напр. Жим штанги</string>
     <string name="textview.example.add.complex">напр. Суперсэт на руки</string>
@@ -55,6 +58,9 @@
     <string name="addsuccess.addupraznenia">Упражнение добавлено</string>
     <string name="first.upraznenie.complex">Первое упражнение</string>
     <string name="second.upraznenie.complex">Второе упражнение</string>
+    <string name="button.start">start</string>
+    <string name="button.stop">stop</string>
+    <string name="button.reset">reset</string>
     <!-- UPRAZNENIA CAT ARRAY-->
     <array name="cat_array_upraznenia">
         <item>Кардио</item>

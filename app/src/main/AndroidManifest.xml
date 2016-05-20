@@ -46,7 +46,8 @@
                 android:value=".view.UprazneniaAddComplex" />
         </activity>
         <activity android:name=".view.TrainingsActivity">
-
+        </activity>
+        <activity android:name=".view.SecundaryActivity">
         </activity>
     </application>
 

@@ -5,6 +5,7 @@ import android.support.v4.widget.DrawerLayout;
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.interfaces.NavigationInterface;
 import com.diplom.app.fitnessproject.view.MainActivity;
+import com.diplom.app.fitnessproject.view.SecundaryActivity;
 import com.diplom.app.fitnessproject.view.TrainingsActivity;
 import com.diplom.app.fitnessproject.view.interfaces.NavView;
 import com.diplom.app.fitnessproject.view.UprazneniaActivity;
@@ -33,6 +34,10 @@ public class NavigationPresenterImpl implements NavigationInterface {
             case R.id.nav_programs:
                 navView.closeDrawer();
                 navView.startNavActivity(TrainingsActivity.class);
+                return true;
+            case R.id.nav_timer:
+                navView.closeDrawer();
+                navView.startNavActivity(SecundaryActivity.class);
                 return true;
         }
         return false;
