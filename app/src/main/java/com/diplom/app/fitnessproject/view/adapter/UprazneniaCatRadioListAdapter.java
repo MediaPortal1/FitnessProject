@@ -33,7 +33,7 @@ public class UprazneniaCatRadioListAdapter extends RadioListAdapter implements V
                         ((ChangeColumn)context).deleteColumn((String) v.getTag());
                         ((ListChangedNotify)context).adapterUpdate();
                         return true;
-                    case R.id.menu_change:
+                    case R.id.menu_rename:
                         UprazneniaCatChangeDialog dialog=new UprazneniaCatChangeDialog();
                         ((ContextSetter)dialog).setContext(context);
                         ((StringSetter)dialog).setString((String)v.getTag());

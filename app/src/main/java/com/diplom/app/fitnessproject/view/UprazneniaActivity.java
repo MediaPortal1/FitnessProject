@@ -28,7 +28,7 @@ public class UprazneniaActivity extends AppCompatActivity
     private DrawerLayout drawer;
     private NavigationInterface navigationPresenter;
     private PagesViewInteface pagesViewPresenter;
-    private UprazneniaInterface preseter;
+    private UprazneniaInterface presenter;
     private ViewPager viewPager;
     private static final int ADD_UPR=1;
     private static final int ADD_COMPL=2;
@@ -58,7 +58,7 @@ public class UprazneniaActivity extends AppCompatActivity
 
         //PRESENTER
         pagesViewPresenter =new UprazneniaActivityPresenter(this,getSupportFragmentManager());
-        preseter=(UprazneniaInterface) pagesViewPresenter;
+        presenter =(UprazneniaInterface) pagesViewPresenter;
         //
 
         viewPager.setAdapter(pagesViewPresenter.getTabPagerAdapter());
@@ -122,11 +122,11 @@ public class UprazneniaActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
             switch (viewPager.getCurrentItem()) {
-                case 0:
-                    startActivityForResult(new Intent(this, UprazneniaAddActivity.class), 1);
+                case 0://ADD UPRAZNENIA FOR RESULT
+                    startActivityForResult(new Intent(this, UprazneniaAddActivity.class), ADD_UPR);
                     break;
-                case 1:
-                    startActivityForResult(new Intent(this, UprazneniaAddComplex.class), 2);
+                case 1://ADD COMPLEX FOR RESULT
+                    startActivityForResult(new Intent(this, UprazneniaAddComplex.class), ADD_COMPL);
                     break;
             }
 
@@ -134,17 +134,18 @@ public class UprazneniaActivity extends AppCompatActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case ADD_UPR:
                 if (resultCode == RESULT_OK) {
-                    preseter.addUpraznenie(data);
+                    presenter.addUpraznenie(data);
             }
                 break;
             case ADD_COMPL:
-
+                if(resultCode == RESULT_OK)
+                    presenter.addComplex(data);
                 break;
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

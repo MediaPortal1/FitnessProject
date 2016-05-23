@@ -14,10 +14,11 @@
     />
 
     <LinearLayout
+        android:id="@+id/buttoncontainer_taimer"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/timer.secundary"
         >
 
 
@@ -40,4 +41,10 @@
             style="@style/Base.Widget.AppCompat.Button.Borderless"
             />
     </LinearLayout>
+    <ListView
+        android:id="@+id/listview_timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttoncontainer_taimer"
+        />
 </RelativeLayout>

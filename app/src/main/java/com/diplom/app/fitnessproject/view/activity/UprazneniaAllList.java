@@ -13,7 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.UprazneniaAllListPresenter;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAllActivityListPresenter;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAllListInterface;
 import com.diplom.app.fitnessproject.view.adapter.UprazneniaAllCatRadioListAdapter;
 import com.diplom.app.fitnessproject.view.interfaces.UprazneniaAllListView;
@@ -38,7 +38,7 @@ public class UprazneniaAllList extends AppCompatActivity implements UprazneniaAl
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.title_choose_upraznenie));
 
-        presenter=new UprazneniaAllListPresenter(getApplicationContext(),this,getSupportFragmentManager()); //PRESENTER
+        presenter=new UprazneniaAllActivityListPresenter(getApplicationContext(),this,getSupportFragmentManager()); //PRESENTER
 
 
         if(getIntent()!=null){

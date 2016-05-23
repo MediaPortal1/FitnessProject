@@ -54,16 +54,41 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
         cv.put("NAME",cat);
         db.update("UPRAZNENIA_CAT",cv,"NAME=?",new String[]{name});
     }
-    public void changeUpraznenie(String from,String to){
+    public void renameUpraznenie(String from, String to){
         ContentValues cv=new ContentValues();
         cv.put("NAME",to);
         db.update("UPRAZNENIA",cv,"NAME=?",new String[]{from});
+
     }
+    public void renameComplex(String from,String to){
+        ContentValues cv=new ContentValues();
+        cv.put("NAME",to);
+        db.update("COMPLEX",cv,"NAME=?",new String[]{from});
+        cv=new ContentValues();
+        cv.put("COMPLEX",to);
+        db.update("COMPLEX_UPRAZNENIA",cv,"COMPLEX=?",new String[]{from});
+    }
+
     public void deleteCat(String name){
         db.delete("UPRAZNENIA_CAT","NAME=?",new String[]{name});
     }
     public void deleteUpraznenie(String name){
         db.delete("UPRAZNENIA","NAME=?",new String[]{name});
     }
+    public void deleteComplex(String name){
+        db.delete("COMPLEX","NAME=?",new String[]{name});
+        db.delete("COMPLEX_UPRAZNENIA","COMPLEX=?",new String[]{name});
+    }
+    public boolean isComplexIsExist(String name){
+        Cursor cursor=db.query("COMPLEX",null,"NAME=?",new String[]{name},null,null,null);
+     if (cursor.getCount()>0)  return true;
+        else return false;
+    }
+    public boolean isUpraznenieIsExist(String name){
+        Cursor cursor=db.query("UPRAZNENIA",null,"NAME=?",new String[]{name},null,null,null);
+     if (cursor.getCount()>0)  return true;
+        else return false;
+    }
+
 
 }

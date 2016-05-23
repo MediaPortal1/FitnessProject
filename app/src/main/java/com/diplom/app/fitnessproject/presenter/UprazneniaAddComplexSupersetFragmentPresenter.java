@@ -2,33 +2,36 @@ package com.diplom.app.fitnessproject.presenter;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
+import android.support.v4.app.FragmentManager;
 import android.widget.SimpleAdapter;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.interfaces.ComplexAddSupersetInterface;
+import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
+import com.diplom.app.fitnessproject.presenter.interfaces.ShowInfoDialog;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddComplexSupersetInterface;
 import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaGetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaSetter;
-import com.diplom.app.fitnessproject.view.UprazneniaAddComplex;
+import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddComplexCommentDialog;
 import com.diplom.app.fitnessproject.view.interfaces.ComplexAddSupersetView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ComplexAddSupersetFragmentPresenter implements ComplexAddSupersetInterface,UprazneniaSetter,ListChangedNotify{
+public class UprazneniaAddComplexSupersetFragmentPresenter implements UprazneniaAddComplexSupersetInterface,UprazneniaSetter,ListChangedNotify,UprazneniaGetter,OnDialogResult{
     private Context context;
     private ComplexAddSupersetView view;
     private ArrayList<Map<String,Object>> itemlist;
-    private String firstUpr,secondUpr;
+    private String firstUpr,secondUpr,comment;
     private SimpleAdapter adapter;
+    private FragmentManager fm;
 
-    public ComplexAddSupersetFragmentPresenter(Context context, ComplexAddSupersetView view) {
+    public UprazneniaAddComplexSupersetFragmentPresenter(Context context, ComplexAddSupersetView view,FragmentManager fm) {
         this.context = context;
         this.view = view;
+        this.fm=fm;
         initAdapter();
     }
 
@@ -36,6 +39,14 @@ public class ComplexAddSupersetFragmentPresenter implements ComplexAddSupersetIn
         itemlist=new ArrayList<>();
 
         Map<String,Object> map=new HashMap<>();
+
+        //
+        map.put("icon", R.mipmap.comment_outline);
+        map.put("text",context.getString(R.string.description));
+        map.put("subtext",context.getString(R.string.nodescription));
+        itemlist.add(map);
+        //
+        map=new HashMap<>();
         map.put("icon", R.mipmap.category);
         map.put("text",context.getString(R.string.first_upraznenie_complex));
         map.put("subtext",context.getString(R.string.noupraznenia));
@@ -61,6 +72,13 @@ public class ComplexAddSupersetFragmentPresenter implements ComplexAddSupersetIn
     }
 
     @Override
+    public void showCommentDialog() {
+        UprazneniaAddComplexCommentDialog fragment=new UprazneniaAddComplexCommentDialog();
+        ((DialogResultSetter)fragment).setDialogResult(this);
+        fragment.show(fm,"comment");
+    }
+
+    @Override
     public void setFirstUpr(String name) {
         firstUpr=name;
         itemlist.get(0).put("subtext",name);
@@ -80,16 +98,40 @@ public class ComplexAddSupersetFragmentPresenter implements ComplexAddSupersetIn
         //NULL
     }
 
-    public String getFirstUpr() {
+    @Override
+    public String getFirstUpraznenie() {
         return firstUpr;
     }
 
-    public String getSecondUpr() {
+    @Override
+    public String getSecondUpraznenie() {
         return secondUpr;
+    }
+
+    @Override
+    public String getThirdUpraznenie() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public String getDescription() {
+        return comment;
     }
 
     @Override
     public void adapterUpdate() {
     adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResultDialog(int DIALOG_CODE, Object obj) {
+        comment=(String)obj;
+        itemlist.get(0).put("subtext",comment);
+        adapterUpdate();
     }
 }

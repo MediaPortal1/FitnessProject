@@ -34,10 +34,21 @@ public class UprazneniaComplexListFragment extends Fragment implements FragmentP
         View v=inflater.inflate(R.layout.fragment_complexall,null);
 
         list=(ExpandableListView)v.findViewById(R.id.expandableListView_complexlist_all);
-
-        presenter=new UprazneniaFragmentComplexPresenter(getContext(),this,db);
-
+        list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                return  list.isGroupExpanded(groupPosition) ? list.collapseGroup(groupPosition) : list.expandGroup(groupPosition);
+            }
+        });
+        list.setOnChildClickListener((ExpandableListView.OnChildClickListener) presenter);
+        presenter=new UprazneniaFragmentComplexPresenter(getContext(),this,db,getFragmentManager());
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.updateAdapter();
     }
 
     @Override
@@ -58,12 +69,7 @@ public class UprazneniaComplexListFragment extends Fragment implements FragmentP
     @Override
     public void setAdapter(BaseExpandableListAdapter adapter) {
         list.setAdapter(adapter);
-        list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                return  list.isGroupExpanded(groupPosition) ? list.collapseGroup(groupPosition) : list.expandGroup(groupPosition);
-            }
-        });
+
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaInterface;
+import com.diplom.app.fitnessproject.view.UprazneniaAddComplex;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaComplexListFragment;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
 import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
@@ -97,27 +98,30 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
 
     @Override
     public void addUpraznenie(Intent data) {
-        DataBaseConnectionAddUpraznenie dataBaseConnection =new DataBaseConnectionAddUpraznenie(dataBaseModel);
+        DataBaseConnectionAddUpraznenie dataBaseConnection =new DataBaseConnectionAddUpraznenie();
         dataBaseConnection.execute(data);
     }
 
     private class DataBaseConnectionAddUpraznenie extends AsyncTask<Intent,Void,Boolean> {
         private DataBaseModelUpraznenia db;
-        public DataBaseConnectionAddUpraznenie(DataBaseModelUpraznenia database) {
-            this.db=database;
-        }
+
 
         @Override
         protected Boolean doInBackground(Intent... params) {
-            ContentValues cv=new ContentValues();
-            cv.put("NAME",params[0].getStringExtra("name"));
-            cv.put("CAT",params[0].getStringExtra("category"));
-            cv.put("COMMENT",params[0].getStringExtra("comment"));
-            cv.put("MEASURE",params[0].getStringExtra("measure"));
-            cv.put("REST",params[0].getIntExtra("rest",60));
-            if(params[0].getStringExtra("name")!=null && params[0].getStringExtra("category")!=null) db.insertToDB("UPRAZNENIA",cv);
-            else return false;
-            return true;
+            if(params[0].getStringExtra("name")!="" && params[0].getStringExtra("name")!=null && params[0].getStringExtra("category")!=null) {
+                if (dataBaseModel.isUpraznenieIsExist(params[0].getStringExtra("name"))) {
+                    dataBaseModel.deleteUpraznenie((params[0].getStringExtra("name")));
+                }
+                ContentValues cv = new ContentValues();
+                cv.put("NAME", params[0].getStringExtra("name"));
+                cv.put("CAT", params[0].getStringExtra("category"));
+                cv.put("COMMENT", params[0].getStringExtra("comment"));
+                cv.put("MEASURE", params[0].getStringExtra("measure"));
+                cv.put("REST", params[0].getIntExtra("rest", 60));
+                dataBaseModel.insertToDB("UPRAZNENIA", cv);
+                return true;
+            }
+            return false;
         }
 
         @Override
@@ -132,4 +136,60 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
         }
     }
 
+    @Override
+    public void addComplex(Intent data) {
+        DataBaseConnectionAddComplex connection=new DataBaseConnectionAddComplex();
+        connection.execute(data);
+    }
+    private class DataBaseConnectionAddComplex extends AsyncTask<Intent,Void,Boolean>{
+        @Override
+        protected Boolean doInBackground(Intent... params) {
+            ContentValues cv=new ContentValues();
+            cv.put("NAME",params[0].getStringExtra("name"));
+            cv.put("DESCRIPTION",params[0].getStringExtra("comment"));
+            //TODO: PUT DESCRIPTION
+            if(params[0].getStringExtra("name")!="" && params[0].getStringExtra("first")!=null && params[0].getStringExtra("second")!=null) {
+
+                if(dataBaseModel.isComplexIsExist(params[0].getStringExtra("name"))){
+                    dataBaseModel.deleteComplex(params[0].getStringExtra("name"));
+                }
+                    //ADD TABLE COMPLEX
+                    dataBaseModel.insertToDB("COMPLEX", cv);
+
+                    //ADD FIRST UPR TO COMPLEX_UPRAZNENIA
+                    cv = new ContentValues();
+                    cv.put("COMPLEX", params[0].getStringExtra("name"));
+                    cv.put("UPRAZNENIE", params[0].getStringExtra("first"));
+                    dataBaseModel.insertToDB("COMPLEX_UPRAZNENIA", cv);
+
+                    //ADD SECOND UPR TO COMPLEX_UPRAZNENIA
+
+                    cv = new ContentValues();
+                    cv.put("COMPLEX", params[0].getStringExtra("name"));
+                    cv.put("UPRAZNENIE", params[0].getStringExtra("second"));
+                    dataBaseModel.insertToDB("COMPLEX_UPRAZNENIA", cv);
+
+                    //ADD THIRD UPR TO COMPLEX_UPRAZNENIA
+                    if (params[0].getIntExtra("type", 0) == UprazneniaAddComplex.TYPE_THREESET) {
+                        cv = new ContentValues();
+                        cv.put("COMPLEX", params[0].getStringExtra("name"));
+                        cv.put("UPRAZNENIE", params[0].getStringExtra("third"));
+                        dataBaseModel.insertToDB("COMPLEX_UPRAZNENIA", cv);
+                    }
+                    return true;
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            if(aBoolean==false){
+                Toast.makeText(context,context.getString(R.string.notempty_addcomplex),Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(context,context.getString(R.string.addsuccess_addcomplex),Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

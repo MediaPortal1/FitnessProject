@@ -8,7 +8,9 @@
     <string name="addupr.menu.button">Добавить упражнение</string>
     <string name="addcompl.menu.button">Добавить комплекс</string>
     <string name="delete.menu.button">Удалить</string>
+    <string name="rename.menu.button">Переиминовать</string>
     <string name="change.menu.button">Редактировать</string>
+    <string name="info.menu.button">Описание</string>
     <!-- Activity Titles-->
     <string name="title.main">Главный экран</string>
     <string name="title.upraznenia">Упражнения</string>
@@ -21,19 +23,21 @@
     <string name="title.tab.upraznenia">Упражнения</string>
     <string name="title.tab.complex">Комплексы упражнений</string>
     <string name="title.tab.history">История упражнений</string>
-    <string name="title.dialog.info">Описание упражнения</string>
+    <string name="title.dialog.upraznenie.info">Описание упражнения</string>
+    <string name="title.dialog.complex.info">Описание комплекса</string>
     <string name="title.tab.history.upraznenia">История упражнений</string>
+    <string name="title.timer">Таймер</string>
+    <string name="title.timepicker">Секундомер</string>
+    <string name="title.rename.complex">Переиминовать комплекс упражнений</string>
     <string name="empty.fragment">Здесь пока пусто</string>
     <string name="add.superset">Добавить суперсэт</string>
-    <string name="add.fragment">Добавить комментарий</string>
+    <string name="add.comment">Добавить комментарий</string>
     <string name="makeitself">Создать вручную</string>
     <string name="chosecategory.upraznenia">Выберите категорию</string>
     <string name="measure.upraznenia">Выберите меру</string>
     <string name="changecat.upraznenia">Изменить категорию</string>
     <string name="changeupr.upraznenia">Изменить название упражнения</string>
     <string name="trainings.myprograms">Мои программы</string>
-    <string name="title.timer">Таймер</string>
-    <string name="title.timepicker">Секундомер</string>
     <!-- IN FRAGMENTS AND ACTIVITY-->
     <string name="textview.example.add.upraznenia">напр. Жим штанги</string>
     <string name="textview.example.add.complex">напр. Суперсэт на руки</string>
@@ -41,6 +45,7 @@
     <string name="category">Категория</string>
     <string name="name">Название</string>
     <string name="comment">Комментарий</string>
+    <string name="description">Описание</string>
     <string name="measure">Мера</string>
     <string name="rest">Отдых</string>
     <string name="upraznenia.in.comlex">Упражнения комплекса</string>
@@ -49,18 +54,23 @@
     <string name="nomeasure">не указана мера</string>
     <string name="nocategory">не указана категория</string>
     <string name="noupraznenia">не выбраны упражнения</string>
+    <string name="nodescription">нету описания</string>
     <string name="ok">Ok</string>
     <string name="cancel">Отмена</string>
     <string name="rest.fromto">от 0 до 600 секунд</string>
     <string name="seconds">секунд</string>
     <string name="rest.upraznenia">Время отдыха (в сек)</string>
     <string name="notempty.addupraznenia">Название или категория не могут быть пустые</string>
+    <string name="notempty.addcomplex">Название или упражнения не могут быть пустые</string>
     <string name="addsuccess.addupraznenia">Упражнение добавлено</string>
+    <string name="addsuccess.addcomplex">Комлпекс добавлено</string>
     <string name="first.upraznenie.complex">Первое упражнение</string>
     <string name="second.upraznenie.complex">Второе упражнение</string>
     <string name="button.start">start</string>
     <string name="button.stop">stop</string>
     <string name="button.reset">reset</string>
+    <string name="button.cicle">cicle</string>
+    <string name="minute">минуту</string>
     <!-- UPRAZNENIA CAT ARRAY-->
     <array name="cat_array_upraznenia">
         <item>Кардио</item>

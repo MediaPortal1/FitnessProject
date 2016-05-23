@@ -8,20 +8,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.UprazneniaActivityAddComplexPresenter;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddComplexInteface;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaGetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaSetter;
-import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
 import com.diplom.app.fitnessproject.view.interfaces.UprazneniaAddComplexView;
 
 
 public class UprazneniaAddComplex extends AppCompatActivity implements UprazneniaAddComplexView{
 
     private UprazneniaAddComplexInteface presenter;
-    private PagesViewInteface pages;
     private ViewPager viewPager;
 
     public final static int TYPE_SUPERSET=1;
@@ -89,5 +90,35 @@ public class UprazneniaAddComplex extends AppCompatActivity implements Uprazneni
                     break;
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_check,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.menu_ckeck){
+            switch (viewPager.getCurrentItem()) {
+                case 0://SUPERSET
+                    Intent intent = new Intent();
+                    UprazneniaGetter fragment = (UprazneniaGetter) ((PagesViewInteface)presenter).getTabListFragments().get(0);
+                    //
+                    intent.putExtra("type", TYPE_SUPERSET);
+                    intent.putExtra("first",fragment.getFirstUpraznenie());
+                    intent.putExtra("second",fragment.getSecondUpraznenie());
+                    intent.putExtra("name",fragment.getName());
+                    intent.putExtra("comment",fragment.getDescription());
+                    setResult(RESULT_OK, intent);
+                    finish();
+                    return true;
+                case 1://TRISET
+
+                    return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

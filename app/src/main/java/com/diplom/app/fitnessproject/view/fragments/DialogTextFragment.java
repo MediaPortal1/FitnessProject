@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.diplom.app.fitnessproject.R;
+import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 
 /**
  * Created by Poltavets on 04.05.2016.
  */
-public abstract class DialogTextFragment extends DialogFragment implements View.OnClickListener{
+public abstract class DialogTextFragment extends DialogFragment implements View.OnClickListener,DialogResultSetter{
+    protected OnDialogResult dialogResult;
     protected EditText editText;
     private int title;
     @Override
@@ -38,7 +41,6 @@ public abstract class DialogTextFragment extends DialogFragment implements View.
     }
 
     protected void ButtonOkAction(){
-
     }
 
     @Override
@@ -52,5 +54,10 @@ public abstract class DialogTextFragment extends DialogFragment implements View.
                 dismiss();
                 break;
         }
+    }
+
+    @Override
+    public void setDialogResult(OnDialogResult dialogResult) {
+        this.dialogResult=dialogResult;
     }
 }

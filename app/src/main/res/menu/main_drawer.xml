@@ -20,12 +20,12 @@
         <item
             android:id="@+id/nav_process"
             android:icon="@drawable/ic_menu_manage"
-            android:enabled="false"
+            android:enabled="true"
             android:title="Тренировочный процес" />
         <item
             android:id="@+id/nav_food"
             android:icon="@drawable/ic_menu_manage"
-            android:enabled="false"
+            android:enabled="true"
             android:title="Режим и питание" />
         <item
             android:id="@+id/nav_timer"
@@ -35,7 +35,7 @@
         <item
             android:id="@+id/statistic"
             android:icon="@drawable/ic_menu_manage"
-            android:enabled="false"
+            android:enabled="true"
 
             android:title="Статистика и советы" />
     </group>
@@ -45,12 +45,8 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_manage"
-                android:enabled="false"
+                android:enabled="true"
                 android:title="Настройки" />
-            <!--<item-->
-                <!--android:id="@+id/nav_send"-->
-                <!--android:icon="@drawable/ic_menu_send"-->
-                <!--android:title="Send" />-->
         </menu>
     </item>
 

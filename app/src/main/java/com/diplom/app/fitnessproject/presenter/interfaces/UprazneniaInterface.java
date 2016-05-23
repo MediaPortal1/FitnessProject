@@ -8,4 +8,5 @@ import android.os.Bundle;
  */
 public interface UprazneniaInterface extends PresenterParent{
     void addUpraznenie(Intent data);
+    void addComplex(Intent data);
 }

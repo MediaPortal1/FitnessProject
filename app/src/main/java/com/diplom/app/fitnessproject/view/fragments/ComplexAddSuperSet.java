@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.ComplexAddSupersetFragmentPresenter;
-import com.diplom.app.fitnessproject.presenter.interfaces.ComplexAddSupersetInterface;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddComplexSupersetFragmentPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddComplexSupersetInterface;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaGetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaSetter;
 import com.diplom.app.fitnessproject.view.UprazneniaAddComplex;
 import com.diplom.app.fitnessproject.view.activity.UprazneniaAllList;
@@ -23,12 +23,12 @@ import com.diplom.app.fitnessproject.view.interfaces.ComplexAddSupersetView;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
 
 
-public class ComplexAddSuperSet extends Fragment implements FragmentPages,ComplexAddSupersetView,AdapterView.OnItemClickListener,UprazneniaSetter{
+public class ComplexAddSuperSet extends Fragment implements FragmentPages,ComplexAddSupersetView,AdapterView.OnItemClickListener,UprazneniaSetter,UprazneniaGetter{
     private ListView list;
     private EditText editText;
     private String title;
-    private ComplexAddSupersetInterface presenter;
-
+    private UprazneniaAddComplexSupersetInterface presenter;
+//TODO: DIALOG FRAGMENT DESCRIPTION!!!
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class ComplexAddSuperSet extends Fragment implements FragmentPages,Comple
         list=(ListView)v.findViewById(R.id.listView_add_superset_complex_upraznenia);
         editText=(EditText)v.findViewById(R.id.editText_add_superset_complex_upraznenia);
 
-        presenter=new ComplexAddSupersetFragmentPresenter(getContext(),this);
+        presenter=new UprazneniaAddComplexSupersetFragmentPresenter(getContext(),this,getFragmentManager());
 
         list.setOnItemClickListener(this);
 
@@ -48,12 +48,15 @@ public class ComplexAddSuperSet extends Fragment implements FragmentPages,Comple
         Intent intent;
         switch (position){
             case 0:
+                presenter.showCommentDialog();
+                break;
+            case 1:
                 intent=new Intent(getContext(), UprazneniaAllList.class)
                         .putExtra("cat", UprazneniaAddComplex.TYPE_SUPERSET)
                         .putExtra("upr",UprazneniaAddComplex.UPR_FIRST);
                 startActivityForResult(intent,1);
                 break;
-            case 1:
+            case 2:
                 intent=new Intent(getContext(), UprazneniaAllList.class)
                         .putExtra("cat", UprazneniaAddComplex.TYPE_SUPERSET)
                         .putExtra("upr",UprazneniaAddComplex.UPR_SECOND);
@@ -96,5 +99,30 @@ public class ComplexAddSuperSet extends Fragment implements FragmentPages,Comple
     @Override
     public void setThirdUpr(String name) {
         //NULL
+    }
+
+    @Override
+    public String getFirstUpraznenie() {
+        return ((UprazneniaGetter)presenter).getFirstUpraznenie();
+    }
+
+    @Override
+    public String getSecondUpraznenie() {
+        return ((UprazneniaGetter)presenter).getSecondUpraznenie();
+    }
+
+    @Override
+    public String getThirdUpraznenie() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return editText.getText().toString();
+    }
+
+    @Override
+    public String getDescription() {
+        return ((UprazneniaGetter)presenter).getDescription();
     }
 }

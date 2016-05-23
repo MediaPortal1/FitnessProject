@@ -6,19 +6,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
 import com.diplom.app.fitnessproject.view.library.CircleTimerView;
 
+import java.util.ArrayList;
 
-public class TimerFragment extends Fragment implements FragmentPages,View.OnClickListener {
+
+public class TimerFragment extends Fragment implements FragmentPages,View.OnClickListener,AdapterView.OnItemClickListener {
     private boolean isrun;
     private String title;
     private CircleTimerView timer;
     private Button btnstartstop, btnreset;
-
+    private ListView list;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,7 +35,47 @@ public class TimerFragment extends Fragment implements FragmentPages,View.OnClic
         btnreset.setOnClickListener(this);
         btnstartstop.setText(getString(R.string.button_start));
         isrun=false;
+        list=(ListView)v.findViewById(R.id.listview_timer);
+        setTimerListAdapter();
+        list.setOnItemClickListener(this);
         return v;
+    }
+
+    private void setTimerListAdapter(){
+        ArrayList<String> times=new ArrayList<>();
+        times.add(1+" "+getString(R.string.minute));
+        times.add(3+" "+getString(R.string.minute));
+        times.add(5+" "+getString(R.string.minute));
+        times.add(10+" "+getString(R.string.minute));
+        times.add(15+" "+getString(R.string.minute));
+        times.add(30+" "+getString(R.string.minute));
+        ArrayAdapter adapter=new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,android.R.id.text1,times);
+        list.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+       stopTimer();
+        switch (position){
+            case 0:
+                timer.setCurrentTime(60);
+                break;
+            case 1:
+                timer.setCurrentTime(180);
+                break;
+            case 2:
+                timer.setCurrentTime(300);
+                break;
+            case 3:
+                timer.setCurrentTime(600);
+                break;
+            case 4:
+                timer.setCurrentTime(900);
+                break;
+            case 5:
+                timer.setCurrentTime(1800);
+                break;
+        }
     }
 
     @Override
@@ -55,31 +100,34 @@ public class TimerFragment extends Fragment implements FragmentPages,View.OnClic
                 //START
                 if(!isrun){
                     if(timer.getCurrentTime()!=0) { //NOT 0
-                        timer.startTimer();
-                        isrun = true;
-                        btnstartstop.setText(getString(R.string.button_stop));
+                     startTimer();
                     }
                 }
                 //STOP
                 else {
                     if (timer.getCurrentTime()!=0) { // NOT 0
-                        timer.pauseTimer();
-                        isrun = false;
-                        btnstartstop.setText(getString(R.string.button_start));
+                      stopTimer();
                     }
                     else{ // 0
-                        timer.startTimer();
-                        isrun=true;
-                        btnstartstop.setText(getString(R.string.button_stop));
+                     startTimer();
                     }
                 }
                 break;
             case  R.id.button_timer_reset:
-                timer.pauseTimer();
+                startTimer();
                 timer.setCurrentTime(0);
-                btnstartstop.setText(getString(R.string.button_start));
-                isrun=false;
+
                 break;
         }
+    }
+    private void stopTimer(){
+        timer.pauseTimer();
+        isrun=false;
+        btnstartstop.setText(getString(R.string.button_start));
+    }
+    private void startTimer(){
+        timer.startTimer();
+        isrun=true;
+        btnstartstop.setText(getString(R.string.button_stop));
     }
 }

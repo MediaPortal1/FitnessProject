@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
+import com.diplom.app.fitnessproject.presenter.behavior.ShowUpraznenieInfoDialog;
 import com.diplom.app.fitnessproject.presenter.interfaces.ChangeColumn;
 import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
+import com.diplom.app.fitnessproject.presenter.interfaces.ShowInfoDialog;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaListInterface;
 import com.diplom.app.fitnessproject.view.adapter.UprazneniaExpandableListAdapter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaListFragment;
@@ -31,12 +33,14 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
     private FragmentManager fm;
     private DataBaseModelUpraznenia db;
     private FragmentListView view;
+    private ShowInfoDialog infoDialog;
 
     public UprazneniaFragmentListPresenter(Context context, FragmentManager fm, FragmentListView view, DataBaseModelUpraznenia db) {
         this.context = context;
         this.fm = fm;
         this.db=db;
         this.view=view;
+        infoDialog=new ShowUpraznenieInfoDialog();
         adapterUpdate();
     }
 
@@ -115,7 +119,7 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
 
     @Override
     public void changeColumn(String from, String to) {
-        db.changeUpraznenie(from, to);
+        db.renameUpraznenie(from, to);
         adapterUpdate();
     }
 
@@ -131,19 +135,19 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
 
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-        UpraznenieInfoDialog dialog=new UpraznenieInfoDialog();
-        Cursor cursor=db.getUprazneniabyId(id);
-        cursor.moveToFirst();
-        dialog.setName(cursor.getString(cursor.getColumnIndex("NAME")));
-        dialog.setCategory(cursor.getString(cursor.getColumnIndex("CAT")));
-        dialog.setComment(cursor.getString(cursor.getColumnIndex("COMMENT")));
-        dialog.setMeasure(cursor.getString(cursor.getColumnIndex("MEASURE")));
-        dialog.setRest(cursor.getString(cursor.getColumnIndex("REST")));
-        dialog.show(fm,"info");
+        showInfoDialog(id);
         return true;
     }
-    private void itemClick(long id){
+    @Override
+    public void showInfoDialog(long id){
+        Cursor cursor=db.getUprazneniabyId(id);
+        infoDialog.showDialog("info",fm,cursor);
+    }
 
+    @Override
+    public void showInfoDialog(String name) {
+        Cursor cursor=db.getUprazneniabyName(name);
+        infoDialog.showDialog("info",fm,cursor);
     }
 
     @Override

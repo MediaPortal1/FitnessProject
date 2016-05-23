@@ -27,7 +27,7 @@ public class UpraznenieInfoDialog extends DialogFragment implements UprazneniaIn
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_upraznenie_info,null);
-        getDialog().setTitle(getString(R.string.title_dialog_info));
+        getDialog().setTitle(getString(R.string.title_dialog_upraznenie_info));
         nametxt=(TextView)v.findViewById(R.id.textview_name_upraznenia_info);
         nametxt.setText(getString(R.string.name)+": "+name);
         measuretxt=(TextView)v.findViewById(R.id.textview_measure_upraznenia_info);

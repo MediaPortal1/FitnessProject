@@ -34,7 +34,7 @@ public class CircleStopWatchView extends View
     private static final float DEFAULT_LINE_WIDTH = 0.5f;
     private static final float DEFAULT_CIRCLE_BUTTON_RADIUS = 15;
     private static final float DEFAULT_CIRCLE_STROKE_WIDTH = 1;
-    private static final float DEFAULT_TIMER_NUMBER_SIZE = 50;
+    private static final float DEFAULT_TIMER_NUMBER_SIZE = 30;
     private static final float DEFAULT_TIMER_TEXT_SIZE = 14;
     private static final float DEFAULT_GAP_BETWEEN_TIMER_NUMBER_AND_TEXT = 30;
 
@@ -90,6 +90,7 @@ public class CircleStopWatchView extends View
     private int mCurrentTime; // seconds
     private boolean mStarted;
     private String mHintText;
+    private int mMiliSeconds;
 
     // TimerTask
     private Timer timer = new Timer();
@@ -105,11 +106,14 @@ public class CircleStopWatchView extends View
             super.handleMessage(msg);
             if (mCurrentRadian >= 0 && mCurrentTime >= 0)
             {
-                mCurrentRadian += (2 * Math.PI) / 60;
-                mCurrentTime++;
-                if (mCircleTimerListener != null)
-                {
-                    mCircleTimerListener.onTimerTimingValueChanged(mCurrentTime);
+                mMiliSeconds++;
+                if(mMiliSeconds==100) {
+                    mCurrentRadian += (2 * Math.PI) / 60;
+                    mCurrentTime++;
+                    mMiliSeconds=0;
+                    if (mCircleTimerListener != null) {
+                        mCircleTimerListener.onTimerTimingValueChanged(mCurrentTime);
+                    }
                 }
             }
             else
@@ -230,7 +234,8 @@ public class CircleStopWatchView extends View
         mTimerColonPaint.setTextAlign(Paint.Align.CENTER);
         mTimerColonPaint.setTextSize(mTimerNumberSize);
 
-        mHintText = "Timer";
+        mHintText = "StopWatch";
+        mMiliSeconds=0;
     }
 
     @Override
@@ -306,9 +311,8 @@ public class CircleStopWatchView extends View
         canvas.restore();
         // TimerNumber
         canvas.save();
-        canvas.drawText((mCurrentTime / 60 < 10 ? "0" + mCurrentTime / 60 : mCurrentTime / 60) + " " + (mCurrentTime % 60 < 10 ?
-                "0" + mCurrentTime % 60 : mCurrentTime % 60), mCx, mCy + getFontHeight(mTimerNumberPaint) / 2, mTimerNumberPaint);
-        canvas.drawText(":", mCx, mCy + getFontHeight(mTimerNumberPaint) / 2, mTimerColonPaint);
+        canvas.drawText((mCurrentTime / 60 < 10 ? "0" + mCurrentTime / 60 : mCurrentTime / 60) + ":" + (mCurrentTime % 60 < 10 ?
+                "0" + mCurrentTime % 60 : mCurrentTime % 60)+":"+(mMiliSeconds < 10 ? "0"+mMiliSeconds : mMiliSeconds), mCx, mCy + getFontHeight(mTimerNumberPaint) / 2, mTimerNumberPaint);
         canvas.restore();
         // Timer Text
         canvas.save();
@@ -442,7 +446,7 @@ public class CircleStopWatchView extends View
                     handler.obtainMessage().sendToTarget();
                 }
             };
-            timer.schedule(timerTask, 1000, 1000);
+            timer.schedule(timerTask, 10, 10);
             mStarted = true;
             if (this.mCircleTimerListener != null)
             {
@@ -474,6 +478,7 @@ public class CircleStopWatchView extends View
      */
     public void setCurrentTime(int time)
     {
+        if(time==0)mMiliSeconds=0;
         if (time >= 0 && time <= 60)
         {
             mCurrentTime = time;
@@ -484,6 +489,10 @@ public class CircleStopWatchView extends View
             this.mCurrentRadian = (float) (time / 60.0f * 2 * Math.PI / 60);
             invalidate();
         }
+    }
+
+    public int getmMiliSeconds() {
+        return mMiliSeconds;
     }
 
     /**

@@ -25,8 +25,8 @@ public class DataBaseModel implements DataBase{
         return db.query(table, null, null, null, null, null, null);
     }
     @Override
-    public void insertToDB(String table,ContentValues contentValues) {
-        db.insert(table, null, contentValues);
+    public long insertToDB(String table, ContentValues contentValues) {
+        return db.insert(table, null, contentValues);
     }
 
     @Override

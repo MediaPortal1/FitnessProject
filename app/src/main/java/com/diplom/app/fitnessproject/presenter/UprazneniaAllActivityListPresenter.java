@@ -6,25 +6,20 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.PopupMenu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.BaseAdapter;
 
-import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.presenter.interfaces.ChangeColumn;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAllListInterface;
 import com.diplom.app.fitnessproject.view.adapter.UprazneniaAllCatRadioListAdapter;
-import com.diplom.app.fitnessproject.view.fragments.UprazneniaChangeDialog;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaListFragment;
 import com.diplom.app.fitnessproject.view.interfaces.UprazneniaAllListView;
 
 import java.util.HashMap;
 
 
-public class UprazneniaAllListPresenter implements UprazneniaAllListInterface,ChangeColumn,OnDialogResult {
+public class UprazneniaAllActivityListPresenter implements UprazneniaAllListInterface,ChangeColumn,OnDialogResult {
     private Context context;
     private DataBaseModelUpraznenia db;
     private UprazneniaAllListView view;
@@ -32,7 +27,7 @@ public class UprazneniaAllListPresenter implements UprazneniaAllListInterface,Ch
     private FragmentManager fm;
     private UprazneniaAllCatRadioListAdapter adapter;
 
-    public UprazneniaAllListPresenter(Context context, UprazneniaAllListView view,FragmentManager fm) {
+    public UprazneniaAllActivityListPresenter(Context context, UprazneniaAllListView view, FragmentManager fm) {
         this.context = context;
         this.view=view;
         connection=new DataBaseConnection();
@@ -82,7 +77,7 @@ public class UprazneniaAllListPresenter implements UprazneniaAllListInterface,Ch
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                db.changeUpraznenie(uprFrom,uprTo);
+                db.renameUpraznenie(uprFrom,uprTo);
             }
         };
     }

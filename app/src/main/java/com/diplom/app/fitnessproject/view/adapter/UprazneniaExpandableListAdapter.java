@@ -17,6 +17,7 @@ import com.diplom.app.fitnessproject.presenter.interfaces.ContextSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.interfaces.StringSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaListInterface;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaChangeDialog;
 
 import java.util.List;
@@ -46,13 +47,14 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
         View v=super.getChildView(groupPosition, childPosition, isLastChild, convertView, parent);
         final ImageButton img=(ImageButton) v.findViewById(R.id.imageButton_listitem_upraznenia);
         final TextView txtview=(TextView) v.findViewById(R.id.textView_listitem_child_complex);
-
+        v.setTag(txtview.getText().toString());
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopumMenuImageListener(v,txtview);
             }
         });
+        img.setTag(txtview.getText().toString());
         v.setOnClickListener(clickListener);
         v.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -64,6 +66,7 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
         return v;
     }
     private void PopumMenuImageListener(View v, final TextView txt){
+        final View view=v;
         PopupMenu popupMenu=new PopupMenu(context,v);
         popupMenu.inflate(R.menu.popup_list);
         popupMenu.show();
@@ -78,7 +81,7 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
                         notifyDataSetChanged();
                         listnotify.adapterUpdate();
                         return true;
-                    case R.id.menu_change:
+                    case R.id.menu_rename:
                         //TODO:
                         UprazneniaChangeDialog dialog=new UprazneniaChangeDialog();
                         ((ContextSetter)dialog).setContext(context);
@@ -88,6 +91,9 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
                         notifyDataSetChanged();
                         listnotify.adapterUpdate();
                         return true;
+                    case R.id.menu_info:
+                        ((UprazneniaListInterface)result).showInfoDialog(((String)view.getTag()));
+                        break;
                 }
                 return false;
             }
