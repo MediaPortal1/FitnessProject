@@ -30,8 +30,9 @@ public class UprazneniaActivity extends AppCompatActivity
     private PagesViewInteface pagesViewPresenter;
     private UprazneniaInterface presenter;
     private ViewPager viewPager;
-    private static final int ADD_UPR=1;
-    private static final int ADD_COMPL=2;
+    public static final int ADD_UPR=1;
+    public static final int ADD_COMPL=2;
+    public static final int CHANGE_UPR=3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

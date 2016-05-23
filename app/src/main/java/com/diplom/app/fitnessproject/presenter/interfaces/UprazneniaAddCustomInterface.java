@@ -1,6 +1,7 @@
 package com.diplom.app.fitnessproject.presenter.interfaces;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.BaseAdapter;
 
 import com.diplom.app.fitnessproject.view.interfaces.UprazneniaInfoGetter;
@@ -14,5 +15,6 @@ public interface UprazneniaAddCustomInterface  extends PresenterParent{
     UprazneniaInfoGetter getUprazneniaInfo();
     void setName(String name);
     void setMeasureCursor();
+    void initChange(Bundle bundle);
 
 }

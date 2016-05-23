@@ -9,4 +9,5 @@ import android.widget.BaseAdapter;
 public interface UprazneniaListInterface  extends PresenterParent{
     void showInfoDialog(long id);
     void showInfoDialog(String name);
+    void changeUpraznenie(String name);
 }

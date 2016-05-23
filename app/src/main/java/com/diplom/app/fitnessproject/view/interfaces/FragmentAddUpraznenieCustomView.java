@@ -5,4 +5,5 @@ import android.widget.BaseAdapter;
 
 public interface FragmentAddUpraznenieCustomView  extends AdapterSetter {
     void startActivityCat();
+    void changeName(String name);
 }

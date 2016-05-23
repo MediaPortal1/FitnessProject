@@ -62,6 +62,9 @@ public class UprazneniaComplexExpandableListAdapter extends SimpleExpandableList
                             case R.id.menu_info:
                                 presenter.showInfoDialog(name);
                                 break;
+                            case R.id.menu_change:
+                                //TODO: CHANGE COMPLEX
+                                break;
                         }
                         return false;
                     }

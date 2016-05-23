@@ -73,7 +73,6 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                //TODO: Do Popup menu!
                 switch (item.getItemId()){
                     case R.id.menu_delete:
                         notifyDataSetChanged();
@@ -82,7 +81,6 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
                         listnotify.adapterUpdate();
                         return true;
                     case R.id.menu_rename:
-                        //TODO:
                         UprazneniaChangeDialog dialog=new UprazneniaChangeDialog();
                         ((ContextSetter)dialog).setContext(context);
                         ((StringSetter)dialog).setString(txt.getText().toString());
@@ -94,6 +92,9 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
                     case R.id.menu_info:
                         ((UprazneniaListInterface)result).showInfoDialog(((String)view.getTag()));
                         break;
+                    case R.id.menu_change:
+                        ((UprazneniaListInterface)result).changeUpraznenie((String)view.getTag());
+                        return true;
                 }
                 return false;
             }

@@ -1,6 +1,7 @@
 package com.diplom.app.fitnessproject.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,7 @@ import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.interfaces.ShowInfoDialog;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaListInterface;
+import com.diplom.app.fitnessproject.view.UprazneniaAddActivity;
 import com.diplom.app.fitnessproject.view.adapter.UprazneniaExpandableListAdapter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaListFragment;
 import com.diplom.app.fitnessproject.view.fragments.UpraznenieInfoDialog;
@@ -163,5 +165,27 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
         dialog.setMeasure(cursor.getString(cursor.getColumnIndex("MEASURE")));
         dialog.setRest(cursor.getString(cursor.getColumnIndex("REST")));
         dialog.show(fm,"info");
+    }
+
+    @Override
+    public void changeUpraznenie(String name) {
+        Intent intent=new Intent(context, UprazneniaAddActivity.class);
+        Cursor cursor=db.getUprazneniabyName(name);
+        cursor.moveToFirst();
+        intent.putExtra("NAME",cursor.getString(cursor.getColumnIndex("NAME")));
+        intent.putExtra("CAT",cursor.getString(cursor.getColumnIndex("CAT")));
+        String test=cursor.getString(cursor.getColumnIndex("COMMENT"));
+        if(test!=null && test!="") {
+            intent.putExtra("COMMENT",test);
+        }
+        test=cursor.getString(cursor.getColumnIndex("MEASURE"));
+        if(test!=null && test!="") {
+            intent.putExtra("MEASURE", test);
+        }
+        int i=cursor.getInt(cursor.getColumnIndex("REST"));
+        if(i!=0) {
+            intent.putExtra("REST", i);
+        }
+        view.startChangeActivity(intent);
     }
 }

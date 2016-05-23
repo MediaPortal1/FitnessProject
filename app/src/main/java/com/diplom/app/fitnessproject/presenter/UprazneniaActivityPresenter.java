@@ -108,6 +108,7 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
 
         @Override
         protected Boolean doInBackground(Intent... params) {
+            //TODO: UPDATE UPRAZNENIE
             if(params[0].getStringExtra("name")!="" && params[0].getStringExtra("name")!=null && params[0].getStringExtra("category")!=null) {
                 if (dataBaseModel.isUpraznenieIsExist(params[0].getStringExtra("name"))) {
                     dataBaseModel.deleteUpraznenie((params[0].getStringExtra("name")));
@@ -147,7 +148,6 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
             ContentValues cv=new ContentValues();
             cv.put("NAME",params[0].getStringExtra("name"));
             cv.put("DESCRIPTION",params[0].getStringExtra("comment"));
-            //TODO: PUT DESCRIPTION
             if(params[0].getStringExtra("name")!="" && params[0].getStringExtra("first")!=null && params[0].getStringExtra("second")!=null) {
 
                 if(dataBaseModel.isComplexIsExist(params[0].getStringExtra("name"))){

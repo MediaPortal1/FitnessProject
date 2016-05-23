@@ -4,15 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
@@ -30,7 +35,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustomInterface,OnDialogResult,AdapterView.OnItemClickListener,UprazneniaInfoGetter {
+public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustomInterface,OnDialogResult,
+        AdapterView.OnItemClickListener,UprazneniaInfoGetter,TextWatcher{
     private Context context;
     private ArrayList<Map<String,Object>> list;
     private FragmentAddUpraznenieCustomView viewFragment;
@@ -201,5 +207,43 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
             measureview.setAdapter(adapter);
             measureview.setCursor(cursor);
         }
+    }
+
+    @Override
+    public void initChange(Bundle bundle) {
+        name=bundle.getString("NAME");
+        viewFragment.changeName(name);
+        category=bundle.getString("CAT");
+        list.get(1).put("subtext",category);
+        String com=bundle.getString("COMMENT");
+        if(com!=null && com!=""){
+            this.comment=com;
+            list.get(0).put("subtext",com);
+        }
+        com=bundle.getString("MEASURE");
+        if(com!=null && com!=""){
+            this.measure=com;
+            list.get(2).put("subtext",com);
+        }
+       int i=bundle.getInt("REST");
+        if(i!=0){
+            this.rest=i;
+            list.get(3).put("subtext",Integer.toString(i));
+        }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        setName(s.toString());
     }
 }

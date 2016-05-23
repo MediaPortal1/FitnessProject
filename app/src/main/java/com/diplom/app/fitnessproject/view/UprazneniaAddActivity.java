@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.UprazneniaAddActivityPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddInterface;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCustom;
 
 public class UprazneniaAddActivity extends AppCompatActivity{
@@ -23,15 +24,28 @@ public class UprazneniaAddActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_upraznenia);
 
+        //TOOLBAR
         Toolbar toolbar=(Toolbar)findViewById(R.id.upraznenia_add_toolbar);
         toolbar.setTitle(getString(R.string.title_add_upraznenia));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //PRESENTER
         pagesViewPresenter=new UprazneniaAddActivityPresenter(getSupportFragmentManager(),getResources());
+
+        //ON CHANGE UPRAZNENIE
+        if(getIntent().hasExtra("NAME")){
+            ((UprazneniaAddInterface)pagesViewPresenter).onChange(getIntent().getExtras());
+        }
+        //
+
         viewPager=(ViewPager)findViewById(R.id.upraznenia_add_viewpager);
         viewPager.setAdapter(pagesViewPresenter.getTabPagerAdapter());
         TabLayout tabLayout=(TabLayout)findViewById(R.id.upraznenia_add_tablayout);
         tabLayout.setupWithViewPager(viewPager);
+
+
+
     }
 
     @Override

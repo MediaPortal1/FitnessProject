@@ -28,7 +28,6 @@ public class ComplexAddSuperSet extends Fragment implements FragmentPages,Comple
     private EditText editText;
     private String title;
     private UprazneniaAddComplexSupersetInterface presenter;
-//TODO: DIALOG FRAGMENT DESCRIPTION!!!
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -64,7 +64,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             contentValues.put("SHORT_NAME", items2[i]);
             db.insert("MEASURE", null, contentValues);
         }
-        db.execSQL("CREATE TABLE COMPLEX(" +
+        db.execSQL("CREATE TABLE COMPLEX(" +//TODO: +TYPE
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT,"+
                 "DESCRIPTION TEXT"+

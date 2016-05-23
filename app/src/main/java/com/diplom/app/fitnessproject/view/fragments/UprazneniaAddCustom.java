@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,8 +25,9 @@ import com.diplom.app.fitnessproject.view.interfaces.UprazneniaInfoGetter;
 
 public class UprazneniaAddCustom extends Fragment implements FragmentPages,FragmentAddUpraznenieCustomView{
     private ListView listView;
-    private TextView textView;
+    private TextView editText;
     private UprazneniaAddCustomInterface presenter;
+    private Bundle changebundle;
 
     private String title;
     @Override
@@ -50,24 +52,14 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Fragm
         presenter=new UprazneniaAddFragmentCustomPresenter(getContext(),this,getChildFragmentManager());
         listView=(ListView)view.findViewById(R.id.upraznenia_add_custom_listview);
         listView.setAdapter(presenter.getListAdapter());
-        textView=(TextView)view.findViewById(R.id.upraznenia_add_custom_edittext);
-        textView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            presenter.setName(s.toString());
-            }
-        });
+        editText =(EditText)view.findViewById(R.id.upraznenia_add_custom_edittext);
+        editText.addTextChangedListener((TextWatcher) presenter);
         listView.setOnItemClickListener((AdapterView.OnItemClickListener) presenter);
+
+        //ON CHANGE
+        if(changebundle!=null)presenter.initChange(changebundle);
+        //
+
         return view;
     }
 
@@ -91,4 +83,12 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Fragm
      return presenter.getUprazneniaInfo();
     }
 
+    public void onChangeUpraznenie(Bundle bundle){
+        this.changebundle=bundle;
+    }
+
+    @Override
+    public void changeName(String name) {
+        editText.setText(name);
+    }
 }
