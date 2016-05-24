@@ -6,4 +6,5 @@ package com.diplom.app.fitnessproject.view.interfaces;
 public interface ComplexInfoSetter {
     void setName(String name);
     void setDescription(String name);
+    void setType(int type);
 }

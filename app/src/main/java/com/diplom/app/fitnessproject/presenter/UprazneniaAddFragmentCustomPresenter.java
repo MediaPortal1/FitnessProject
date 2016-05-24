@@ -43,6 +43,8 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
     private SimpleAdapter simpleAdapter;
     private String measure,comment,name,category;
     private int rest;
+    private long id;
+    private boolean isChange;
     private FragmentManager fm;
     public static final int COMMENT=1,REST=2,CATEGORY=3,MEASURE=4;
     public static final int RESULT_CODE=1;
@@ -177,6 +179,11 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
     @Override public String getCategory() { return category; }
 
     @Override
+    public long getID() {
+        return id;
+    }
+
+    @Override
     public UprazneniaInfoGetter getUprazneniaInfo() {
         return this;
     }
@@ -230,6 +237,8 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
             this.rest=i;
             list.get(3).put("subtext",Integer.toString(i));
         }
+        id=bundle.getLong("_id");
+        isChange=true;
     }
 
     @Override
@@ -245,5 +254,10 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
     @Override
     public void afterTextChanged(Editable s) {
         setName(s.toString());
+    }
+
+    @Override
+    public boolean isStartforChange() {
+        return isChange;
     }
 }

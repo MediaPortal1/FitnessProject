@@ -91,4 +91,5 @@ public class UprazneniaAddCustom extends Fragment implements FragmentPages,Fragm
     public void changeName(String name) {
         editText.setText(name);
     }
+
 }

@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
+import com.diplom.app.fitnessproject.model.DataBaseHelper;
 import com.diplom.app.fitnessproject.view.interfaces.ComplexInfoSetter;
 
 
 public class UprazneniaComplexInfoDialog extends DialogFragment implements ComplexInfoSetter {
     private String name,description;
-    private TextView nameview,descrview;
+    private int type;
+    private TextView nameview,descrview,typeview;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,11 +31,13 @@ public class UprazneniaComplexInfoDialog extends DialogFragment implements Compl
         getDialog().setTitle(R.string.title_dialog_complex_info);
         nameview=(TextView)v.findViewById(R.id.textview_name_complex_info);
         descrview=(TextView)v.findViewById(R.id.textview_descriprion_complex_info);
+        typeview=(TextView)v.findViewById(R.id.textView_type_complex_info);
         nameview.setText(getString(R.string.name)+": "+name);
         if(description!=null && description!="")
         descrview.setText(getString(R.string.description)+": "+description);
         else descrview.setText(getString(R.string.description)+": "+getString(R.string.nodescription));
-
+        if(type==DataBaseHelper.COMPLEX_TYPE_DOUBLE)typeview.setText(getString(R.string.type_of_complex)+": "+getString(R.string.superset));
+        else if(type==DataBaseHelper.COMPLEX_TYPE_TRIPLE)typeview.setText(getString(R.string.type_of_complex)+": "+getString(R.string.threeset));
         return v;
     }
 
@@ -45,5 +49,10 @@ public class UprazneniaComplexInfoDialog extends DialogFragment implements Compl
     @Override
     public void setDescription(String name) {
         this.description=name;
+    }
+
+    @Override
+    public void setType(int type) {
+        this.type=type;
     }
 }

@@ -89,6 +89,9 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
      if (cursor.getCount()>0)  return true;
         else return false;
     }
+    public void updateUpraznenie(long id,ContentValues cv){
+        if(id!=-1)db.update("UPRAZNENIA",cv,"_ID=?",new String[]{Long.toString(id)});
+    }
 
 
 }

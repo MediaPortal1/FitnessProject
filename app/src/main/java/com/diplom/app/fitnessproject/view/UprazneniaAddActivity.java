@@ -66,6 +66,9 @@ public class UprazneniaAddActivity extends AppCompatActivity{
             intent.putExtra("measure", fragment.getUpraznenieInfo().getMeasure());
             intent.putExtra("category", fragment.getUpraznenieInfo().getCategory());
             intent.putExtra("rest", fragment.getUpraznenieInfo().getRest());
+            if(fragment.getUpraznenieInfo().isStartforChange()) {
+                intent.putExtra("_id", fragment.getUpraznenieInfo().getID());
+            }
             setResult(RESULT_OK, intent);
             finish();
                 return true;

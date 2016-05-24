@@ -71,6 +71,9 @@
     <string name="button.reset">reset</string>
     <string name="button.cicle">cicle</string>
     <string name="minute">минуту</string>
+    <string name="superset">суперсэт</string>
+    <string name="threeset">трисэт</string>
+    <string name="type.of.complex">Тип комплекса</string>
     <!-- UPRAZNENIA CAT ARRAY-->
     <array name="cat_array_upraznenia">
         <item>Кардио</item>

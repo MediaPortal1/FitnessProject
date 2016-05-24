@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.diplom.app.fitnessproject.R;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddCategoryActivityPresenter;
 import com.diplom.app.fitnessproject.presenter.interfaces.ChangeColumn;
 import com.diplom.app.fitnessproject.presenter.interfaces.ContextSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
@@ -15,35 +16,16 @@ import com.diplom.app.fitnessproject.presenter.interfaces.StringSetter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaCatChangeDialog;
 
 public class UprazneniaCatRadioListAdapter extends RadioListAdapter implements View.OnClickListener{
-    public UprazneniaCatRadioListAdapter(Context applicationContext, int simple_list_item_1, Cursor cursor, String[] strings, int[] ints, int bindAutoCreate) {
+    private UprazneniaAddCategoryActivityPresenter presenter;
+    public UprazneniaCatRadioListAdapter(UprazneniaAddCategoryActivityPresenter presenter,Context applicationContext, int simple_list_item_1, Cursor cursor, String[] strings, int[] ints, int bindAutoCreate) {
         super(applicationContext, simple_list_item_1, cursor, strings, ints, bindAutoCreate);
-        setClickListener(this);
+        this.presenter=presenter;
+        setClickListener(presenter);
     }
 
     @Override
     public void onClick(final View v) {
-        PopupMenu popupMenu=new PopupMenu(context,v);
-        popupMenu.inflate(R.menu.popup_list);
-        popupMenu.show();
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.menu_delete:
-                        ((ChangeColumn)context).deleteColumn((String) v.getTag());
-                        ((ListChangedNotify)context).adapterUpdate();
-                        return true;
-                    case R.id.menu_rename:
-                        UprazneniaCatChangeDialog dialog=new UprazneniaCatChangeDialog();
-                        ((ContextSetter)dialog).setContext(context);
-                        ((StringSetter)dialog).setString((String)v.getTag());
-                        dialog.show(((AppCompatActivity)context).getSupportFragmentManager(),"change");
-                        ((ListChangedNotify)context).adapterUpdate();
-                        return true;
-                }
-                return false;
-            }
-        });
+
     }
 
 }

@@ -9,8 +9,11 @@ import android.database.sqlite.SQLiteDatabase;
  * Created by Poltavets on 26.03.2016.
  */
 public class DataBaseModel implements DataBase{
+
     protected SQLiteDatabase db;
     private Context context;
+
+
     public DataBaseModel(Context context) {
         this.context=context;
         db=new DataBaseHelper(context).getWritableDatabase();

@@ -7,4 +7,5 @@ public interface UprazneniaGetter extends PresenterParent {
     String getThirdUpraznenie();
     String getName();
     String getDescription();
+
 }

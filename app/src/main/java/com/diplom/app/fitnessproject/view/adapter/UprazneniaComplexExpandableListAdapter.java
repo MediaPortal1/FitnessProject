@@ -47,7 +47,7 @@ public class UprazneniaComplexExpandableListAdapter extends SimpleExpandableList
             @Override
             public void onClick(final View v) {
                 PopupMenu popupMenu=new PopupMenu(context,v);
-                popupMenu.inflate(R.menu.popup_list);
+                popupMenu.inflate(R.menu.popup_list_full);
                 popupMenu.show();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override

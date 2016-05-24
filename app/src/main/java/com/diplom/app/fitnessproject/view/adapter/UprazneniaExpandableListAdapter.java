@@ -68,7 +68,7 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
     private void PopumMenuImageListener(View v, final TextView txt){
         final View view=v;
         PopupMenu popupMenu=new PopupMenu(context,v);
-        popupMenu.inflate(R.menu.popup_list);
+        popupMenu.inflate(R.menu.popup_list_full);
         popupMenu.show();
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override

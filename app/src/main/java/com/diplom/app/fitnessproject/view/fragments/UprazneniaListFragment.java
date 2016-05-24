@@ -89,6 +89,7 @@ public class UprazneniaListFragment extends Fragment implements FragmentPagesUse
 
     @Override
     public void startChangeActivity(Intent intent) {
-        startActivityForResult(intent, UprazneniaActivity.ADD_UPR);
+        if(intent.hasExtra("_id"))startActivityForResult(intent, UprazneniaActivity.CHANGE_UPR);
+        else startActivityForResult(intent, UprazneniaActivity.ADD_UPR);
     }
 }

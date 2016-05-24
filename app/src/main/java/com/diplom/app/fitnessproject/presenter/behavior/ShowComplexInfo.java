@@ -15,6 +15,7 @@ public class ShowComplexInfo implements ShowInfoDialog{
         UprazneniaComplexInfoDialog fragment=new UprazneniaComplexInfoDialog();
         fragment.setName(cursor.getString(cursor.getColumnIndex("NAME")));
         fragment.setDescription(cursor.getString(cursor.getColumnIndex("DESCRIPTION")));
+        fragment.setType(cursor.getInt(cursor.getColumnIndex("TYPE")));
         fragment.show(fm,tag);
     }
 }

@@ -173,6 +173,7 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
         Cursor cursor=db.getUprazneniabyName(name);
         cursor.moveToFirst();
         intent.putExtra("NAME",cursor.getString(cursor.getColumnIndex("NAME")));
+        intent.putExtra("_id",cursor.getLong(cursor.getColumnIndex("_id")));
         intent.putExtra("CAT",cursor.getString(cursor.getColumnIndex("CAT")));
         String test=cursor.getString(cursor.getColumnIndex("COMMENT"));
         if(test!=null && test!="") {

@@ -81,7 +81,7 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
     @Override
     public void setFirstUpr(String name) {
         firstUpr=name;
-        itemlist.get(0).put("subtext",name);
+        itemlist.get(1).put("subtext",name);
         adapterUpdate();
 
     }
@@ -89,7 +89,7 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
     @Override
     public void setSecondUpr(String name) {
         secondUpr=name;
-        itemlist.get(1).put("subtext",name);
+        itemlist.get(2).put("subtext",name);
         adapterUpdate();
     }
 

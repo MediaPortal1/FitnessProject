@@ -8,10 +8,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.diplom.app.fitnessproject.R;
 
 public class DataBaseHelper extends SQLiteOpenHelper{
+
+    private Context context;
     private SQLiteDatabase sqLiteDatabase;
+
     private static final int DB_VERSION=1;
     private static final String DB_NAME="FintessBD";
-    private Context context;
+
+    public static final int COMPLEX_TYPE_DOUBLE=2;
+    public static final int COMPLEX_TYPE_TRIPLE=3;
 
     public DataBaseHelper(Context context) {
         super(context,DB_NAME, null, DB_VERSION);
@@ -64,9 +69,10 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             contentValues.put("SHORT_NAME", items2[i]);
             db.insert("MEASURE", null, contentValues);
         }
-        db.execSQL("CREATE TABLE COMPLEX(" +//TODO: +TYPE
+        db.execSQL("CREATE TABLE COMPLEX(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT,"+
+                "TYPE INTEGER,"+
                 "DESCRIPTION TEXT"+
                 ");");
          /*
@@ -74,6 +80,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
          */
         ContentValues contentValues=new ContentValues();
         contentValues.put("NAME","TEST");
+        contentValues.put("TYPE",COMPLEX_TYPE_DOUBLE);
         contentValues.put("DESCRIPTION","TEST DESCRIPTON");
         db.insert("COMPLEX",null,contentValues);
         //

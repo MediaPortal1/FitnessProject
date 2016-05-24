@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.diplom.app.fitnessproject.R;
+import com.diplom.app.fitnessproject.model.DataBaseHelper;
 import com.diplom.app.fitnessproject.presenter.UprazneniaActivityAddComplexPresenter;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddComplexInteface;
@@ -25,8 +26,8 @@ public class UprazneniaAddComplex extends AppCompatActivity implements Uprazneni
     private UprazneniaAddComplexInteface presenter;
     private ViewPager viewPager;
 
-    public final static int TYPE_SUPERSET=1;
-    public final static int TYPE_THREESET=2;
+    public final static int TYPE_SUPERSET=2;
+    public final static int TYPE_THREESET=3;
 
     public final static int UPR_FIRST=1;
     public final static int UPR_SECOND=2;
@@ -106,7 +107,7 @@ public class UprazneniaAddComplex extends AppCompatActivity implements Uprazneni
                     Intent intent = new Intent();
                     UprazneniaGetter fragment = (UprazneniaGetter) ((PagesViewInteface)presenter).getTabListFragments().get(0);
                     //
-                    intent.putExtra("type", TYPE_SUPERSET);
+                    intent.putExtra("type", DataBaseHelper.COMPLEX_TYPE_DOUBLE);
                     intent.putExtra("first",fragment.getFirstUpraznenie());
                     intent.putExtra("second",fragment.getSecondUpraznenie());
                     intent.putExtra("name",fragment.getName());

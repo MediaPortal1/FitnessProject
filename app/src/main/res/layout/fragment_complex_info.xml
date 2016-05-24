@@ -12,6 +12,14 @@
         android:text="Medium Text"
         android:textColor="@android:color/black"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/textView.type.complex.info" />
+
     <TextView
         android:id="@+id/textview.descriprion.complex.info"
         android:layout_width="wrap_content"

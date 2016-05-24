@@ -145,6 +145,11 @@ public class UprazneniaActivity extends AppCompatActivity
                 if(resultCode == RESULT_OK)
                     presenter.addComplex(data);
                 break;
+            case CHANGE_UPR:
+                if (resultCode == RESULT_OK) {
+                    presenter.addUpraznenie(data);
+                }
+                break;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

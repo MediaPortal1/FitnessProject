@@ -7,4 +7,6 @@ public interface UprazneniaInfoGetter  extends ParentView {
     String getName();
     int getRest();
     String getCategory();
+    long getID();
+    boolean isStartforChange();
 }

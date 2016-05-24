@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.diplom.app.fitnessproject.R;
+import com.diplom.app.fitnessproject.model.DataBaseHelper;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaInterface;
@@ -105,22 +106,35 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
     private class DataBaseConnectionAddUpraznenie extends AsyncTask<Intent,Void,Boolean> {
         private DataBaseModelUpraznenia db;
 
-
         @Override
         protected Boolean doInBackground(Intent... params) {
-            //TODO: UPDATE UPRAZNENIE
-            if(params[0].getStringExtra("name")!="" && params[0].getStringExtra("name")!=null && params[0].getStringExtra("category")!=null) {
-                if (dataBaseModel.isUpraznenieIsExist(params[0].getStringExtra("name"))) {
-                    dataBaseModel.deleteUpraznenie((params[0].getStringExtra("name")));
-                }
+
+            //UPDATE UPRAZNENIE BY ID
+            if(params[0].hasExtra("_id")){
                 ContentValues cv = new ContentValues();
                 cv.put("NAME", params[0].getStringExtra("name"));
                 cv.put("CAT", params[0].getStringExtra("category"));
                 cv.put("COMMENT", params[0].getStringExtra("comment"));
                 cv.put("MEASURE", params[0].getStringExtra("measure"));
                 cv.put("REST", params[0].getIntExtra("rest", 60));
-                dataBaseModel.insertToDB("UPRAZNENIA", cv);
-                return true;
+
+                dataBaseModel.updateUpraznenie(params[0].getLongExtra("_id",-1),cv);
+            }
+            //ADD UPRAZNENIE
+            else {
+                if (params[0].getStringExtra("name") != "" && params[0].getStringExtra("name") != null && params[0].getStringExtra("category") != null) {
+                    if (dataBaseModel.isUpraznenieIsExist(params[0].getStringExtra("name"))) {
+                        dataBaseModel.deleteUpraznenie((params[0].getStringExtra("name")));
+                    }
+                    ContentValues cv = new ContentValues();
+                    cv.put("NAME", params[0].getStringExtra("name"));
+                    cv.put("CAT", params[0].getStringExtra("category"));
+                    cv.put("COMMENT", params[0].getStringExtra("comment"));
+                    cv.put("MEASURE", params[0].getStringExtra("measure"));
+                    cv.put("REST", params[0].getIntExtra("rest", 60));
+                    dataBaseModel.insertToDB("UPRAZNENIA", cv);
+                    return true;
+                }
             }
             return false;
         }
@@ -145,9 +159,13 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
     private class DataBaseConnectionAddComplex extends AsyncTask<Intent,Void,Boolean>{
         @Override
         protected Boolean doInBackground(Intent... params) {
+
             ContentValues cv=new ContentValues();
             cv.put("NAME",params[0].getStringExtra("name"));
             cv.put("DESCRIPTION",params[0].getStringExtra("comment"));
+            cv.put("TYPE",params[0].getIntExtra("type",0));
+
+            //NOT NULL
             if(params[0].getStringExtra("name")!="" && params[0].getStringExtra("first")!=null && params[0].getStringExtra("second")!=null) {
 
                 if(dataBaseModel.isComplexIsExist(params[0].getStringExtra("name"))){
@@ -170,7 +188,7 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
                     dataBaseModel.insertToDB("COMPLEX_UPRAZNENIA", cv);
 
                     //ADD THIRD UPR TO COMPLEX_UPRAZNENIA
-                    if (params[0].getIntExtra("type", 0) == UprazneniaAddComplex.TYPE_THREESET) {
+                    if (params[0].getIntExtra("type", 0) == DataBaseHelper.COMPLEX_TYPE_TRIPLE) {
                         cv = new ContentValues();
                         cv.put("COMPLEX", params[0].getStringExtra("name"));
                         cv.put("UPRAZNENIE", params[0].getStringExtra("third"));
