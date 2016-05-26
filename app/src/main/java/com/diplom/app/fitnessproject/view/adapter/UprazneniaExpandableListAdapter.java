@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
+import com.diplom.app.fitnessproject.presenter.UprazneniaFragmentListPresenter;
 import com.diplom.app.fitnessproject.presenter.interfaces.ChangeColumn;
 import com.diplom.app.fitnessproject.presenter.interfaces.ContextSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
@@ -31,6 +32,8 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
     private FragmentManager fm;
     private ListChangedNotify listnotify;
     private View.OnClickListener clickListener;
+    private UprazneniaFragmentListPresenter presenter;
+
     public UprazneniaExpandableListAdapter(Context context, List<? extends Map<String, ?>> groupData, int groupLayout, String[] groupFrom, int[] groupTo, List<? extends List<? extends Map<String, ?>>> childData, int childLayout, String[] childFrom, int[] childTo, DataBaseModelUpraznenia db, ChangeColumn onpopup, OnDialogResult result, FragmentManager fm, View.OnClickListener click) {
         super(context, groupData, groupLayout, groupFrom, groupTo, childData, childLayout, childFrom, childTo);
         this.context=context;
@@ -40,6 +43,7 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
         this.result=result;
         this.listnotify=(ListChangedNotify) result;
         this.clickListener=click;
+        this.presenter=(UprazneniaFragmentListPresenter) result;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopumMenuImageListener(v,txtview);
+                presenter.OnPopupCalled(v,txtview);
             }
         });
         img.setTag(txtview.getText().toString());
@@ -59,47 +63,13 @@ public class UprazneniaExpandableListAdapter extends SimpleExpandableListAdapter
         v.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                PopumMenuImageListener(img,txtview);
+                presenter.OnPopupCalled(v,txtview);
                 return true;
             }
         });
         return v;
     }
-    private void PopumMenuImageListener(View v, final TextView txt){
-        final View view=v;
-        PopupMenu popupMenu=new PopupMenu(context,v);
-        popupMenu.inflate(R.menu.popup_list_full);
-        popupMenu.show();
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.menu_delete:
-                        notifyDataSetChanged();
-                        changeColumn.deleteColumn(txt.getText().toString());
-                        notifyDataSetChanged();
-                        listnotify.adapterUpdate();
-                        return true;
-                    case R.id.menu_rename:
-                        UprazneniaChangeDialog dialog=new UprazneniaChangeDialog();
-                        ((ContextSetter)dialog).setContext(context);
-                        ((StringSetter)dialog).setString(txt.getText().toString());
-                        dialog.setResult(result);
-                        dialog.show(fm,"change");
-                        notifyDataSetChanged();
-                        listnotify.adapterUpdate();
-                        return true;
-                    case R.id.menu_info:
-                        ((UprazneniaListInterface)result).showInfoDialog(((String)view.getTag()));
-                        break;
-                    case R.id.menu_change:
-                        ((UprazneniaListInterface)result).changeUpraznenie((String)view.getTag());
-                        return true;
-                }
-                return false;
-            }
-        });
-    }
+
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.PopupMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
@@ -14,12 +16,15 @@ import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.presenter.behavior.ShowUpraznenieInfoDialog;
 import com.diplom.app.fitnessproject.presenter.interfaces.ChangeColumn;
+import com.diplom.app.fitnessproject.presenter.interfaces.ContextSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.interfaces.ShowInfoDialog;
+import com.diplom.app.fitnessproject.presenter.interfaces.StringSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaListInterface;
 import com.diplom.app.fitnessproject.view.UprazneniaAddActivity;
 import com.diplom.app.fitnessproject.view.adapter.UprazneniaExpandableListAdapter;
+import com.diplom.app.fitnessproject.view.fragments.UprazneniaChangeDialog;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaListFragment;
 import com.diplom.app.fitnessproject.view.fragments.UpraznenieInfoDialog;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentListView;
@@ -63,6 +68,40 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
         arraycat=new ArrayList<>();
         DataBaseConnectionGetUprazneniaList connection=new DataBaseConnectionGetUprazneniaList();
         connection.execute(notemptycats);
+    }
+
+    @Override
+    public void OnPopupCalled(View v, final TextView txt){
+        final View view=v;
+        PopupMenu popupMenu=new PopupMenu(context,v);
+        popupMenu.inflate(R.menu.popup_list_full);
+        popupMenu.show();
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menu_delete:
+                        deleteColumn(txt.getText().toString());
+                        adapterUpdate();
+                        return true;
+                    case R.id.menu_rename:
+                        UprazneniaChangeDialog dialog=new UprazneniaChangeDialog();
+                        ((ContextSetter)dialog).setContext(context);
+                        ((StringSetter)dialog).setString(txt.getText().toString());
+                        dialog.setResult(UprazneniaFragmentListPresenter.this);
+                        dialog.show(fm,"change");
+                        adapterUpdate();
+                        return true;
+                    case R.id.menu_info:
+                        showInfoDialog(((String)view.getTag()));
+                        break;
+                    case R.id.menu_change:
+                        changeUpraznenie((String)view.getTag());
+                        return true;
+                }
+                return false;
+            }
+        });
     }
     private class DataBaseConnectionGetUprazneniaList extends AsyncTask<ArrayList<String>, Void, Void> {
 

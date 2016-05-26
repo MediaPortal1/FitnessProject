@@ -62,8 +62,10 @@
     <string name="rest.upraznenia">Время отдыха (в сек)</string>
     <string name="notempty.addupraznenia">Название или категория не могут быть пустые</string>
     <string name="notempty.addcomplex">Название или упражнения не могут быть пустые</string>
-    <string name="addsuccess.addupraznenia">Упражнение добавлено</string>
-    <string name="addsuccess.addcomplex">Комлпекс добавлено</string>
+    <string name="notempty.updateupraznenie">Название или упражнения не могут быть пустые</string>
+    <string name="addsuccess.upraznenia">Упражнение добавлено</string>
+    <string name="addsuccess.complex">Комлпекс добавлено</string>
+    <string name="updatesuccess.upraznenie">Упражнение изменено</string>
     <string name="first.upraznenie.complex">Первое упражнение</string>
     <string name="second.upraznenie.complex">Второе упражнение</string>
     <string name="button.start">start</string>

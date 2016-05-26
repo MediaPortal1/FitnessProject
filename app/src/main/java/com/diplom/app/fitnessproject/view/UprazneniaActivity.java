@@ -147,7 +147,7 @@ public class UprazneniaActivity extends AppCompatActivity
                 break;
             case CHANGE_UPR:
                 if (resultCode == RESULT_OK) {
-                    presenter.addUpraznenie(data);
+                    presenter.updateUpraznenie(data);
                 }
                 break;
         }

@@ -12,7 +12,6 @@ import com.diplom.app.fitnessproject.model.DataBaseHelper;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaInterface;
-import com.diplom.app.fitnessproject.view.UprazneniaAddComplex;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaComplexListFragment;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
 import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
@@ -103,25 +102,23 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
         dataBaseConnection.execute(data);
     }
 
-    private class DataBaseConnectionAddUpraznenie extends AsyncTask<Intent,Void,Boolean> {
-        private DataBaseModelUpraznenia db;
+    @Override
+    public void updateUpraznenie(Intent data) {
+        DataBaseConnectionUpdateUpraznenie dataBaseConnection =new DataBaseConnectionUpdateUpraznenie();
+        dataBaseConnection.execute(data);
+    }
 
+    @Override
+    public void addComplex(Intent data) {
+        DataBaseConnectionAddComplex connection=new DataBaseConnectionAddComplex();
+        connection.execute(data);
+    }
+
+    //--------ADD UPRAZNENIE------
+    private class DataBaseConnectionAddUpraznenie extends AsyncTask<Intent,Void,Boolean> {
         @Override
         protected Boolean doInBackground(Intent... params) {
-
-            //UPDATE UPRAZNENIE BY ID
-            if(params[0].hasExtra("_id")){
-                ContentValues cv = new ContentValues();
-                cv.put("NAME", params[0].getStringExtra("name"));
-                cv.put("CAT", params[0].getStringExtra("category"));
-                cv.put("COMMENT", params[0].getStringExtra("comment"));
-                cv.put("MEASURE", params[0].getStringExtra("measure"));
-                cv.put("REST", params[0].getIntExtra("rest", 60));
-
-                dataBaseModel.updateUpraznenie(params[0].getLongExtra("_id",-1),cv);
-            }
             //ADD UPRAZNENIE
-            else {
                 if (params[0].getStringExtra("name") != "" && params[0].getStringExtra("name") != null && params[0].getStringExtra("category") != null) {
                     if (dataBaseModel.isUpraznenieIsExist(params[0].getStringExtra("name"))) {
                         dataBaseModel.deleteUpraznenie((params[0].getStringExtra("name")));
@@ -135,7 +132,6 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
                     dataBaseModel.insertToDB("UPRAZNENIA", cv);
                     return true;
                 }
-            }
             return false;
         }
 
@@ -146,16 +142,49 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
                 Toast.makeText(context,context.getString(R.string.notempty_addupraznenia),Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(context,context.getString(R.string.addsuccess_addupraznenia),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,context.getString(R.string.addsuccess_upraznenia),Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    //--------------
+
+
+    //--------UPDATE UPRAZNENIE------
+    private class DataBaseConnectionUpdateUpraznenie extends AsyncTask<Intent,Void,Boolean> {
+        @Override
+        protected Boolean doInBackground(Intent... params) {
+
+            //UPDATE UPRAZNENIE BY ID
+            if(params[0].hasExtra("_id")){
+                ContentValues cv = new ContentValues();
+                cv.put("NAME", params[0].getStringExtra("name"));
+                cv.put("CAT", params[0].getStringExtra("category"));
+                cv.put("COMMENT", params[0].getStringExtra("comment"));
+                cv.put("MEASURE", params[0].getStringExtra("measure"));
+                cv.put("REST", params[0].getIntExtra("rest", 60));
+
+                dataBaseModel.updateUpraznenie(params[0].getLongExtra("_id",-1),cv);
+                return true;
+            }
+
+            return false;
+        }
+        //---------------
+
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            if(aBoolean==false){
+                Toast.makeText(context,context.getString(R.string.notempty_updateupraznenie),Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(context,context.getString(R.string.updatesuccess_upraznenie),Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    @Override
-    public void addComplex(Intent data) {
-        DataBaseConnectionAddComplex connection=new DataBaseConnectionAddComplex();
-        connection.execute(data);
-    }
+    //------------ADD COMPLEX-------------
     private class DataBaseConnectionAddComplex extends AsyncTask<Intent,Void,Boolean>{
         @Override
         protected Boolean doInBackground(Intent... params) {
@@ -206,8 +235,9 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
                 Toast.makeText(context,context.getString(R.string.notempty_addcomplex),Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(context,context.getString(R.string.addsuccess_addcomplex),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,context.getString(R.string.addsuccess_complex),Toast.LENGTH_SHORT).show();
             }
         }
     }
+    //-----------------
 }

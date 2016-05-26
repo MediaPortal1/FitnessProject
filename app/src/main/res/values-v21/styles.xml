@@ -12,14 +12,10 @@
         <item name="android:itemBackground">@color/nicebackground</item>
         <item name="android:colorBackground">@color/nicebackground</item>
         <item name="android:popupMenuStyle">@style/myPopupMenuStyle</item>
-        <item name="popupMenuStyle">@style/myPopupMenuStyle</item>
-        <item name="android:shadowColor">@color/nicebackground</item>
-        <item name="android:colorForeground">@color/nicebackground</item>
     </style>
 
     <!--POPUP MENU STYLE-->
-    <style name="myPopupMenuStyle" parent="@style/Widget.AppCompat.Light.PopupMenu">
-        <item name="android:popupBackground">@android:color/white</item>
+    <style name="myPopupMenuStyle" parent="@android:style/Widget.Holo.Light.PopupMenu">
     </style>
 </resources>
 
