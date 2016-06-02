@@ -1,10 +1,10 @@
 package com.diplom.app.fitnessproject.presenter.interfaces;
 
 
-public interface UprazneniaGetter extends PresenterParent {
+public interface ComplexSuperSetUprazneniaGetter{
+    //COMPLEX GET
     String getFirstUpraznenie();
     String getSecondUpraznenie();
-    String getThirdUpraznenie();
     String getName();
     String getDescription();
 

@@ -6,13 +6,13 @@ import android.support.v4.app.FragmentManager;
 import android.widget.SimpleAdapter;
 
 import com.diplom.app.fitnessproject.R;
+import com.diplom.app.fitnessproject.presenter.behavior.ItemListFactory;
 import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
-import com.diplom.app.fitnessproject.presenter.interfaces.ShowInfoDialog;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddComplexSupersetInterface;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddComplexFragmentInt;
 import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaGetter;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.ComplexSuperSetUprazneniaGetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.ComplexSuperSetUprazneniaSetter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddComplexCommentDialog;
 import com.diplom.app.fitnessproject.view.interfaces.ComplexAddSupersetView;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UprazneniaAddComplexSupersetFragmentPresenter implements UprazneniaAddComplexSupersetInterface,UprazneniaSetter,ListChangedNotify,UprazneniaGetter,OnDialogResult{
+public class UprazneniaAddComplexSupersetFragmentPresenter implements UprazneniaAddComplexFragmentInt,ComplexSuperSetUprazneniaSetter,ListChangedNotify,ComplexSuperSetUprazneniaGetter,OnDialogResult{
     private Context context;
     private ComplexAddSupersetView view;
     private ArrayList<Map<String,Object>> itemlist;
@@ -38,25 +38,13 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
     public SimpleAdapter initList(){
         itemlist=new ArrayList<>();
 
-        Map<String,Object> map=new HashMap<>();
+        //
+        itemlist.add(ItemListFactory.getListMap( R.mipmap.comment_outline,context.getString(R.string.description),context.getString(R.string.nodescription)));
+        //
+        itemlist.add(ItemListFactory.getListMap( R.mipmap.category,context.getString(R.string.first_upraznenie_complex),context.getString(R.string.noupraznenia)));
+        //
+        itemlist.add(ItemListFactory.getListMap( R.mipmap.category,context.getString(R.string.second_upraznenie_complex),context.getString(R.string.noupraznenia)));
 
-        //
-        map.put("icon", R.mipmap.comment_outline);
-        map.put("text",context.getString(R.string.description));
-        map.put("subtext",context.getString(R.string.nodescription));
-        itemlist.add(map);
-        //
-        map=new HashMap<>();
-        map.put("icon", R.mipmap.category);
-        map.put("text",context.getString(R.string.first_upraznenie_complex));
-        map.put("subtext",context.getString(R.string.noupraznenia));
-        itemlist.add(map);
-        //
-        map=new HashMap<>();
-        map.put("icon", R.mipmap.category);
-        map.put("text",context.getString(R.string.second_upraznenie_complex));
-        map.put("subtext",context.getString(R.string.noupraznenia));
-        itemlist.add(map);
         adapter=new SimpleAdapter(context,itemlist, R.layout.listitem_upraznenia_add_custom,
                 new String[]{"icon","text","subtext"},
                 new int[]{R.id.imageview_listitem_add_upraznenia,
@@ -82,7 +70,7 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
     public void setFirstUpr(String name) {
         firstUpr=name;
         itemlist.get(1).put("subtext",name);
-        adapterUpdate();
+        updateList();
 
     }
 
@@ -90,12 +78,7 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
     public void setSecondUpr(String name) {
         secondUpr=name;
         itemlist.get(2).put("subtext",name);
-        adapterUpdate();
-    }
-
-    @Override
-    public void setThirdUpr(String name) {
-        //NULL
+        updateList();
     }
 
     @Override
@@ -109,11 +92,6 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
     }
 
     @Override
-    public String getThirdUpraznenie() {
-        return null;
-    }
-
-    @Override
     public String getName() {
         return null;
     }
@@ -124,7 +102,7 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
     }
 
     @Override
-    public void adapterUpdate() {
+    public void updateList() {
     adapter.notifyDataSetChanged();
     }
 
@@ -132,6 +110,6 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
     public void onResultDialog(int DIALOG_CODE, Object obj) {
         comment=(String)obj;
         itemlist.get(0).put("subtext",comment);
-        adapterUpdate();
+        updateList();
     }
 }

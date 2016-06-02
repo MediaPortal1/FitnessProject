@@ -20,11 +20,9 @@ import com.diplom.app.fitnessproject.presenter.TrainingsActivityPresenter;
 import com.diplom.app.fitnessproject.presenter.interfaces.NavigationInterface;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.interfaces.TrainingsInterface;
-import com.diplom.app.fitnessproject.view.interfaces.NavView;
 
 
-public class TrainingsActivity extends AppCompatActivity
-        implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener,NavView{
+public class TrainingsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DrawerLayout drawer;
     private NavigationInterface navigationPresenter;
@@ -49,8 +47,14 @@ public class TrainingsActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         android.support.design.widget.NavigationView navigationView = (android.support.design.widget.NavigationView) findViewById(R.id.nav_view_trainings);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationPresenter=new NavigationPresenterImpl(drawer,(NavView)this);
+
+        /*
+        NAVIGATION PRESENTER
+         */
+        navigationPresenter=new NavigationPresenterImpl(this,drawer);
+        //
+
+        navigationView.setNavigationItemSelectedListener(navigationPresenter);
         navigationView.setCheckedItem(R.id.nav_programs);
         viewPager=(ViewPager)findViewById(R.id.pager_trainings);
         TabLayout tabLayout=(TabLayout)findViewById(R.id.tablayout_trainings);
@@ -72,10 +76,6 @@ public class TrainingsActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        return navigationPresenter.navigationDrawerClickListener(item.getItemId());
-    }
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         navigationPresenter.closeNavigationPresenter();
@@ -85,17 +85,10 @@ public class TrainingsActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            closeDrawer();
+            navigationPresenter.closeDrawer();
         } else {
             super.onBackPressed();
         }
     }
-    public void closeDrawer() {
-        drawer.closeDrawer(GravityCompat.START);
-    }
 
-    @Override
-    public void startNavActivity(Class classitem) {
-        startActivity(new Intent(getApplicationContext(), classitem));
-    }
 }

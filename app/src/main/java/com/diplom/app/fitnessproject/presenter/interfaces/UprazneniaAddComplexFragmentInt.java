@@ -3,7 +3,8 @@ package com.diplom.app.fitnessproject.presenter.interfaces;
 /**
  * Created by Poltavets on 13.05.2016.
  */
-public interface UprazneniaAddComplexSupersetInterface {
+public interface UprazneniaAddComplexFragmentInt {
+    //SUPERSET/THREESET INTERFACE FRAGMENT
     void initAdapter();
     void showCommentDialog();
 }

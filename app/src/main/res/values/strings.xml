@@ -31,6 +31,7 @@
     <string name="title.rename.complex">Переиминовать комплекс упражнений</string>
     <string name="empty.fragment">Здесь пока пусто</string>
     <string name="add.superset">Добавить суперсэт</string>
+    <string name="add.threeset">Добавить трисэт</string>
     <string name="add.comment">Добавить комментарий</string>
     <string name="makeitself">Создать вручную</string>
     <string name="chosecategory.upraznenia">Выберите категорию</string>
@@ -40,7 +41,8 @@
     <string name="trainings.myprograms">Мои программы</string>
     <!-- IN FRAGMENTS AND ACTIVITY-->
     <string name="textview.example.add.upraznenia">напр. Жим штанги</string>
-    <string name="textview.example.add.complex">напр. Суперсэт на руки</string>
+    <string name="textview.superset.example.add.complex">напр. Суперсэт на руки</string>
+    <string name="textview.threeset.example.add.complex">напр. Трисэт на руки</string>
     <string name="checkmenu.button">Check</string>
     <string name="category">Категория</string>
     <string name="name">Название</string>
@@ -68,6 +70,7 @@
     <string name="updatesuccess.upraznenie">Упражнение изменено</string>
     <string name="first.upraznenie.complex">Первое упражнение</string>
     <string name="second.upraznenie.complex">Второе упражнение</string>
+    <string name="third.upraznenie.complex">Третье упражнение</string>
     <string name="button.start">start</string>
     <string name="button.stop">stop</string>
     <string name="button.reset">reset</string>

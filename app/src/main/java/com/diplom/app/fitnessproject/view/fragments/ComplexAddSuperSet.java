@@ -14,20 +14,20 @@ import android.widget.ListView;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.UprazneniaAddComplexSupersetFragmentPresenter;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddComplexSupersetInterface;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaGetter;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddComplexFragmentInt;
+import com.diplom.app.fitnessproject.presenter.interfaces.ComplexSuperSetUprazneniaGetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.ComplexSuperSetUprazneniaSetter;
 import com.diplom.app.fitnessproject.view.UprazneniaAddComplex;
 import com.diplom.app.fitnessproject.view.activity.UprazneniaAllList;
 import com.diplom.app.fitnessproject.view.interfaces.ComplexAddSupersetView;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
 
 
-public class ComplexAddSuperSet extends Fragment implements FragmentPages,ComplexAddSupersetView,AdapterView.OnItemClickListener,UprazneniaSetter,UprazneniaGetter{
+public class ComplexAddSuperSet extends Fragment implements FragmentPages,ComplexAddSupersetView,AdapterView.OnItemClickListener,ComplexSuperSetUprazneniaSetter,ComplexSuperSetUprazneniaGetter {
     private ListView list;
     private EditText editText;
     private String title;
-    private UprazneniaAddComplexSupersetInterface presenter;
+    private UprazneniaAddComplexFragmentInt presenter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -86,34 +86,26 @@ public class ComplexAddSuperSet extends Fragment implements FragmentPages,Comple
 
     @Override
     public void setFirstUpr(String name) {
-        ((UprazneniaSetter)presenter).setFirstUpr(name);
+        ((ComplexSuperSetUprazneniaSetter)presenter).setFirstUpr(name);
     }
 
     @Override
     public void setSecondUpr(String name) {
-        ((UprazneniaSetter)presenter).setSecondUpr(name);
+        ((ComplexSuperSetUprazneniaSetter)presenter).setSecondUpr(name);
 
     }
 
-    @Override
-    public void setThirdUpr(String name) {
-        //NULL
-    }
 
     @Override
     public String getFirstUpraznenie() {
-        return ((UprazneniaGetter)presenter).getFirstUpraznenie();
+        return ((ComplexSuperSetUprazneniaGetter)presenter).getFirstUpraznenie();
     }
 
     @Override
     public String getSecondUpraznenie() {
-        return ((UprazneniaGetter)presenter).getSecondUpraznenie();
+        return ((ComplexSuperSetUprazneniaGetter)presenter).getSecondUpraznenie();
     }
 
-    @Override
-    public String getThirdUpraznenie() {
-        return null;
-    }
 
     @Override
     public String getName() {
@@ -122,6 +114,6 @@ public class ComplexAddSuperSet extends Fragment implements FragmentPages,Comple
 
     @Override
     public String getDescription() {
-        return ((UprazneniaGetter)presenter).getDescription();
+        return ((ComplexSuperSetUprazneniaGetter)presenter).getDescription();
     }
 }

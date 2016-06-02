@@ -16,10 +16,10 @@
         >
 
         <EditText
+            android:id="@+id/editText.add.threeset.complex.upraznenia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText.add.superset.complex.upraznenia"
-            android:hint="@string/textview.superset.example.add.complex"
+            android:hint="@string/textview.threeset.example.add.complex"
             android:textColorHint="@color/lightgray"
             android:textColor="@color/white"
             android:theme="@style/EditTextLightGray"
@@ -27,9 +27,9 @@
     </RelativeLayout>
 
     <ListView
+        android:id="@+id/listView.add.threeset.complex.upraznenia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView.add.superset.complex.upraznenia"
         tools:listitem="@layout/listitem_upraznenia_add_custom"
         android:layout_gravity="center_horizontal"
         android:choiceMode="singleChoice" />

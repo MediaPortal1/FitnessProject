@@ -29,61 +29,51 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
     private TabPagerAdapter tabPagerAdapter;
     private android.support.v4.app.FragmentManager fm;
     private UprazneniaInterface presenter;
-    private ArrayList<Fragment> fragmentpages;
+    private ArrayList<Fragment> fragments =new ArrayList<>();
 
     public UprazneniaActivityPresenter(Context context, android.support.v4.app.FragmentManager fm) {
         this.context=context;
-        dataBaseModel=new DataBaseModelUpraznenia(context);
-        tabPagerAdapter=new TabPagerAdapter(fm);
         this.fm=fm;
-        fragmentpages=new ArrayList<>();
+        dataBaseModel=new DataBaseModelUpraznenia(context);
+
     }
 
     @Override
     public TabPagerAdapter getTabPagerAdapter() {
-        Fragment fragment;
-        FragmentPages fragmentPages;
+        tabPagerAdapter=new TabPagerAdapter(fm);
+
+        //1 FRAGMENT
         if(dataBaseModel.isUprazneniaEmpty()){
-            fragment=new UprazneniaListFragmentEmpty();
-            fragmentpages.add(fragment);
-            fragmentPages=(FragmentPages)fragment;
-            fragmentPages.setTitle(context.getString(R.string.title_tab_upraznenia));
-            tabPagerAdapter.addFragment((FragmentPages) fragment);
+            addFragmentToList(new UprazneniaListFragmentEmpty(),context.getString(R.string.title_tab_upraznenia));
         }
         else{
-            fragment=new UprazneniaListFragment();
-            fragmentpages.add(fragment);
-            fragmentPages=(FragmentPages)fragment;
-            fragmentPages.setTitle(context.getString(R.string.title_tab_upraznenia));
-            UprazneniaListFragment uprazneniaListFragment=(UprazneniaListFragment)fragment;
-            ((FragmentPagesUseDb) fragment).setDataBase(dataBaseModel);
-            tabPagerAdapter.addFragment((FragmentPages) fragment);
+            addFragmentToList(new UprazneniaListFragment(),context.getString(R.string.title_tab_upraznenia));
         }
+
         //2 FRAGMENT
         if(dataBaseModel.isComplexEmpty()){
-            fragment=new UprazneniaListFragmentEmpty();
-            fragmentpages.add(fragment);
-            fragmentPages=(FragmentPages)fragment;
-            fragmentPages.setTitle(context.getString(R.string.title_tab_complex));
-            tabPagerAdapter.addFragment((FragmentPages) fragment);
+            addFragmentToList(new UprazneniaListFragmentEmpty(),context.getString(R.string.title_tab_complex));
         }
         else {
-            fragment=new UprazneniaComplexListFragment();
-            fragmentpages.add(fragment);
-            fragmentPages=(FragmentPages)fragment;
-            fragmentPages.setTitle(context.getString(R.string.title_tab_complex));
-            ((FragmentPagesUseDb)fragment).setDataBase(dataBaseModel);
-            tabPagerAdapter.addFragment((FragmentPages) fragment);
+            addFragmentToList(new UprazneniaComplexListFragment(),context.getString(R.string.title_tab_complex));
         }
 
         //3 FRAGMENT
-        fragment=new UprazneniaListFragmentEmpty();
-        fragmentpages.add(fragment);
-        fragmentPages=(FragmentPages)fragment;
-        fragmentPages.setTitle(context.getString(R.string.title_tab_history));
-        tabPagerAdapter.addFragment((FragmentPages)fragment);
+        addFragmentToList(new UprazneniaListFragmentEmpty(),context.getString(R.string.title_tab_history));
+
+
         return tabPagerAdapter;
     }
+
+    @Override
+    public void addFragmentToList(FragmentPages fragment, String title) {
+        fragments.add((Fragment) fragment);
+        fragment.setTitle(title);
+        if(fragment instanceof FragmentPagesUseDb)
+        ((FragmentPagesUseDb)fragment).setDataBase(dataBaseModel);
+        tabPagerAdapter.addFragment(fragment);
+    }
+
     public void closePresenter(){
         context=null;
         dataBaseModel.closeDB();
@@ -93,7 +83,7 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
 
     @Override
     public List<Fragment> getTabListFragments() {
-        return fragmentpages;
+        return fragments;
     }
 
     @Override
@@ -171,7 +161,6 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
         }
         //---------------
 
-
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
@@ -196,6 +185,10 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
 
             //NOT NULL
             if(params[0].getStringExtra("name")!="" && params[0].getStringExtra("first")!=null && params[0].getStringExtra("second")!=null) {
+
+                //IF THREESET --NOT NULL
+                if(params[0].getIntExtra("type",0)==DataBaseHelper.COMPLEX_TYPE_TRIPLE && (params[0].getStringExtra("first")=="" || params[0].getStringExtra("first")==null))
+                    return false;
 
                 if(dataBaseModel.isComplexIsExist(params[0].getStringExtra("name"))){
                     dataBaseModel.deleteComplex(params[0].getStringExtra("name"));

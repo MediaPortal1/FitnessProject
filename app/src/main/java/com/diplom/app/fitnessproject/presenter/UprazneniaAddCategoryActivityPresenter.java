@@ -55,7 +55,7 @@ public class UprazneniaAddCategoryActivityPresenter implements UprazneniaCategor
         }
     }
     @Override
-    public void adapterUpdate() {
+    public void updateList() {
     adapter.notifyDataSetChanged();
     }
 
@@ -65,14 +65,14 @@ public class UprazneniaAddCategoryActivityPresenter implements UprazneniaCategor
     }
 
     @Override
-    public void changeColumn(String from, String to) {
-        db.changeCat(from, to);
+    public void renameColumn(String from, String to) {
+        db.updateCat(from, to);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         adapter.setSelectedIndex(position);
-        adapterUpdate();
+        updateList();
     }
 
     @Override
@@ -87,7 +87,7 @@ public class UprazneniaAddCategoryActivityPresenter implements UprazneniaCategor
         switch (item.getItemId()) {
             case R.id.menu_delete://DELETE
                 deleteColumn((String) v.getTag());
-                adapterUpdate();
+                updateList();
                 break;
             case R.id.menu_rename://RENAME
                 UprazneniaCatChangeDialog dialog = new UprazneniaCatChangeDialog();
@@ -101,7 +101,7 @@ public class UprazneniaAddCategoryActivityPresenter implements UprazneniaCategor
 
     @Override
     public void onResultDialog(int DIALOG_CODE, Object obj) {
-        adapterUpdate();
+        updateList();
         DataBaseLoadCatList connection=new DataBaseLoadCatList();
         connection.execute();
     }

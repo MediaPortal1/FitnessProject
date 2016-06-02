@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomInterface;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomFragmentInt;
 import com.diplom.app.fitnessproject.presenter.UprazneniaAddFragmentCustomPresenter;
 import com.diplom.app.fitnessproject.view.activity.UprazneniaAddCustomChooseCategory;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentAddUpraznenieCustomView;
@@ -26,7 +25,7 @@ import com.diplom.app.fitnessproject.view.interfaces.UprazneniaInfoGetter;
 public class UprazneniaAddCustom extends Fragment implements FragmentPages,FragmentAddUpraznenieCustomView{
     private ListView listView;
     private TextView editText;
-    private UprazneniaAddCustomInterface presenter;
+    private UprazneniaAddCustomFragmentInt presenter;
     private Bundle changebundle;
 
     private String title;

@@ -8,14 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.SimpleExpandableListAdapter;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModel;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.presenter.UprazneniaFragmentComplexPresenter;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaComplexInterface;
-import com.diplom.app.fitnessproject.view.adapter.UprazneniaComplexExpandableListAdapter;
 import com.diplom.app.fitnessproject.view.interfaces.ComplexView;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPagesUseDb;
 
@@ -48,7 +46,7 @@ public class UprazneniaComplexListFragment extends Fragment implements FragmentP
     @Override
     public void onResume() {
         super.onResume();
-        presenter.updateAdapter();
+        presenter.updateList();
     }
 
     @Override

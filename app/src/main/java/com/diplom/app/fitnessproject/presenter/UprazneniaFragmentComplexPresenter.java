@@ -16,7 +16,6 @@ import com.diplom.app.fitnessproject.presenter.interfaces.ShowInfoDialog;
 import com.diplom.app.fitnessproject.presenter.interfaces.StringSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaComplexInterface;
 import com.diplom.app.fitnessproject.view.adapter.UprazneniaComplexExpandableListAdapter;
-import com.diplom.app.fitnessproject.view.fragments.UprazneniaComplexInfoDialog;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaComplexRenameDialog;
 import com.diplom.app.fitnessproject.view.interfaces.ComplexView;
 
@@ -41,10 +40,10 @@ public class UprazneniaFragmentComplexPresenter implements UprazneniaComplexInte
         this.fm=fm;
         infoUprDialog =new ShowUpraznenieInfoDialog();
         infoComplDialog=new ShowComplexInfo();
-        updateAdapter();
+        updateList();
     }
     @Override
-    public void updateAdapter(){
+    public void updateList(){
         DataBaseConnectionAdapter connection=new DataBaseConnectionAdapter();
         connection.execute();
     }
@@ -101,7 +100,7 @@ public class UprazneniaFragmentComplexPresenter implements UprazneniaComplexInte
     @Override
     public void deleteComplex(String name) {
         db.deleteComplex(name);
-        updateAdapter();
+        updateList();
     }
 
     @Override
@@ -118,7 +117,7 @@ public class UprazneniaFragmentComplexPresenter implements UprazneniaComplexInte
         if(map.get("to")!=null && map.get("to")!=""){
             db.renameComplex(map.get("from"),map.get("to"));
         }
-        updateAdapter();
+        updateList();
     }
 
     @Override

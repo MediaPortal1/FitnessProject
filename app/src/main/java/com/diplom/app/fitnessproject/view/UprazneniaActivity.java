@@ -19,11 +19,8 @@ import com.diplom.app.fitnessproject.presenter.NavigationPresenterImpl;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.UprazneniaActivityPresenter;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaInterface;
-import com.diplom.app.fitnessproject.view.interfaces.NavView;
 
-public class UprazneniaActivity extends AppCompatActivity
-        implements android.support.design.widget.NavigationView.OnNavigationItemSelectedListener,
-        NavView,View.OnClickListener{
+public class UprazneniaActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DrawerLayout drawer;
     private NavigationInterface navigationPresenter;
@@ -51,8 +48,14 @@ public class UprazneniaActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         android.support.design.widget.NavigationView navigationView = (android.support.design.widget.NavigationView) findViewById(R.id.upraznenia_nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationPresenter=new NavigationPresenterImpl(drawer,(NavView)this);
+
+        /*
+        NAVIGATION PRESENTER
+         */
+        navigationPresenter=new NavigationPresenterImpl(this,drawer);
+        //
+
+        navigationView.setNavigationItemSelectedListener(navigationPresenter);
         navigationView.setCheckedItem(R.id.nav_upraznenia);
         viewPager=(ViewPager)findViewById(R.id.pager_upraznenia);
         TabLayout tabLayout=(TabLayout)findViewById(R.id.tablayout_upraznenia);
@@ -78,7 +81,7 @@ public class UprazneniaActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            closeDrawer();
+            navigationPresenter.closeDrawer();
         } else {
             super.onBackPressed();
         }
@@ -101,24 +104,9 @@ public class UprazneniaActivity extends AppCompatActivity
 
                 return true;
         }
-        return navigationPresenter.optionMenuClickListener(item.getItemId());
+        return false;
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        return navigationPresenter.navigationDrawerClickListener(item.getItemId());
-    }
-
-    @Override
-    public void closeDrawer() {
-        drawer.closeDrawer(GravityCompat.START);
-    }
-
-    @Override
-    public void startNavActivity(Class classitem) {
-        startActivity(new Intent(getApplicationContext(), classitem));
-    }
 
     @Override
     public void onClick(View v) {
@@ -130,7 +118,6 @@ public class UprazneniaActivity extends AppCompatActivity
                     startActivityForResult(new Intent(this, UprazneniaAddComplex.class), ADD_COMPL);
                     break;
             }
-
     }
 
     @Override
@@ -153,5 +140,6 @@ public class UprazneniaActivity extends AppCompatActivity
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 
 }

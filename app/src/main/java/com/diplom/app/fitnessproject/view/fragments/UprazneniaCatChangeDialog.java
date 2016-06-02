@@ -9,8 +9,6 @@ import android.view.View;
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.presenter.interfaces.ContextSetter;
-import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
-import com.diplom.app.fitnessproject.presenter.interfaces.ListChangedNotify;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.interfaces.StringSetter;
 
@@ -43,7 +41,7 @@ public class UprazneniaCatChangeDialog extends DialogTextFragment implements Vie
         @Override
         protected Void doInBackground(String... params) {
             DataBaseModelUpraznenia db=new DataBaseModelUpraznenia(context);
-            db.changeCat(params[0],name);
+            db.updateCat(params[0],name);
             return null;
         }
 

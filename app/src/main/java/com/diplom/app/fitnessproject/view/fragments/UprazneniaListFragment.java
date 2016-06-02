@@ -43,7 +43,7 @@ public class UprazneniaListFragment extends Fragment implements FragmentPagesUse
     @Override
     public void onResume() {
         super.onResume();
-        ((ListChangedNotify)presenter).adapterUpdate();
+        ((ListChangedNotify)presenter).updateList();
     }
 
     @Nullable
@@ -89,7 +89,7 @@ public class UprazneniaListFragment extends Fragment implements FragmentPagesUse
 
     @Override
     public void startChangeActivity(Intent intent) {
-        if(intent.hasExtra("_id"))startActivityForResult(intent, UprazneniaActivity.CHANGE_UPR);
-        else startActivityForResult(intent, UprazneniaActivity.ADD_UPR);
+        if(intent.hasExtra("_id"))getActivity().startActivityForResult(intent, UprazneniaActivity.CHANGE_UPR);
+        else getActivity().startActivityForResult(intent, UprazneniaActivity.ADD_UPR);
     }
 }

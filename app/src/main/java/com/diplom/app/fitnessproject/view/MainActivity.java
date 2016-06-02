@@ -1,6 +1,5 @@
 package com.diplom.app.fitnessproject.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,11 +12,9 @@ import android.view.MenuItem;
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.interfaces.NavigationInterface;
 import com.diplom.app.fitnessproject.presenter.NavigationPresenterImpl;
-import com.diplom.app.fitnessproject.view.interfaces.NavView;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
-public class MainActivity extends AppCompatActivity
-        implements android.support.design.widget.NavigationView.OnNavigationItemSelectedListener,NavView {
+public class MainActivity extends AppCompatActivity{
     private DrawerLayout drawer;
     private NavigationInterface navigationPresenter;
     private MaterialCalendarView calendar;
@@ -37,19 +34,33 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.open_navigationdrawer, R.string.close_navigationdrawer);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
         android.support.design.widget.NavigationView navigationView = (android.support.design.widget.NavigationView) findViewById(R.id.main_nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationPresenter=new NavigationPresenterImpl(drawer,(NavView)this);
+
+        /*
+        NAVIGATION ACTIVITY PRESENTER
+         */
+        navigationPresenter=new NavigationPresenterImpl(this,drawer);
+        //
+
+        navigationView.setNavigationItemSelectedListener(navigationPresenter);
         navigationView.setCheckedItem(R.id.nav_main);
+
         calendar=(MaterialCalendarView)findViewById(R.id.calendarview_main);
         //---
 
     }
 
     @Override
+    protected void onDestroy() {
+        navigationPresenter.closeDrawer();
+        super.onDestroy();
+    }
+
+    @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            closeDrawer();
+            navigationPresenter.closeDrawer();
         } else {
             super.onBackPressed();
         }
@@ -63,23 +74,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return navigationPresenter.optionMenuClickListener(item.getItemId());
+        return true;
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        return navigationPresenter.navigationDrawerClickListener(item.getItemId());
-    }
-
-    @Override
-    public void closeDrawer() {
-        drawer.closeDrawer(GravityCompat.START);
-
-    }
-
-    @Override
-    public void startNavActivity(Class classitem) {
-        startActivity(new Intent(getApplicationContext(),classitem));
-    }
 }

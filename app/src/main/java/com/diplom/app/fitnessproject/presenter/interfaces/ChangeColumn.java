@@ -1,6 +1,7 @@
 package com.diplom.app.fitnessproject.presenter.interfaces;
 
-public interface ChangeColumn  extends PresenterParent{
+public interface ChangeColumn{
+    //INTERFACE FOR CHANGE/DELETE ITEMS IN LIST
     void deleteColumn(String name);
-    void changeColumn(String from,String to);
+    void renameColumn(String from, String to);
 }

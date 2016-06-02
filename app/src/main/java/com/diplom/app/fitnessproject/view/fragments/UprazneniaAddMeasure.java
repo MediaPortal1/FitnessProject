@@ -14,8 +14,7 @@ import android.widget.ListView;
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
-import com.diplom.app.fitnessproject.presenter.interfaces.PresenterParent;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomInterface;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomFragmentInt;
 import com.diplom.app.fitnessproject.presenter.UprazneniaAddFragmentCustomPresenter;
 import com.diplom.app.fitnessproject.view.interfaces.DialogMeasurePresenterSetter;
 
@@ -24,7 +23,7 @@ public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView
     private ListView listView;
     private Cursor cursor;
     private OnDialogResult result;
-    private UprazneniaAddCustomInterface presenter;
+    private UprazneniaAddCustomFragmentInt presenter;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +65,8 @@ public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView
     }
 
     @Override
-    public void setPresenter(PresenterParent presenter) {
-        this.presenter=(UprazneniaAddCustomInterface)presenter;
+    public void setPresenter(Object presenter) {
+        this.presenter=(UprazneniaAddCustomFragmentInt)presenter;
     }
 
     @Override

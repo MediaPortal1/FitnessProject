@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
-import com.diplom.app.fitnessproject.presenter.interfaces.SecundaryInterface;
 import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
 import com.diplom.app.fitnessproject.view.fragments.StopWatchFragment;
 import com.diplom.app.fitnessproject.view.fragments.TimerFragment;
@@ -17,40 +16,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SecundaryActivityPresenter implements SecundaryInterface,PagesViewInteface{
+public class SecundaryActivityPresenter implements PagesViewInteface{
     private Context context;
     private FragmentManager fm;
-    private ArrayList<Fragment> fragments;
+    private ArrayList<Fragment> fragments=new ArrayList<>();
+    private  TabPagerAdapter tabPagerAdapter;
 
     public SecundaryActivityPresenter(Context context, FragmentManager fm) {
         this.context = context;
         this.fm = fm;
-        fragments=new ArrayList<>();
     }
 
     @Override
     public TabPagerAdapter getTabPagerAdapter() {
-        TabPagerAdapter tabPagerAdapter=new TabPagerAdapter(fm);
-        Fragment fragment;
-        FragmentPages fragmentPages;
+        tabPagerAdapter=new TabPagerAdapter(fm);
 
         //1 FRAGMENT
-        fragment=new StopWatchFragment();
-        fragments.add(fragment);
-        fragmentPages=(FragmentPages)fragment;
-        ((FragmentPages) fragment).setTitle(context.getString(R.string.title_timepicker));
-        tabPagerAdapter.addFragment((FragmentPages) fragment);
+        addFragmentToList(new StopWatchFragment(),context.getString(R.string.title_timepicker));
 
         //2 FRAGMENT
-        fragment=new TimerFragment();
-        fragments.add(fragment);
-        fragmentPages=(FragmentPages)fragment;
-        ((FragmentPages) fragment).setTitle(context.getString(R.string.title_timer));
-        tabPagerAdapter.addFragment((FragmentPages) fragment);
-
+        addFragmentToList(new TimerFragment(),context.getString(R.string.title_timer));
 
         //
         return tabPagerAdapter;
+    }
+
+    @Override
+    public void addFragmentToList(FragmentPages fragment, String title) {
+        fragments.add((Fragment) fragment);
+        fragment.setTitle(title);
+        tabPagerAdapter.addFragment(fragment);
     }
 
     @Override

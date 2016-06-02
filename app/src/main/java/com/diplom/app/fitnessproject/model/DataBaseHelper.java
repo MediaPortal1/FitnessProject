@@ -25,6 +25,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         //CREATE UPRAZNENIA
         db.execSQL("CREATE TABLE UPRAZNENIA(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT," +

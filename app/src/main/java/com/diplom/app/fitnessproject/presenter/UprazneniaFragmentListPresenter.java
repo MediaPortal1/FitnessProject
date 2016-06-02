@@ -48,11 +48,11 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
         this.db=db;
         this.view=view;
         infoDialog=new ShowUpraznenieInfoDialog();
-        adapterUpdate();
+        updateList();
     }
 
     @Override
-    public void adapterUpdate() {
+    public void updateList() {
         ArrayList<String> catlist=new ArrayList<String>();
         Cursor cats=db.getUprazneniaCats();
         cats.moveToFirst();
@@ -82,7 +82,7 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
                 switch (item.getItemId()){
                     case R.id.menu_delete:
                         deleteColumn(txt.getText().toString());
-                        adapterUpdate();
+                        updateList();
                         return true;
                     case R.id.menu_rename:
                         UprazneniaChangeDialog dialog=new UprazneniaChangeDialog();
@@ -90,7 +90,7 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
                         ((StringSetter)dialog).setString(txt.getText().toString());
                         dialog.setResult(UprazneniaFragmentListPresenter.this);
                         dialog.show(fm,"change");
-                        adapterUpdate();
+                        updateList();
                         return true;
                     case R.id.menu_info:
                         showInfoDialog(((String)view.getTag()));
@@ -155,13 +155,13 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
     @Override
     public void deleteColumn(String name) {
         db.deleteUpraznenie(name);
-        adapterUpdate();
+        updateList();
     }
 
     @Override
-    public void changeColumn(String from, String to) {
+    public void renameColumn(String from, String to) {
         db.renameUpraznenie(from, to);
-        adapterUpdate();
+        updateList();
     }
 
     @Override
@@ -169,7 +169,7 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
         switch (DIALOG_CODE){
             case UprazneniaListFragment.CHANGE_DIALOG:
                 HashMap<String,String> map=(HashMap<String, String>)obj;
-                changeColumn(map.get("from"),map.get("to"));
+                renameColumn(map.get("from"),map.get("to"));
                 break;
         }
     }

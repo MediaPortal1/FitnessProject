@@ -7,9 +7,15 @@ import android.database.Cursor;
 import com.diplom.app.fitnessproject.model.DataBaseModel;
 
 public class DataBaseModelUpraznenia extends DataBaseModel {
+    /*
+    CONSTRUCTOR
+     */
     public DataBaseModelUpraznenia(Context context) {
         super(context);
     }
+
+
+    //----------GET CURSOR-------------
     public Cursor getAllUpraznenia(){
         return db.query("UPRAZNENIA",null,null,null,null,null,"NAME ASC");
     }
@@ -37,6 +43,9 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
     public Cursor getComplexbyName(String name){
         return db.query("COMPLEX",null,"NAME=?",new String[]{name},null,null,null,null);
     }
+
+    //-------------IS EMPTY--------
+
     public boolean isCatEmpty(String cat){
         if(getUprazneniaByCat(cat).getCount()>0)return false;
         else return true;
@@ -49,11 +58,33 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
         if(super.queryAllfromDB("COMPLEX").getCount()>0) return false;
         else return true;
     }
-    public void changeCat(String cat,String name){
+    public boolean isComplexIsExist(String name){
+        Cursor cursor=db.query("COMPLEX",null,"NAME=?",new String[]{name},null,null,null);
+        if (cursor.getCount()>0)  return true;
+        else return false;
+    }
+    public boolean isUpraznenieIsExist(String name){
+        Cursor cursor=db.query("UPRAZNENIA",null,"NAME=?",new String[]{name},null,null,null);
+        if (cursor.getCount()>0)  return true;
+        else return false;
+    }
+
+    //------------UPDATE------------
+
+    public void updateCat(String cat, String name){
         ContentValues cv=new ContentValues();
         cv.put("NAME",cat);
         db.update("UPRAZNENIA_CAT",cv,"NAME=?",new String[]{name});
     }
+
+    public void updateUpraznenie(long id,ContentValues cv){
+        if(id!=-1)db.update("UPRAZNENIA",cv,"_ID=?",new String[]{Long.toString(id)});
+    }
+
+
+    //------------RENAME------------
+
+
     public void renameUpraznenie(String from, String to){
         ContentValues cv=new ContentValues();
         cv.put("NAME",to);
@@ -69,6 +100,8 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
         db.update("COMPLEX_UPRAZNENIA",cv,"COMPLEX=?",new String[]{from});
     }
 
+    //-----------DELETE----------------
+
     public void deleteCat(String name){
         db.delete("UPRAZNENIA_CAT","NAME=?",new String[]{name});
     }
@@ -79,19 +112,5 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
         db.delete("COMPLEX","NAME=?",new String[]{name});
         db.delete("COMPLEX_UPRAZNENIA","COMPLEX=?",new String[]{name});
     }
-    public boolean isComplexIsExist(String name){
-        Cursor cursor=db.query("COMPLEX",null,"NAME=?",new String[]{name},null,null,null);
-     if (cursor.getCount()>0)  return true;
-        else return false;
-    }
-    public boolean isUpraznenieIsExist(String name){
-        Cursor cursor=db.query("UPRAZNENIA",null,"NAME=?",new String[]{name},null,null,null);
-     if (cursor.getCount()>0)  return true;
-        else return false;
-    }
-    public void updateUpraznenie(long id,ContentValues cv){
-        if(id!=-1)db.update("UPRAZNENIA",cv,"_ID=?",new String[]{Long.toString(id)});
-    }
-
 
 }

@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.widget.BaseExpandableListAdapter;
 
 
-public interface FragmentListView  extends ParentView {
+public interface FragmentListView {
     void setAdapter(BaseExpandableListAdapter adapter);
     void startChangeActivity(Intent intent);
 }

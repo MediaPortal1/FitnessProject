@@ -37,8 +37,8 @@ public class UprazneniaAddActivity extends AppCompatActivity{
         if(getIntent().hasExtra("NAME")){
             ((UprazneniaAddInterface)pagesViewPresenter).onChange(getIntent().getExtras());
         }
-        //
 
+        //
         viewPager=(ViewPager)findViewById(R.id.upraznenia_add_viewpager);
         viewPager.setAdapter(pagesViewPresenter.getTabPagerAdapter());
         TabLayout tabLayout=(TabLayout)findViewById(R.id.upraznenia_add_tablayout);
@@ -58,22 +58,12 @@ public class UprazneniaAddActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_ckeck:
-            Intent intent = new Intent();
-            UprazneniaAddCustom fragment = (UprazneniaAddCustom) pagesViewPresenter.getTabListFragments().get(0);
-            //
-            intent.putExtra("name", fragment.getUpraznenieInfo().getName());
-            intent.putExtra("comment", fragment.getUpraznenieInfo().getComment());
-            intent.putExtra("measure", fragment.getUpraznenieInfo().getMeasure());
-            intent.putExtra("category", fragment.getUpraznenieInfo().getCategory());
-            intent.putExtra("rest", fragment.getUpraznenieInfo().getRest());
-            if(fragment.getUpraznenieInfo().isStartforChange()) {
-                intent.putExtra("_id", fragment.getUpraznenieInfo().getID());
-            }
+           Intent intent=((UprazneniaAddActivityPresenter)pagesViewPresenter).getResultIntent();
             setResult(RESULT_OK, intent);
             finish();
                 return true;
         }
-                    return super.onOptionsItemSelected(item);
+        return false;
     }
 
 }

@@ -30,8 +30,7 @@ public class UprazneniaAllActivityListPresenter implements UprazneniaAllListInte
     public UprazneniaAllActivityListPresenter(Context context, UprazneniaAllListView view, FragmentManager fm) {
         this.context = context;
         this.view=view;
-        connection=new DataBaseConnection();
-        connection.execute();
+        updateList();
         this.fm=fm;
     }
 
@@ -50,11 +49,11 @@ public class UprazneniaAllActivityListPresenter implements UprazneniaAllListInte
         }
 
     }
-    @Override
-    public void updateList(){
-        connection.execute();
-    }
 
+    @Override
+    public void updateList() {
+        connection=new DataBaseConnection();
+        connection.execute();    }
 
     @Override
     public void deleteColumn(String name) {
@@ -70,7 +69,7 @@ public class UprazneniaAllActivityListPresenter implements UprazneniaAllListInte
     }
 
     @Override
-    public void changeColumn(final String from, String to) {
+    public void renameColumn(final String from, String to) {
         final String uprFrom= from;
         final String uprTo= to;
         Handler handler=new Handler(){
@@ -87,7 +86,7 @@ public class UprazneniaAllActivityListPresenter implements UprazneniaAllListInte
         switch (DIALOG_CODE){
             case UprazneniaListFragment.CHANGE_DIALOG:
                 HashMap<String,String> map=(HashMap<String,String>)obj;
-                changeColumn(map.get("from"),map.get("to"));
+                renameColumn(map.get("from"),map.get("to"));
                 updateList();
                 break;
         }

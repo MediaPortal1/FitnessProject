@@ -11,18 +11,17 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
+import com.diplom.app.fitnessproject.presenter.behavior.ItemListFactory;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomInterface;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomFragmentInt;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCommentDialog;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddMeasure;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddTimeDialog;
@@ -35,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustomInterface,OnDialogResult,
+public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustomFragmentInt,OnDialogResult,
         AdapterView.OnItemClickListener,UprazneniaInfoGetter,TextWatcher{
     private Context context;
     private ArrayList<Map<String,Object>> list;
@@ -61,27 +60,17 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
     }
     private ArrayList<Map<String,Object>> initList(){
       list=new ArrayList<Map<String,Object>>();
-        HashMap<String,Object> map;
-        map=new HashMap<>();
-        map.put("icon", R.mipmap.comment_outline);
-        map.put("text",context.getString(R.string.comment));
-        map.put("subtext",context.getString(R.string.nocomment));
-        list.add(map);
-        map=new HashMap<>();
-        map.put("icon",R.mipmap.category);
-        map.put("text",context.getString(R.string.category));
-        map.put("subtext",context.getString(R.string.nocategory));
-        list.add(map);
-        map=new HashMap<>();
-        map.put("icon",R.mipmap.weight_kilogram);
-        map.put("text",context.getString(R.string.measure));
-        map.put("subtext",context.getString(R.string.nomeasure));
-        list.add(map);
-        map=new HashMap<>();
-        map.put("icon",R.mipmap.clock);
-        map.put("text",context.getString(R.string.rest));
-        map.put("subtext",context.getString(R.string.norest));
-        list.add(map);
+
+        //
+        list.add(ItemListFactory.getListMap(R.mipmap.comment_outline,context.getString(R.string.comment),context.getString(R.string.nocomment)));
+        //
+        list.add(ItemListFactory.getListMap(R.mipmap.category,context.getString(R.string.category),context.getString(R.string.nocategory)));
+        //
+        list.add(ItemListFactory.getListMap(R.mipmap.weight_kilogram,context.getString(R.string.measure),context.getString(R.string.nomeasure)));
+        //
+        list.add(ItemListFactory.getListMap(R.mipmap.clock,context.getString(R.string.rest),context.getString(R.string.norest)));
+
+
         return list;
     }
     private void initAdapter(){

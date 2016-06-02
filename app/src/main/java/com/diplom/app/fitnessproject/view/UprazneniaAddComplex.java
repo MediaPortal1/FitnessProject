@@ -13,17 +13,19 @@ import android.view.MenuItem;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseHelper;
-import com.diplom.app.fitnessproject.presenter.UprazneniaActivityAddComplexPresenter;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddComplexActivityPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.ComplexThreeSetUprazneniaGetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.ComplexThreeSetUprazneniaSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddComplexInteface;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaGetter;
-import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.ComplexSuperSetUprazneniaGetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.ComplexSuperSetUprazneniaSetter;
+import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
 import com.diplom.app.fitnessproject.view.interfaces.UprazneniaAddComplexView;
 
 
 public class UprazneniaAddComplex extends AppCompatActivity implements UprazneniaAddComplexView{
 
-    private UprazneniaAddComplexInteface presenter;
+    private PagesViewInteface presenter;
     private ViewPager viewPager;
 
     public final static int TYPE_SUPERSET=2;
@@ -46,7 +48,10 @@ public class UprazneniaAddComplex extends AppCompatActivity implements Uprazneni
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        presenter=new UprazneniaActivityAddComplexPresenter(getApplicationContext(),this,getSupportFragmentManager()); //set Presenter
+        /*
+        PRESENTER
+         */
+        presenter=new UprazneniaAddComplexActivityPresenter(getApplicationContext(),this,getSupportFragmentManager()); //set Presenter
 
         viewPager=(ViewPager)findViewById(R.id.viewpager_add_complex);
         viewPager.setAdapter(((PagesViewInteface)presenter).getTabPagerAdapter());
@@ -65,11 +70,11 @@ public class UprazneniaAddComplex extends AppCompatActivity implements Uprazneni
                     switch (data.getIntExtra("upr", 0)) {
                         case UPR_FIRST:
                             fragment = ((PagesViewInteface) presenter).getTabListFragments().get(0);
-                            ((UprazneniaSetter) fragment).setFirstUpr(data.getStringExtra("name"));
+                            ((ComplexSuperSetUprazneniaSetter) fragment).setFirstUpr(data.getStringExtra("name"));
                             break;
                         case UPR_SECOND:
                             fragment = ((PagesViewInteface) presenter).getTabListFragments().get(0);
-                            ((UprazneniaSetter) fragment).setSecondUpr(data.getStringExtra("name"));
+                            ((ComplexSuperSetUprazneniaSetter) fragment).setSecondUpr(data.getStringExtra("name"));
                             break;
                     }
                     break;
@@ -77,15 +82,15 @@ public class UprazneniaAddComplex extends AppCompatActivity implements Uprazneni
                     switch (data.getIntExtra("upr", 0)) {
                         case UPR_FIRST:
                             fragment = ((PagesViewInteface) presenter).getTabListFragments().get(1);
-                            ((UprazneniaSetter) fragment).setFirstUpr(data.getStringExtra("name"));
+                            ((ComplexThreeSetUprazneniaSetter) fragment).setFirstUpr(data.getStringExtra("name"));
                             break;
                         case UPR_SECOND:
                             fragment = ((PagesViewInteface) presenter).getTabListFragments().get(1);
-                            ((UprazneniaSetter) fragment).setSecondUpr(data.getStringExtra("name"));
+                            ((ComplexThreeSetUprazneniaSetter) fragment).setSecondUpr(data.getStringExtra("name"));
                             break;
                         case UPR_THIRD:
                             fragment = ((PagesViewInteface) presenter).getTabListFragments().get(1);
-                            ((UprazneniaSetter) fragment).setThirdUpr(data.getStringExtra("name"));
+                            ((ComplexThreeSetUprazneniaSetter) fragment).setThirdUpr(data.getStringExtra("name"));
                             break;
                     }
                     break;
@@ -102,24 +107,19 @@ public class UprazneniaAddComplex extends AppCompatActivity implements Uprazneni
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==R.id.menu_ckeck){
+            Intent intent = new Intent();
+            ComplexSuperSetUprazneniaGetter fragment;
             switch (viewPager.getCurrentItem()) {
                 case 0://SUPERSET
-                    Intent intent = new Intent();
-                    UprazneniaGetter fragment = (UprazneniaGetter) ((PagesViewInteface)presenter).getTabListFragments().get(0);
-                    //
-                    intent.putExtra("type", DataBaseHelper.COMPLEX_TYPE_DOUBLE);
-                    intent.putExtra("first",fragment.getFirstUpraznenie());
-                    intent.putExtra("second",fragment.getSecondUpraznenie());
-                    intent.putExtra("name",fragment.getName());
-                    intent.putExtra("comment",fragment.getDescription());
-                    setResult(RESULT_OK, intent);
+                    setResult(RESULT_OK, ((UprazneniaAddComplexActivityPresenter)presenter).getSuperSetIntent());
                     finish();
                     return true;
-                case 1://TRISET
-
+                case 1://TRISE
+                    setResult(RESULT_OK, ((UprazneniaAddComplexActivityPresenter)presenter).getThreeSetIntent());
+                    finish();
                     return true;
             }
         }
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 }

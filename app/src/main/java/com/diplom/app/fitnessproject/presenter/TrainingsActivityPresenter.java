@@ -22,32 +22,34 @@ public class TrainingsActivityPresenter implements TrainingsInterface,PagesViewI
 
     private Context context;
     private FragmentManager fm;
-    private ArrayList<Fragment> fragments;
+    private ArrayList<Fragment> fragments=new ArrayList<>();
     private DataBaseTrainings db;
+    private TabPagerAdapter tabPagerAdapter;
 
 
     public TrainingsActivityPresenter(Context context, FragmentManager fm) {
         this.context = context;
         this.fm = fm;
-        fragments=new ArrayList<>();
         db=new DataBaseTrainings(context);
     }
 
     @Override
     public TabPagerAdapter getTabPagerAdapter() {
-        TabPagerAdapter tabPagerAdapter=new TabPagerAdapter(fm);
-        Fragment fragment;
-        FragmentPages fragmentPages;
+        tabPagerAdapter=new TabPagerAdapter(fm);
 
             //1 FRAGMENT
-            fragment=new TrainingsListFragment();
-            fragments.add(fragment);
-            fragmentPages=(FragmentPages)fragment;
-            fragmentPages.setTitle(context.getString(R.string.trainings_myprograms));
-            ((FragmentPagesUseDb)fragment).setDataBase(db);
-            tabPagerAdapter.addFragment((FragmentPages) fragment);
+            addFragmentToList(new TrainingsListFragment(),context.getString(R.string.trainings_myprograms));
              //
+
         return tabPagerAdapter;
+    }
+
+    @Override
+    public void addFragmentToList(FragmentPages fragment, String title) {
+        fragments.add((Fragment) fragment);
+        fragment.setTitle(title);
+        ((FragmentPagesUseDb)fragment).setDataBase(db);
+        tabPagerAdapter.addFragment(fragment);
     }
 
     @Override
