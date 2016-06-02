@@ -24,14 +24,14 @@ public class UprazneniaAddCategoryActivityPresenter implements UprazneniaCategor
     private Context context;
     private UprazneniaAddCategoryView view;
     private volatile UprazneniaCategoriesRadioListAdapter adapter;
-    private DataBaseModelUpraznenia db;
+    private DataBaseModelUpraznenia dataBase;
 
 
     public UprazneniaAddCategoryActivityPresenter(FragmentManager fm, Context context, UprazneniaAddCategoryView view) {
         this.fm = fm;
         this.context = context;
         this.view = view;
-        db=new DataBaseModelUpraznenia(context);
+        dataBase =new DataBaseModelUpraznenia(context);
         DataBaseLoadCatList connection=new DataBaseLoadCatList();
         connection.execute();
     }
@@ -41,8 +41,8 @@ public class UprazneniaAddCategoryActivityPresenter implements UprazneniaCategor
 
         @Override
         protected Cursor doInBackground(Void... params) {
-            db=new DataBaseModelUpraznenia(context);
-            Cursor cursor=db.getUprazneniaCats();
+            dataBase =new DataBaseModelUpraznenia(context);
+            Cursor cursor= dataBase.getUprazneniaCats();
             return cursor;
         }
 
@@ -61,12 +61,12 @@ public class UprazneniaAddCategoryActivityPresenter implements UprazneniaCategor
 
     @Override
     public void deleteColumn(String name) {
-        db.deleteCat(name);
+        dataBase.deleteCat(name);
     }
 
     @Override
     public void renameColumn(String from, String to) {
-        db.updateCat(from, to);
+        dataBase.updateCat(from, to);
     }
 
     @Override
