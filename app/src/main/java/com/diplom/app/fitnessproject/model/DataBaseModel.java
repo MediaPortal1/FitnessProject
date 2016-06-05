@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class DataBaseModel implements DataBase{
 
     protected SQLiteDatabase db;
-    private Context context;
+    protected Context context;
 
 
     public DataBaseModel(Context context) {

@@ -45,7 +45,7 @@ public class TrainingsListFragment extends Fragment implements FragmentPages,Ada
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_trainings_programs,null);
         listView=(ListView) v.findViewById(R.id.listView_trainings_list);
-        presenter=new TrainingListFragment(getContext());
+        presenter=new TrainingListFragment(getContext(),getFragmentManager());
         return v;
     }
 

@@ -71,14 +71,18 @@ public class DataBaseModelUpraznenia extends DataBaseModel {
 
     //------------UPDATE------------
 
-    public void updateCat(String cat, String name){
+    public void updateCat(String from, String to){
         ContentValues cv=new ContentValues();
-        cv.put("NAME",cat);
-        db.update("UPRAZNENIA_CAT",cv,"NAME=?",new String[]{name});
+        cv.put("NAME",to);
+        db.update("UPRAZNENIA_CAT",cv,"NAME=?",new String[]{from});
     }
 
     public void updateUpraznenie(long id,ContentValues cv){
         if(id!=-1)db.update("UPRAZNENIA",cv,"_ID=?",new String[]{Long.toString(id)});
+    }
+    public void updateComplex(long id,String name,ContentValues cv){
+        if(id!=-1)db.update("COMPLEX",cv,"_ID=?",new String[]{Long.toString(id)});
+        db.delete("COMPLEX_UPRAZNENIA","COMPLEX=?",new String[]{name});
     }
 
 

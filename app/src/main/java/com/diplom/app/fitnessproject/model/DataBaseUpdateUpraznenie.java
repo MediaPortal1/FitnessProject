@@ -23,7 +23,7 @@ public class DataBaseUpdateUpraznenie extends AsyncTask<Intent,Void,Boolean> {
     protected Boolean doInBackground(Intent... params) {
 
         //UPDATE UPRAZNENIE BY ID
-        if(params[0].hasExtra("_id")){
+        if(params[0].hasExtra("_id") && !params[0].getStringExtra("name").equals("") && (!params[0].getStringExtra("name").equals("") && params[0].getStringExtra("name")!=null)){
             ContentValues cv = new ContentValues();
             cv.put("NAME", params[0].getStringExtra("name"));
             cv.put("CAT", params[0].getStringExtra("category"));

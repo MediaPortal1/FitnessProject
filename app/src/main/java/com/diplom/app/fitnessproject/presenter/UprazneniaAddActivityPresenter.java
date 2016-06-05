@@ -12,6 +12,7 @@ import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddInterface
 import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCustom;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
+import com.diplom.app.fitnessproject.view.interfaces.UprazneniaInfoGetter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,15 +69,15 @@ public class UprazneniaAddActivityPresenter implements PagesViewInteface,Uprazne
 
     public Intent getResultIntent(){
         Intent intent = new Intent();
-        UprazneniaAddCustom fragment = (UprazneniaAddCustom)getTabListFragments().get(0);
+        UprazneniaInfoGetter infoGetter = ((UprazneniaAddCustom)getTabListFragments().get(0)).getUpraznenieInfo();
         //
-        intent.putExtra("name", fragment.getUpraznenieInfo().getName());
-        intent.putExtra("comment", fragment.getUpraznenieInfo().getComment());
-        intent.putExtra("measure", fragment.getUpraznenieInfo().getMeasure());
-        intent.putExtra("category", fragment.getUpraznenieInfo().getCategory());
-        intent.putExtra("rest", fragment.getUpraznenieInfo().getRest());
-        if(fragment.getUpraznenieInfo().isStartforChange()) {
-            intent.putExtra("_id", fragment.getUpraznenieInfo().getID());
+        intent.putExtra("name", infoGetter.getName());
+        intent.putExtra("comment", infoGetter.getComment());
+        intent.putExtra("measure", infoGetter.getMeasure());
+        intent.putExtra("category", infoGetter.getCategory());
+        intent.putExtra("rest", infoGetter.getRest());
+        if(infoGetter.isStartforChange()) {
+            intent.putExtra("_id", infoGetter.getID());
         }
         return intent;
     }

@@ -39,6 +39,7 @@
     <string name="changecat.upraznenia">Изменить категорию</string>
     <string name="changeupr.upraznenia">Изменить название упражнения</string>
     <string name="trainings.myprograms">Мои программы</string>
+    <string name="add.new.category">Добавить новую категорию</string>
     <!-- IN FRAGMENTS AND ACTIVITY-->
     <string name="textview.example.add.upraznenia">напр. Жим штанги</string>
     <string name="textview.superset.example.add.complex">напр. Суперсэт на руки</string>
@@ -65,8 +66,13 @@
     <string name="notempty.addupraznenia">Название или категория не могут быть пустые</string>
     <string name="notempty.addcomplex">Название или упражнения не могут быть пустые</string>
     <string name="notempty.updateupraznenie">Название или упражнения не могут быть пустые</string>
+    <string name="notempty.name">Название не может быть пустым</string>
+    <string name="notempty.comment">Комментарий не может быть пустым</string>
+    <string name="notempty.description">Описание не может быть пустым</string>
     <string name="addsuccess.upraznenia">Упражнение добавлено</string>
     <string name="addsuccess.complex">Комлпекс добавлено</string>
+    <string name="updatesuccess.complex">Комлпекс изменено</string>
+    <string name="updatesuccess.category">Категория переиминована</string>
     <string name="updatesuccess.upraznenie">Упражнение изменено</string>
     <string name="first.upraznenie.complex">Первое упражнение</string>
     <string name="second.upraznenie.complex">Второе упражнение</string>
@@ -79,6 +85,9 @@
     <string name="superset">суперсэт</string>
     <string name="threeset">трисэт</string>
     <string name="type.of.complex">Тип комплекса</string>
+    <string name="add.category">Добавить категорию</string>
+    <string name="add.category.success">Категория добавлена</string>
+    <string name="add.category.fail">Ошибка добавления категории</string>
     <!-- UPRAZNENIA CAT ARRAY-->
     <array name="cat_array_upraznenia">
         <item>Кардио</item>

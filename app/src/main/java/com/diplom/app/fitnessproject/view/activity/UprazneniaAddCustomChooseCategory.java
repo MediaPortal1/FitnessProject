@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.diplom.app.fitnessproject.R;
@@ -20,6 +22,7 @@ import com.diplom.app.fitnessproject.view.interfaces.UprazneniaAddCategoryView;
 public class UprazneniaAddCustomChooseCategory extends AppCompatActivity implements UprazneniaAddCategoryView{
 
     private ListView listView;
+    private Button addBtn;
     private UprazneniaCategoryListInterface presenter;
 
     @Override
@@ -30,18 +33,18 @@ public class UprazneniaAddCustomChooseCategory extends AppCompatActivity impleme
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar_category_choose);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.chosecategory_upraznenia));
 
         //PRESENTER
         presenter=new UprazneniaAddCategoryActivityPresenter(getSupportFragmentManager(),getApplicationContext(),this);
         //
 
-        listView=(ListView)findViewById(R.id.listview_category_choose);
+        listView =(ListView)findViewById(R.id.listview_category_choose);
         listView.setOnItemClickListener((AdapterView.OnItemClickListener) presenter);
+        addBtn = (Button) findViewById(R.id.button_add_category);
+        addBtn.setOnClickListener((View.OnClickListener) presenter);
 
     }
-//TODO: Сделать что-бы список обновлялся при закрытии фрагмента
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -33,7 +33,7 @@ public class UprazneniaComplexInfoDialog extends DialogFragment implements Compl
         descrview=(TextView)v.findViewById(R.id.textview_descriprion_complex_info);
         typeview=(TextView)v.findViewById(R.id.textView_type_complex_info);
         nameview.setText(getString(R.string.name)+": "+name);
-        if(description!=null && description!="")
+        if(description!=null && !description.equals(""))
         descrview.setText(getString(R.string.description)+": "+description);
         else descrview.setText(getString(R.string.description)+": "+getString(R.string.nodescription));
         if(type==DataBaseHelper.COMPLEX_TYPE_DOUBLE)typeview.setText(getString(R.string.type_of_complex)+": "+getString(R.string.superset));

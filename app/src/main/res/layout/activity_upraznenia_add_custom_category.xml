@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_category_choose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/appbar_category_choose">
+        >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_category_choose"
@@ -18,17 +21,28 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             />
     </android.support.design.widget.AppBarLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:layout_below="@id/appbar_category_choose"
+        >
     <ListView
         android:id="@+id/listview_category_choose"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
         android:choiceMode="singleChoice"
+        android:layout_marginTop="?attr/actionBarSize"
         android:descendantFocusability="beforeDescendants"
-        android:layout_below="@+id/appbar_list_allupr"
-        android:layout_alignParentStart="true"
         tools:listitem="@layout/listitem_upraznenia_add_custom_category" />
 
-
+    <Button
+        android:id="@+id/button.add.category"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/add.category"
+        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+        />
+</LinearLayout>
 </RelativeLayout>

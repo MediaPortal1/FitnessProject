@@ -2,8 +2,10 @@ package com.diplom.app.fitnessproject.presenter;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.behavior.ItemListFactory;
@@ -24,7 +26,7 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
     private Context context;
     private ComplexAddSupersetView view;
     private ArrayList<Map<String,Object>> itemlist;
-    private String firstUpr,secondUpr,comment;
+    private String firstUpr,secondUpr,comment,name;
     private SimpleAdapter adapter;
     private FragmentManager fm;
 
@@ -82,6 +84,19 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
     }
 
     @Override
+    public void setName(String name) {
+        this.name=name;
+        view.setEditText(name);
+    }
+
+    @Override
+    public void setDescription(String description) {
+        comment=description;
+        itemlist.get(0).put("subtext",description);
+        updateList();
+    }
+
+    @Override
     public String getFirstUpraznenie() {
         return firstUpr;
     }
@@ -93,7 +108,7 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
@@ -108,8 +123,20 @@ public class UprazneniaAddComplexSupersetFragmentPresenter implements Upraznenia
 
     @Override
     public void onResultDialog(int DIALOG_CODE, Object obj) {
-        comment=(String)obj;
-        itemlist.get(0).put("subtext",comment);
-        updateList();
+        if(comment!=null && !comment.equals("")) {
+            comment = (String) obj;
+            itemlist.get(0).put("subtext", comment);
+            updateList();
+        } else Toast.makeText(context,context.getString(R.string.notempty_description),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onChangeComplex(Bundle data) {
+        setName(data.getString("NAME"));
+        if(data.getString("DESCRIPTION")!=null && !data.getString("DESCRIPTION").equals(""))
+            setDescription(data.getString("DESCRIPTION"));
+
+        setFirstUpr(data.getString("FIRST"));
+        setSecondUpr(data.getString("SECOND"));
     }
 }

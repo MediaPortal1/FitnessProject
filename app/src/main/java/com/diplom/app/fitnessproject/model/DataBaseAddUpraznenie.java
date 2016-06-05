@@ -22,7 +22,7 @@ public class DataBaseAddUpraznenie extends AsyncTask<Intent,Void,Boolean> {
     @Override
     protected Boolean doInBackground(Intent... params) {
         //ADD UPRAZNENIE
-        if (params[0].getStringExtra("name") != "" && params[0].getStringExtra("name") != null && params[0].getStringExtra("category") != null) {
+        if (params[0].getStringExtra("name") != null && !params[0].getStringExtra("name").equals("")  && params[0].getStringExtra("category") != null) {
             if (dataBaseModel.isUpraznenieIsExist(params[0].getStringExtra("name"))) {
                 dataBaseModel.deleteUpraznenie((params[0].getStringExtra("name")));
             }

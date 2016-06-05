@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
@@ -103,6 +104,8 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
             }
         });
     }
+
+    /********LOAD UPRAZNENIA FROM DATABASE*****/
     private class DataBaseConnectionGetUprazneniaList extends AsyncTask<ArrayList<String>, Void, Void> {
 
         @Override
@@ -110,38 +113,46 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
             Cursor cursor;
             ArrayList<String> list;
             ArrayList<HashMap<String, String>> groupCatList = new ArrayList<>();
+
             for(String cat:params[0]){
-                list=new ArrayList<>();
-                cursor=db.getUprazneniaByCat(cat);
-                cursor.moveToFirst();
-                do{
-                    list.add(cursor.getString(cursor.getColumnIndex("NAME")));
-                }while(cursor.moveToNext());
-                arraycat.add(list);
-                HashMap<String,String> map=new HashMap<>();
-                map.put("cat",cat);
-                groupCatList.add(map);
+                    list=new ArrayList<>();
+                    cursor=db.getUprazneniaByCat(cat);
+                    cursor.moveToFirst();
+                        do{
+                            list.add(cursor.getString(cursor.getColumnIndex("NAME")));
+                                }while(cursor.moveToNext());
+
+                    arraycat.add(list);
+                    HashMap<String,String> map=new HashMap<>();
+                    map.put("cat",cat);
+                    groupCatList.add(map);
             }
+
             String[] groupfrom=new String[]{"cat"};
             int[] groupto=new int[]{android.R.id.text1};
+
             ArrayList<ArrayList<Map<String, String>>> сhildCatList = new ArrayList<>();
             ArrayList<Map<String, String>> сhildCatItemList = new ArrayList<>();
+
             for(ArrayList<String> upraznenia:arraycat){
                 сhildCatItemList=new ArrayList<>();
-                for (String name:upraznenia){
-                    HashMap map = new HashMap<>();
-                    map.put("cat", name); // название месяца
-                    сhildCatItemList.add(map);
+                    for (String name:upraznenia){
+                        HashMap map = new HashMap<>();
+                        map.put("cat", name); // название месяца
+                        сhildCatItemList.add(map);
                 }
                 сhildCatList.add(сhildCatItemList);
             }
+
             String childFrom[] = new String[] { "cat" };
             int childTo[] = new int[] { R.id.textView_listitem_child_complex};
+
             adapter = new UprazneniaExpandableListAdapter(
                     context, groupCatList,
                     android.R.layout.simple_expandable_list_item_1, groupfrom,
                     groupto, сhildCatList, R.layout.listitem_upraznenia,
                     childFrom, childTo,db,UprazneniaFragmentListPresenter.this,UprazneniaFragmentListPresenter.this,fm,UprazneniaFragmentListPresenter.this);
+
             return null;
         }
 
@@ -151,6 +162,7 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
             super.onPostExecute(aVoid);
         }
     }
+    /***************/
 
     @Override
     public void deleteColumn(String name) {
@@ -169,7 +181,9 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
         switch (DIALOG_CODE){
             case UprazneniaListFragment.CHANGE_DIALOG:
                 HashMap<String,String> map=(HashMap<String, String>)obj;
+                if(!map.get("to").equals(""))
                 renameColumn(map.get("from"),map.get("to"));
+                else Toast.makeText(context,context.getString(R.string.notempty_updateupraznenie),Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -215,11 +229,11 @@ public class UprazneniaFragmentListPresenter implements UprazneniaListInterface,
         intent.putExtra("_id",cursor.getLong(cursor.getColumnIndex("_id")));
         intent.putExtra("CAT",cursor.getString(cursor.getColumnIndex("CAT")));
         String test=cursor.getString(cursor.getColumnIndex("COMMENT"));
-        if(test!=null && test!="") {
+        if(test!=null && !test.equals("")) {
             intent.putExtra("COMMENT",test);
         }
         test=cursor.getString(cursor.getColumnIndex("MEASURE"));
-        if(test!=null && test!="") {
+        if(test!=null && !test.equals("")) {
             intent.putExtra("MEASURE", test);
         }
         int i=cursor.getInt(cursor.getColumnIndex("REST"));

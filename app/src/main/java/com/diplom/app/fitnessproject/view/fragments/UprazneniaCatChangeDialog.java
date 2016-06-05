@@ -8,15 +8,17 @@ import android.view.View;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddCategoryActivityPresenter;
 import com.diplom.app.fitnessproject.presenter.interfaces.ContextSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.interfaces.StringSetter;
 
+import java.util.HashMap;
+import java.util.Map;
 
-public class UprazneniaCatChangeDialog extends DialogTextFragment implements View.OnClickListener,ContextSetter,StringSetter{
 
-    private OnDialogResult result;
-    private Context context;
+public class UprazneniaCatChangeDialog extends DialogTextFragment implements StringSetter{
+
     private String name;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,36 +26,14 @@ public class UprazneniaCatChangeDialog extends DialogTextFragment implements Vie
         super.setTitle(R.string.changecat_upraznenia);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        result.onResultDialog(1,null);
-    }
 
     @Override
     protected void ButtonOkAction() {
         super.ButtonOkAction();
-       DataBaseConnection connection=new DataBaseConnection();
-        connection.execute(editText.getText().toString());
-
-    }
-    private class DataBaseConnection extends AsyncTask<String,Void,Void>{
-        @Override
-        protected Void doInBackground(String... params) {
-            DataBaseModelUpraznenia db=new DataBaseModelUpraznenia(context);
-            db.updateCat(params[0],name);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            result.onResultDialog(1,null);
-            super.onPostExecute(aVoid);
-        }
-    }
-    @Override
-    public void setContext(Context context) {
-        this.context=context;
+        Map<String,String> map=new HashMap<>();
+        map.put("from",name);
+        map.put("to",editText.getText().toString());
+        dialogResult.onResultDialog(UprazneniaAddCategoryActivityPresenter.DIALOG_CHANGE_CAT_NAME,map);
     }
 
     @Override
@@ -61,8 +41,4 @@ public class UprazneniaCatChangeDialog extends DialogTextFragment implements Vie
         this.name=string;
     }
 
-    @Override
-    public void setDialogResult(OnDialogResult dialogResult) {
-        this.result=dialogResult;
-    }
 }

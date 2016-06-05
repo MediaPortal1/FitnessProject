@@ -8,5 +8,6 @@ public interface UprazneniaInterface {
     void addUpraznenie(Intent data);
     void addComplex(Intent data);
     void updateUpraznenie(Intent data);
+    void updateComplex(Intent data);
 
 }

@@ -26,18 +26,31 @@ public class UpraznenieInfoDialog extends DialogFragment implements UprazneniaIn
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View v=inflater.inflate(R.layout.fragment_upraznenie_info,null);
         getDialog().setTitle(getString(R.string.title_dialog_upraznenie_info));
+
         nametxt=(TextView)v.findViewById(R.id.textview_name_upraznenia_info);
         nametxt.setText(getString(R.string.name)+": "+name);
+
         measuretxt=(TextView)v.findViewById(R.id.textview_measure_upraznenia_info);
-        measuretxt.setText(getString(R.string.measure)+": "+measure);
+        if(measure!=null && !measure.equals(""))
+             measuretxt.setText(getString(R.string.measure)+": "+measure);
+                else measuretxt.setText(getString(R.string.measure)+": "+getString(R.string.nomeasure));
+
         commenttxt=(TextView)v.findViewById(R.id.textview_comment_upraznenia_info);
-        commenttxt.setText(getString(R.string.comment)+": "+comment);
+        if(comment!=null && !comment.equals(""))
+            commenttxt.setText(getString(R.string.comment)+": "+comment);
+                 else commenttxt.setText(getString(R.string.comment)+": "+getString(R.string.nocomment));
+
         categorytxt=(TextView)v.findViewById(R.id.textview_cat_upraznenia_info);
         categorytxt.setText(getString(R.string.category)+": "+category);
+
         resttxt=(TextView)v.findViewById(R.id.textview_rest_upraznenia_info);
-        resttxt.setText(getString(R.string.rest)+": "+rest+" "+getString(R.string.seconds));
+        if(rest!=null && !rest.equals(""))
+            resttxt.setText(getString(R.string.rest)+": "+rest+" "+getString(R.string.seconds));
+                else resttxt.setText(getString(R.string.rest)+": "+getString(R.string.norest));
+
         return v;
     }
 

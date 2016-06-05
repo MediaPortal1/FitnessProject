@@ -16,5 +16,4 @@ public interface PagesViewInteface{
     void closePresenter();
     List<Fragment> getTabListFragments();
     void addFragmentToList(FragmentPages fragment,String title);
-
 }

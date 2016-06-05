@@ -1,6 +1,6 @@
 package com.diplom.app.fitnessproject.presenter.interfaces;
 
 
-public interface TrainingListInterface {
+public interface TrainingListInterface  extends ListChangedNotify{
 
 }

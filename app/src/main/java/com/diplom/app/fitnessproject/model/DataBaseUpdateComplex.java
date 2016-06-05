@@ -5,22 +5,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
-
 import com.diplom.app.fitnessproject.R;
 
-//------------ADD COMPLEX-------------
-public class DataBaseAddComplex extends AsyncTask<Intent,Void,Boolean> {
+
+//------------UPDATE COMPLEX-------------
+public class DataBaseUpdateComplex extends AsyncTask<Intent,Void,Boolean> {
     private Context context;
     private DataBaseModelUpraznenia dataBaseModel;
 
-    public DataBaseAddComplex(Context context, DataBaseModelUpraznenia dataBaseModel) {
+    public DataBaseUpdateComplex(Context context, DataBaseModelUpraznenia dataBaseModel) {
         this.context = context;
         this.dataBaseModel = dataBaseModel;
     }
 
     @Override
     protected Boolean doInBackground(Intent... params) {
-
+        //TODO: UPDATE COMPLEX
         ContentValues cv=new ContentValues();
         cv.put("NAME",params[0].getStringExtra("name"));
         cv.put("DESCRIPTION",params[0].getStringExtra("comment"));
@@ -33,11 +33,9 @@ public class DataBaseAddComplex extends AsyncTask<Intent,Void,Boolean> {
             if(params[0].getIntExtra("type",0)==DataBaseHelper.COMPLEX_TYPE_TRIPLE && (params[0].getStringExtra("first").equals("") || params[0].getStringExtra("first")==null))
                 return false;
 
-            if(dataBaseModel.isComplexIsExist(params[0].getStringExtra("name"))){
-                dataBaseModel.deleteComplex(params[0].getStringExtra("name"));
-            }
             //ADD TABLE COMPLEX
-            dataBaseModel.insertToDB("COMPLEX", cv);
+
+            dataBaseModel.updateComplex(params[0].getLongExtra("_ID",-1),params[0].getStringExtra("name"),cv);
 
             //ADD FIRST UPR TO COMPLEX_UPRAZNENIA
             cv = new ContentValues();
@@ -71,7 +69,7 @@ public class DataBaseAddComplex extends AsyncTask<Intent,Void,Boolean> {
             Toast.makeText(context,context.getString(R.string.notempty_addcomplex),Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(context,context.getString(R.string.addsuccess_complex),Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,context.getString(R.string.updatesuccess_complex),Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -1,7 +1,8 @@
 package com.diplom.app.fitnessproject.view.interfaces;
 
-/**
- * Created by Poltavets on 09.05.2016.
- */
+import android.content.Intent;
+
+
 public interface ComplexView extends ExpandableListAdapterSetter {
+    void startChangeActivity(Intent data);
 }

@@ -16,6 +16,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
@@ -82,8 +83,10 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
         switch (DIALOG_CODE){
             case COMMENT:
                 comment=textObj;
-                list.get(0).put("subtext",textObj);
-                simpleAdapter.notifyDataSetChanged();
+                if(textObj!=null && !textObj.equals("")) {
+                    list.get(0).put("subtext", textObj);
+                    simpleAdapter.notifyDataSetChanged();
+                }   else Toast.makeText(context,context.getString(R.string.notempty_comment),Toast.LENGTH_SHORT).show();
                 break;
             case MEASURE:
                 measure=textObj;
@@ -91,9 +94,11 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
                 simpleAdapter.notifyDataSetChanged();
                 break;
             case REST:
-                rest=Integer.parseInt(textObj);
-                list.get(3).put("subtext",textObj);
-                simpleAdapter.notifyDataSetChanged();
+                if (obj!=null && !obj.equals("")) {
+                    rest = Integer.parseInt(textObj);
+                    list.get(3).put("subtext", textObj);
+                    simpleAdapter.notifyDataSetChanged();
+                }
                 break;
 
         }
@@ -109,7 +114,9 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
             switch (requestCode) {
                 case CATEGORY:
                     category = data.getStringExtra("category");
-                    list.get(1).put("subtext", category);
+                    if(!category.equals(new String("")))
+                        list.get(1).put("subtext", category);
+
                     simpleAdapter.notifyDataSetChanged();
                     break;
             }
@@ -212,12 +219,12 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
         category=bundle.getString("CAT");
         list.get(1).put("subtext",category);
         String com=bundle.getString("COMMENT");
-        if(com!=null && com!=""){
+        if(com!=null && !com.equals("")){
             this.comment=com;
             list.get(0).put("subtext",com);
         }
         com=bundle.getString("MEASURE");
-        if(com!=null && com!=""){
+        if(com!=null && !com.equals("")){
             this.measure=com;
             list.get(2).put("subtext",com);
         }

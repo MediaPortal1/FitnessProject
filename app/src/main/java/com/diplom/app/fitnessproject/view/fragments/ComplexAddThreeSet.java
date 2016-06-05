@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.UprazneniaAddComplexThreesetPresenter;
@@ -30,6 +32,8 @@ public class ComplexAddThreeSet extends Fragment implements FragmentPages,Comple
     private EditText editText;
     private String title;
     private UprazneniaAddComplexFragmentInt presenter;
+    private Bundle changeComplex;
+
 
     @Nullable
     @Override
@@ -37,8 +41,17 @@ public class ComplexAddThreeSet extends Fragment implements FragmentPages,Comple
     View view=inflater.inflate(R.layout.fragment_complex_threeset,null);
         list=(ListView)view.findViewById(R.id.listView_add_threeset_complex_upraznenia);
         editText=(EditText)view.findViewById(R.id.editText_add_threeset_complex_upraznenia);
+
         list.setOnItemClickListener(this);
         presenter=new UprazneniaAddComplexThreesetPresenter((ComplexAddThreesetView) this,getFragmentManager(),getContext());
+
+        /*
+        ON COMPLEX CHANGE
+         */
+        if(changeComplex!=null){
+            presenter.onChangeComplex(changeComplex);
+        }
+
         return view;
     }
 
@@ -107,7 +120,7 @@ public class ComplexAddThreeSet extends Fragment implements FragmentPages,Comple
 
     @Override
     public String getName() {
-        return ((ComplexSuperSetUprazneniaGetter)presenter).getName();
+        return editText.getText().toString();
     }
 
     @Override
@@ -129,5 +142,24 @@ public class ComplexAddThreeSet extends Fragment implements FragmentPages,Comple
     public void setThirdUpr(String name) {
         ((ComplexThreeSetUprazneniaSetter)presenter).setThirdUpr(name);
 
+    }
+
+    @Override
+    public void setName(String name) {
+        ((ComplexThreeSetUprazneniaSetter)presenter).setName(editText.getText().toString());
+    }
+
+    @Override
+    public void setDescription(String description) {
+        ((ComplexThreeSetUprazneniaSetter)presenter).setDescription("");
+    }
+
+    @Override
+    public void setEditText(String text) {
+        editText.setText(text);
+    }
+
+    public void setChangeComplex(Bundle changeComplex) {
+        this.changeComplex = changeComplex;
     }
 }

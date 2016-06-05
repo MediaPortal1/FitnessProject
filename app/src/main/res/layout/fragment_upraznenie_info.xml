@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
+        android:text="comment"
         android:id="@+id/textview.comment.upraznenia.info"
         android:layout_marginTop="5dp" />
 
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
+        android:text="cat"
         android:id="@+id/textview.cat.upraznenia.info"
         android:layout_marginTop="5dp" />
 
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
+        android:text="measure"
         android:id="@+id/textview.measure.upraznenia.info"
         android:layout_marginTop="5dp" />
 
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
+        android:text="rest"
         android:id="@+id/textview.rest.upraznenia.info"
         android:layout_marginTop="5dp" />
 </LinearLayout>

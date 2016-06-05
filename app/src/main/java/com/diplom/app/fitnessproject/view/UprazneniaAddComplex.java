@@ -19,13 +19,14 @@ import com.diplom.app.fitnessproject.presenter.interfaces.ComplexThreeSetUprazne
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.interfaces.ComplexSuperSetUprazneniaGetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.ComplexSuperSetUprazneniaSetter;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddComplexActivityInt;
 import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
 import com.diplom.app.fitnessproject.view.interfaces.UprazneniaAddComplexView;
 
 
 public class UprazneniaAddComplex extends AppCompatActivity implements UprazneniaAddComplexView{
 
-    private PagesViewInteface presenter;
+    private UprazneniaAddComplexActivityInt presenter;
     private ViewPager viewPager;
 
     public final static int TYPE_SUPERSET=2;
@@ -58,6 +59,18 @@ public class UprazneniaAddComplex extends AppCompatActivity implements Uprazneni
         TabLayout tabLayout=(TabLayout)findViewById(R.id.tablayout_add_complex);
         tabLayout.setupWithViewPager(viewPager);
         //
+
+           /*
+        START ACTIVITY FOR CHANGE?
+         */
+        if(getIntent()!=null && getIntent().hasExtra("NAME")){
+            presenter.onChangeComplex(getIntent());
+        }
+    }
+
+    @Override
+    public void setCurentPage(int id) {
+        viewPager.setCurrentItem(id);
     }
 
     @Override
@@ -107,14 +120,13 @@ public class UprazneniaAddComplex extends AppCompatActivity implements Uprazneni
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==R.id.menu_ckeck){
-            Intent intent = new Intent();
             ComplexSuperSetUprazneniaGetter fragment;
             switch (viewPager.getCurrentItem()) {
                 case 0://SUPERSET
                     setResult(RESULT_OK, ((UprazneniaAddComplexActivityPresenter)presenter).getSuperSetIntent());
                     finish();
                     return true;
-                case 1://TRISE
+                case 1://THREESET
                     setResult(RESULT_OK, ((UprazneniaAddComplexActivityPresenter)presenter).getThreeSetIntent());
                     finish();
                     return true;

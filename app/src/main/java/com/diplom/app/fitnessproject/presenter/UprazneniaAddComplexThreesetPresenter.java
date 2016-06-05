@@ -1,6 +1,7 @@
 package com.diplom.app.fitnessproject.presenter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.widget.SimpleAdapter;
 
@@ -126,5 +127,29 @@ public class UprazneniaAddComplexThreesetPresenter implements UprazneniaAddCompl
         this.third=name;
         itemlist.get(3).put("subtext",name);
         updateList();
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name=name;
+        view.setEditText(name);
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.comment=description;
+        itemlist.get(0).put("subtext",description);
+        updateList();
+    }
+
+    @Override
+    public void onChangeComplex(Bundle data) {
+        setName(data.getString("NAME"));
+        if(data.getString("DESCRIPTION")!=null && !data.getString("DESCRIPTION").equals(""))
+            setDescription(data.getString("DESCRIPTION"));
+
+        setFirstUpr(data.getString("FIRST"));
+        setSecondUpr(data.getString("SECOND"));
+        setThirdUpr(data.getString("THIRD"));
     }
 }

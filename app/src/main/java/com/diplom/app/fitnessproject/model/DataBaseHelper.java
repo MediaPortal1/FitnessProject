@@ -102,6 +102,15 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             db.insert("COMPLEX_UPRAZNENIA", null, contentValues);
         }
 
+        /**CREATE TABLE TRAININGS**/
+        db.execSQL("CREATE TABLE TRAININGS(" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "NAME TEXT,"+
+                "TYPE INTEGER,"+
+                "DESCRIPTION TEXT"+
+                "CYCLES INTEGER"+
+                ");");
+
     }
     //---
 

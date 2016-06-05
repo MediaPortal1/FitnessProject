@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,11 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
 import com.diplom.app.fitnessproject.presenter.UprazneniaAddComplexSupersetFragmentPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.ComplexThreeSetUprazneniaSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddComplexFragmentInt;
 import com.diplom.app.fitnessproject.presenter.interfaces.ComplexSuperSetUprazneniaGetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.ComplexSuperSetUprazneniaSetter;
@@ -28,16 +31,23 @@ public class ComplexAddSuperSet extends Fragment implements FragmentPages,Comple
     private EditText editText;
     private String title;
     private UprazneniaAddComplexFragmentInt presenter;
+    private Bundle changeComplex;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_complex_superset,null);
         list=(ListView)v.findViewById(R.id.listView_add_superset_complex_upraznenia);
         editText=(EditText)v.findViewById(R.id.editText_add_superset_complex_upraznenia);
-
         presenter=new UprazneniaAddComplexSupersetFragmentPresenter(getContext(),this,getFragmentManager());
 
         list.setOnItemClickListener(this);
+
+        /*
+        ON COMPLEX CHANGE
+         */
+        if(changeComplex!=null){
+            presenter.onChangeComplex(changeComplex);
+        }
 
         return v;
     }
@@ -115,5 +125,24 @@ public class ComplexAddSuperSet extends Fragment implements FragmentPages,Comple
     @Override
     public String getDescription() {
         return ((ComplexSuperSetUprazneniaGetter)presenter).getDescription();
+    }
+
+    @Override
+    public void setName(String name) {
+        ((ComplexSuperSetUprazneniaSetter)presenter).setName(editText.getText().toString());
+    }
+
+    @Override
+    public void setDescription(String description) {
+        ((ComplexSuperSetUprazneniaSetter)presenter).setDescription("");
+    }
+
+    @Override
+    public void setEditText(String text) {
+        editText.setText(text);
+    }
+
+    public void setChangeComplex(Bundle changeComplex) {
+        this.changeComplex = changeComplex;
     }
 }

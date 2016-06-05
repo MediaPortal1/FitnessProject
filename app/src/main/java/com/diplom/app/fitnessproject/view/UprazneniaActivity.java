@@ -30,6 +30,7 @@ public class UprazneniaActivity extends AppCompatActivity implements View.OnClic
     public static final int ADD_UPR=1;
     public static final int ADD_COMPL=2;
     public static final int CHANGE_UPR=3;
+    public static final int CHANGE_COMPL=4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -122,22 +123,22 @@ public class UprazneniaActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case ADD_UPR:
-                if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case ADD_UPR:
                     presenter.addUpraznenie(data);
-            }
-                break;
-            case ADD_COMPL:
-                if(resultCode == RESULT_OK)
+                     break;
+                case ADD_COMPL:
                     presenter.addComplex(data);
-                break;
-            case CHANGE_UPR:
-                if (resultCode == RESULT_OK) {
+                    break;
+                case CHANGE_UPR:
                     presenter.updateUpraznenie(data);
-                }
-                break;
+                case CHANGE_COMPL:
+                    presenter.updateComplex(data);
+                    break;
         }
+    }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 

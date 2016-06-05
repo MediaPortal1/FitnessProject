@@ -12,6 +12,7 @@ import com.diplom.app.fitnessproject.model.DataBaseAddComplex;
 import com.diplom.app.fitnessproject.model.DataBaseAddUpraznenie;
 import com.diplom.app.fitnessproject.model.DataBaseHelper;
 import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
+import com.diplom.app.fitnessproject.model.DataBaseUpdateComplex;
 import com.diplom.app.fitnessproject.model.DataBaseUpdateUpraznenie;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaInterface;
@@ -107,4 +108,9 @@ public class UprazneniaActivityPresenter implements PagesViewInteface,Upraznenia
         connection.execute(data);
     }
 
+    @Override
+    public void updateComplex(Intent data) {
+        DataBaseUpdateComplex connection=new DataBaseUpdateComplex(context,dataBaseModel);
+        connection.execute(data);
+    }
 }

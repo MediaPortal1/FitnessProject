@@ -13,7 +13,6 @@ import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.UprazneniaAddFragmentCustomPresenter;
 
 public class UprazneniaAddTimeDialog extends DialogTextFragment{
-    private OnDialogResult result;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +32,7 @@ public class UprazneniaAddTimeDialog extends DialogTextFragment{
     @Override
     protected void ButtonOkAction() {
         super.ButtonOkAction();
-       result.onResultDialog(UprazneniaAddFragmentCustomPresenter.REST, editText.getText().toString());
+       dialogResult.onResultDialog(UprazneniaAddFragmentCustomPresenter.REST, editText.getText().toString());
     }
 
 }
