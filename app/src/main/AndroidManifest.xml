@@ -47,8 +47,14 @@
         </activity>
         <activity android:name=".view.TrainingsActivity">
         </activity>
+        <activity android:name=".view.TrainingsAddActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.TrainingsActivity" />
+        </activity>
         <activity android:name=".view.SecundaryActivity">
         </activity>
+
     </application>
 
 </manifest>

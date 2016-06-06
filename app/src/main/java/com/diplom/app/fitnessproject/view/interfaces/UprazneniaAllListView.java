@@ -5,7 +5,8 @@ import android.database.Cursor;
 /**
  * Created by Poltavets on 13.05.2016.
  */
-public interface UprazneniaAllListView{
+public interface UprazneniaAllListView {
     int getChoosenListPosition();
+
     void setAdapter(Cursor cursor);
 }

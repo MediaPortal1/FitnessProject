@@ -9,16 +9,17 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.diplom.app.fitnessproject.R;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddCategoryActivityPresenter;
 import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 
-/**
- * Created by Poltavets on 04.05.2016.
- */
-public abstract class DialogTextFragment extends DialogFragment implements View.OnClickListener,DialogResultSetter{
+
+public  class DialogTextFragment extends DialogFragment implements View.OnClickListener,DialogResultSetter{
     protected OnDialogResult dialogResult;
     protected EditText editText;
     private int title;
+    private int DIALOG_CODE;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +37,13 @@ public abstract class DialogTextFragment extends DialogFragment implements View.
         return view;
     }
 
-    protected void setTitle(int title) {
+    public void setTitle(int title) {
         this.title = title;
     }
 
     protected void ButtonOkAction(){
+        dialogResult.onResultDialog(DIALOG_CODE,editText.getText().toString());
+
     }
 
     @Override
@@ -59,5 +62,9 @@ public abstract class DialogTextFragment extends DialogFragment implements View.
     @Override
     public void setDialogResult(OnDialogResult dialogResult) {
         this.dialogResult=dialogResult;
+    }
+
+    public void setDialogCode(int DIALOG_CODE) {
+        this.DIALOG_CODE = DIALOG_CODE;
     }
 }

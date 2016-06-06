@@ -14,26 +14,31 @@ public class DataBaseModel implements DataBase{
     protected Context context;
 
 
-    public DataBaseModel(Context context) {
+    protected DataBaseModel(Context context) {
         this.context=context;
         db=new DataBaseHelper(context).getWritableDatabase();
     }
+
+    public SQLiteDatabase getDb() {
+        return db;
+    }
+
     @Override
     public void closeDB() {
-        db.close();
+        getDb().close();
         context=null;
     }
     @Override
     public Cursor queryAllfromDB(String table) {
-        return db.query(table, null, null, null, null, null, null);
+        return getDb().query(table, null, null, null, null, null, null);
     }
     @Override
     public long insertToDB(String table, ContentValues contentValues) {
-        return db.insert(table, null, contentValues);
+        return getDb().insert(table, null, contentValues);
     }
 
     @Override
     public void execSQLtoDB(String sql) {
-        db.execSQL(sql);
+        getDb().execSQL(sql);
     }
 }

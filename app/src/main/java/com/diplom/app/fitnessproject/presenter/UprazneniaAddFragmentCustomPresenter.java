@@ -23,7 +23,7 @@ import com.diplom.app.fitnessproject.model.DataBaseModelUpraznenia;
 import com.diplom.app.fitnessproject.presenter.behavior.ItemListFactory;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomFragmentInt;
-import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddCommentDialog;
+import com.diplom.app.fitnessproject.view.fragments.DialogTextFragment;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddMeasure;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddTimeDialog;
 import com.diplom.app.fitnessproject.view.interfaces.DialogMeasurePresenterSetter;
@@ -31,7 +31,6 @@ import com.diplom.app.fitnessproject.view.interfaces.FragmentAddUpraznenieCustom
 import com.diplom.app.fitnessproject.view.interfaces.UprazneniaInfoGetter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -134,7 +133,9 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position){
             case 0:
-                UprazneniaAddCommentDialog commentDialog=new UprazneniaAddCommentDialog();
+                DialogTextFragment commentDialog=new DialogTextFragment();
+                commentDialog.setDialogCode(COMMENT);
+                commentDialog.setTitle(R.string.add_comment);
                 commentDialog.setDialogResult(this);
                 commentDialog.show(fm,"comment");
                 break;

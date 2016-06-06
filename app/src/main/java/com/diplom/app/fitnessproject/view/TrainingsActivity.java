@@ -72,7 +72,12 @@ public class TrainingsActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        //FAB BUTTON
+        int page=viewPager.getCurrentItem();
+        switch (page){
+            case 0: //PAGE "TRAININGS LIST"
+                startActivity(new Intent(getApplicationContext(),TrainingsAddActivity.class));
+                break;
+        }
     }
 
     @Override

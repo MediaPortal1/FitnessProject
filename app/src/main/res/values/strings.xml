@@ -17,6 +17,7 @@
     <string name="title.add.upraznenia">Добавить упражнение</string>
     <string name="title.add.complex">Добавить комлпекс упражнений</string>
     <string name="title.choose.upraznenie">Добавить комлпекс упражнений</string>
+    <string name="title.add.training">Добавить тренировочную программу</string>
     <string name="title.trainings">Тренировочные програмы</string>
     <string name="title.secundary">Таймер и секундомер</string>
     <!-- FRAGMENTS-->
@@ -33,6 +34,9 @@
     <string name="add.superset">Добавить суперсэт</string>
     <string name="add.threeset">Добавить трисэт</string>
     <string name="add.comment">Добавить комментарий</string>
+    <string name="add.training">Добавить программу</string>
+    <string name="rename.training">Изменить имя програмы</string>
+    <string name="info.training">Описание програмы</string>
     <string name="makeitself">Создать вручную</string>
     <string name="chosecategory.upraznenia">Выберите категорию</string>
     <string name="measure.upraznenia">Выберите меру</string>
@@ -44,6 +48,7 @@
     <string name="textview.example.add.upraznenia">напр. Жим штанги</string>
     <string name="textview.superset.example.add.complex">напр. Суперсэт на руки</string>
     <string name="textview.threeset.example.add.complex">напр. Трисэт на руки</string>
+    <string name="textview.example.add.training">напр. "Для начинающих. 3-х дневная"</string>
     <string name="checkmenu.button">Check</string>
     <string name="category">Категория</string>
     <string name="name">Название</string>
@@ -51,6 +56,7 @@
     <string name="description">Описание</string>
     <string name="measure">Мера</string>
     <string name="rest">Отдых</string>
+    <string name="type">Тип</string>
     <string name="upraznenia.in.comlex">Упражнения комплекса</string>
     <string name="norest">нету времени отдыха</string>
     <string name="nocomment">нету комментария</string>
@@ -58,6 +64,7 @@
     <string name="nocategory">не указана категория</string>
     <string name="noupraznenia">не выбраны упражнения</string>
     <string name="nodescription">нету описания</string>
+    <string name="notype">не указан тип</string>
     <string name="ok">Ok</string>
     <string name="cancel">Отмена</string>
     <string name="rest.fromto">от 0 до 600 секунд</string>
@@ -88,6 +95,8 @@
     <string name="add.category">Добавить категорию</string>
     <string name="add.category.success">Категория добавлена</string>
     <string name="add.category.fail">Ошибка добавления категории</string>
+    <string name="type.trainings.basic">Обычная программа</string>
+    <string name="type.trainings.cicle">Круговая программа</string>
     <!-- UPRAZNENIA CAT ARRAY-->
     <array name="cat_array_upraznenia">
         <item>Кардио</item>

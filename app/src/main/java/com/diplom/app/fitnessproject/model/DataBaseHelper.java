@@ -18,6 +18,10 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final int COMPLEX_TYPE_DOUBLE=2;
     public static final int COMPLEX_TYPE_TRIPLE=3;
 
+
+    public static final int TRAININGS_TYPE_STEPBYSTEP=1;
+    public static final int TRAININGS_TYPE_CICLE=2;
+
     public DataBaseHelper(Context context) {
         super(context,DB_NAME, null, DB_VERSION);
         this.context=context;
@@ -70,46 +74,44 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             contentValues.put("SHORT_NAME", items2[i]);
             db.insert("MEASURE", null, contentValues);
         }
+
+        /**CREATE TABLE COMPLEX**/
         db.execSQL("CREATE TABLE COMPLEX(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT,"+
                 "TYPE INTEGER,"+
                 "DESCRIPTION TEXT"+
                 ");");
-         /*
-        INSERT COMPLEX
-         */
-        ContentValues contentValues=new ContentValues();
-        contentValues.put("NAME","TEST");
-        contentValues.put("TYPE",COMPLEX_TYPE_DOUBLE);
-        contentValues.put("DESCRIPTION","TEST DESCRIPTON");
-        db.insert("COMPLEX",null,contentValues);
-        //
 
+        /**CREATE TABLE COMPLEX-UPRAZNENIA**/
         db.execSQL("CREATE TABLE COMPLEX_UPRAZNENIA(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "UPRAZNENIE TEXT," +
                 "COMPLEX TEXT"+
                 ");");
-       /*
-       INSERT COMPLEX_UPRAZNENIA
-        */
-        items=context.getResources().getStringArray(R.array.list_names_upraznenia);
-        for(int i=0;i<items.length;i++) {
-            contentValues = new ContentValues();
-            contentValues.put("UPRAZNENIE", items[i]);
-            contentValues.put("COMPLEX", "TEST");
-            db.insert("COMPLEX_UPRAZNENIA", null, contentValues);
-        }
 
         /**CREATE TABLE TRAININGS**/
         db.execSQL("CREATE TABLE TRAININGS(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT,"+
                 "TYPE INTEGER,"+
-                "DESCRIPTION TEXT"+
-                "CYCLES INTEGER"+
+                "DESCRIPTION TEXT,"+
+                "REST INTEGER," +
+                "CATEGORIES TEXT"+
                 ");");
+
+         /*
+        INSERT TRAINING
+         */
+        ContentValues contentValues=new ContentValues();
+        contentValues.put("NAME","TEST");
+        contentValues.put("TYPE",TRAININGS_TYPE_STEPBYSTEP);
+        contentValues.put("DESCRIPTION","TEST DESCRIPTON");
+        contentValues.put("REST",90);
+        contentValues.put("CATEGORIES","Грудь, Спина");
+        db.insert("TRAININGS",null,contentValues);
+        /**/
+
 
     }
     //---

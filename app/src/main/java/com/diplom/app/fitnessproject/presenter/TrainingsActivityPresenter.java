@@ -5,12 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.model.DataBaseTrainings;
+import com.diplom.app.fitnessproject.model.DataBaseModelTrainings;
 import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
 import com.diplom.app.fitnessproject.presenter.interfaces.TrainingsInterface;
 import com.diplom.app.fitnessproject.view.adapter.TabPagerAdapter;
 import com.diplom.app.fitnessproject.view.fragments.TrainingsListFragment;
-import com.diplom.app.fitnessproject.view.fragments.UprazneniaListFragmentEmpty;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPagesUseDb;
 
@@ -23,14 +22,14 @@ public class TrainingsActivityPresenter implements TrainingsInterface,PagesViewI
     private Context context;
     private FragmentManager fm;
     private ArrayList<Fragment> fragments=new ArrayList<>();
-    private DataBaseTrainings db;
+    private DataBaseModelTrainings db;
     private TabPagerAdapter tabPagerAdapter;
 
 
     public TrainingsActivityPresenter(Context context, FragmentManager fm) {
         this.context = context;
         this.fm = fm;
-        db=new DataBaseTrainings(context);
+        db=new DataBaseModelTrainings(context);
     }
 
     @Override

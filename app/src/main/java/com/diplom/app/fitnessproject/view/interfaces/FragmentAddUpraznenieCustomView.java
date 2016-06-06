@@ -1,9 +1,7 @@
 package com.diplom.app.fitnessproject.view.interfaces;
 
-import android.widget.BaseAdapter;
-
-
-public interface FragmentAddUpraznenieCustomView  extends AdapterSetter {
+public interface FragmentAddUpraznenieCustomView extends AdapterSetter {
     void startActivityCat();
+
     void changeName(String name);
 }

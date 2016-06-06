@@ -1,34 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearlayout.listitem.trainings"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:paddingLeft="15dp"
-    android:paddingRight="10dp">
+    android:focusable="false"
+    android:clickable="false"
+    android:paddingBottom="15dp">
 
-    <TextView
+    <ImageView
+        android:id="@+id/imageView.listitem.trainings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/textView.large.listitem.trainings"
+        android:src="@mipmap/gym"
+        android:paddingTop="10dp"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:focusable="false"
+        android:clickable="false"
+        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/textView.small.listitem.trainings"
-        android:layout_below="@+id/textView.large.listitem.trainings"
-        android:layout_alignStart="@+id/textView.large.listitem.trainings"
-        android:layout_marginTop="5dp" />
+    <RelativeLayout
+        android:id="@+id/relativelayout.listitem.trainings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:focusable="false"
+        android:clickable="false"
+        >
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton.listitem.trainings"
-        android:layout_alignTop="@+id/textView.large.listitem.trainings"
-        android:layout_alignParentEnd="true"
-        android:background="@mipmap/dots_vertical" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/textView.large.listitem.trainings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:layout_centerVertical="true"
+            android:focusable="false"
+            android:clickable="false"
+            />
+
+        <TextView
+            android:id="@+id/textView.small.listitem.trainings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:layout_below="@+id/textView.large.listitem.trainings"
+            android:layout_alignStart="@+id/textView.large.listitem.trainings"
+            android:layout_marginTop="5dp"
+            android:focusable="false"
+            android:clickable="false"
+            />
+
+        <ImageButton
+            android:id="@+id/imageButton.listitem.trainings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView.large.listitem.trainings"
+            android:layout_alignParentEnd="true"
+            android:background="@mipmap/dots_vertical"
+            android:focusable="false"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

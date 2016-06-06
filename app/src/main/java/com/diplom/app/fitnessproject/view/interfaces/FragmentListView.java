@@ -6,5 +6,6 @@ import android.widget.BaseExpandableListAdapter;
 
 public interface FragmentListView {
     void setAdapter(BaseExpandableListAdapter adapter);
+
     void startChangeActivity(Intent intent);
 }
