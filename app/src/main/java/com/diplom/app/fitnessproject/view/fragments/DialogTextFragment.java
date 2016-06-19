@@ -17,8 +17,8 @@ import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 public  class DialogTextFragment extends DialogFragment implements View.OnClickListener,DialogResultSetter{
     protected OnDialogResult dialogResult;
     protected EditText editText;
-    private int title;
-    private int DIALOG_CODE;
+    protected int title;
+    protected int DIALOG_CODE;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

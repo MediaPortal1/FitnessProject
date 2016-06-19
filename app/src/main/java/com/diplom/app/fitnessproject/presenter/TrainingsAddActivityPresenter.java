@@ -16,9 +16,7 @@ import com.diplom.app.fitnessproject.view.interfaces.FragmentPagesUseDb;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Poltavets on 06.06.2016.
- */
+
 public class TrainingsAddActivityPresenter implements TrainingsAddInterface{
 
     private FragmentManager fragmentManager;

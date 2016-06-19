@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageview_listitem_add_upraznenia"
+        android:id="@+id/imageview_listitem_add_custom"
         android:src="@mipmap/clock"
         />
 
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
-            android:id="@+id/textView_listitem_add_upraznenia"
+            android:id="@+id/textView_listitem_add_custom"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="10dp" />
 
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Small Text"
-            android:id="@+id/textView_subtext_listitem_add_upraznenia"
+            android:id="@+id/textView_subtext_listitem_add_custom"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="3dp" />
     </LinearLayout>

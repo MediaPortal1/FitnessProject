@@ -17,7 +17,6 @@ import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddComplexCommentD
 import com.diplom.app.fitnessproject.view.interfaces.ComplexAddThreesetView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -49,11 +48,11 @@ public class UprazneniaAddComplexThreesetPresenter implements UprazneniaAddCompl
         itemlist.add(ItemListFactory.getListMap(R.mipmap.category,context.getString(R.string.third_upraznenie_complex),context.getString(R.string.noupraznenia)));
         //
 
-        adapter=new SimpleAdapter(context,itemlist, R.layout.listitem_upraznenia_add_custom,
+        adapter=new SimpleAdapter(context,itemlist, R.layout.listitem_add_custom,
                 new String[]{"icon","text","subtext"},
-                new int[]{R.id.imageview_listitem_add_upraznenia,
-                        R.id.textView_listitem_add_upraznenia,
-                        R.id.textView_subtext_listitem_add_upraznenia});
+                new int[]{R.id.imageview_listitem_add_custom,
+                        R.id.textView_listitem_add_custom,
+                        R.id.textView_subtext_listitem_add_custom});
         return adapter;
 
     }

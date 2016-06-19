@@ -20,7 +20,6 @@ public class DataBaseUpdateComplex extends AsyncTask<Intent,Void,Boolean> {
 
     @Override
     protected Boolean doInBackground(Intent... params) {
-        //TODO: UPDATE COMPLEX
         ContentValues cv=new ContentValues();
         cv.put("NAME",params[0].getStringExtra("name"));
         cv.put("DESCRIPTION",params[0].getStringExtra("comment"));

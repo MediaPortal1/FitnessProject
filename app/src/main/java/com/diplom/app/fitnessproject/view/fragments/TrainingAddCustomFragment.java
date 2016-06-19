@@ -6,19 +6,26 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.diplom.app.fitnessproject.R;
+import com.diplom.app.fitnessproject.presenter.TrainingsAddCustomPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.TrainingsAddCustomInterface;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentPages;
+import com.diplom.app.fitnessproject.view.interfaces.TrainingsAddCustomView;
 
 
-public class TrainingAddCustomFragment extends Fragment implements FragmentPages {
+public class TrainingAddCustomFragment extends Fragment implements FragmentPages,TrainingsAddCustomView {
 
     private String title; // TITLE OF FRAGMENT
 
     private EditText editText;
     private ListView listView;
+
+    private TrainingsAddCustomInterface presenter;
 
     @Nullable
     @Override
@@ -31,6 +38,13 @@ public class TrainingAddCustomFragment extends Fragment implements FragmentPages
         editText=(EditText)view.findViewById(R.id.editText_add_training);
         listView=(ListView)view.findViewById(R.id.listView_training_add_custom);
         //
+
+        /*
+        PRESENTER
+         */
+        presenter=new TrainingsAddCustomPresenter(getContext(),getFragmentManager(),this);
+        //
+        listView.setOnItemClickListener((AdapterView.OnItemClickListener) presenter);
 
         return view;
     }
@@ -48,5 +62,10 @@ public class TrainingAddCustomFragment extends Fragment implements FragmentPages
     @Override
     public void setTitle(String title) {
         this.title=title;
+    }
+
+    @Override
+    public void setAdapter(BaseAdapter adapter) {
+        listView.setAdapter(adapter);
     }
 }

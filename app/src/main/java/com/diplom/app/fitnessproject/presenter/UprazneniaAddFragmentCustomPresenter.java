@@ -25,7 +25,7 @@ import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddCustomFragmentInt;
 import com.diplom.app.fitnessproject.view.fragments.DialogTextFragment;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddMeasure;
-import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddTimeDialog;
+import com.diplom.app.fitnessproject.view.fragments.AddTimeDialog;
 import com.diplom.app.fitnessproject.view.interfaces.DialogMeasurePresenterSetter;
 import com.diplom.app.fitnessproject.view.interfaces.FragmentAddUpraznenieCustomView;
 import com.diplom.app.fitnessproject.view.interfaces.UprazneniaInfoGetter;
@@ -74,7 +74,7 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
         return list;
     }
     private void initAdapter(){
-        simpleAdapter=new SimpleAdapter(context,list,R.layout.listitem_upraznenia_add_custom,new String[]{"icon","text","subtext"},new int[]{R.id.imageview_listitem_add_upraznenia,R.id.textView_listitem_add_upraznenia,R.id.textView_subtext_listitem_add_upraznenia});
+        simpleAdapter=new SimpleAdapter(context,list,R.layout.listitem_add_custom,new String[]{"icon","text","subtext"},new int[]{R.id.imageview_listitem_add_custom,R.id.textView_listitem_add_custom,R.id.textView_subtext_listitem_add_custom});
     }
     @Override
     public void onResultDialog(int DIALOG_CODE,Object obj) {
@@ -150,8 +150,9 @@ public class UprazneniaAddFragmentCustomPresenter implements UprazneniaAddCustom
                 measure.show(fm,"measure");
                 break;
             case 3:
-                UprazneniaAddTimeDialog rest=new UprazneniaAddTimeDialog();
+                AddTimeDialog rest=new AddTimeDialog();
                 rest.setDialogResult(this);
+                rest.setDialogCode(REST);
                 rest.show(fm,"rest");
                 break;
         }

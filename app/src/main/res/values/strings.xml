@@ -20,6 +20,7 @@
     <string name="title.add.training">Добавить тренировочную программу</string>
     <string name="title.trainings">Тренировочные програмы</string>
     <string name="title.secundary">Таймер и секундомер</string>
+    <string name="title.choose.upraznenia">Добавить упражнения</string>
     <!-- FRAGMENTS-->
     <string name="title.tab.upraznenia">Упражнения</string>
     <string name="title.tab.complex">Комплексы упражнений</string>
@@ -33,12 +34,14 @@
     <string name="empty.fragment">Здесь пока пусто</string>
     <string name="add.superset">Добавить суперсэт</string>
     <string name="add.threeset">Добавить трисэт</string>
-    <string name="add.comment">Добавить комментарий</string>
+    <string name="add.comment">Добавить описание/комментарий</string>
     <string name="add.training">Добавить программу</string>
+    <string name="add.upraznenia">Добавить упражнение</string>
     <string name="rename.training">Изменить имя програмы</string>
     <string name="info.training">Описание програмы</string>
     <string name="makeitself">Создать вручную</string>
     <string name="chosecategory.upraznenia">Выберите категорию</string>
+    <string name="choose.type.trainings">Выберите тип программы</string>
     <string name="measure.upraznenia">Выберите меру</string>
     <string name="changecat.upraznenia">Изменить категорию</string>
     <string name="changeupr.upraznenia">Изменить название упражнения</string>
@@ -97,6 +100,7 @@
     <string name="add.category.fail">Ошибка добавления категории</string>
     <string name="type.trainings.basic">Обычная программа</string>
     <string name="type.trainings.cicle">Круговая программа</string>
+    <string name="empty.upraznenia.trainings">Пока список упражнений пуст, но вы можете добавить новые упражнения в тренировочную программу нажав на кнопку ниже</string>
     <!-- UPRAZNENIA CAT ARRAY-->
     <array name="cat_array_upraznenia">
         <item>Кардио</item>

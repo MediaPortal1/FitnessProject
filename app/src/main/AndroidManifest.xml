@@ -23,7 +23,9 @@
         <activity android:name=".view.UprazneniaActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".view.UprazneniaAddActivity">
+        <activity android:name=".view.UprazneniaAddActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.UprazneniaActivity" />
@@ -40,6 +42,7 @@
                 android:value=".view.UprazneniaActivity" />
         </activity>
         <activity android:name=".view.activity.UprazneniaAllList"
+            android:windowSoftInputMode="stateAlwaysHidden"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -47,12 +50,17 @@
         </activity>
         <activity android:name=".view.TrainingsActivity">
         </activity>
-        <activity android:name=".view.TrainingsAddActivity">
+        <activity android:name=".view.TrainingsAddActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.TrainingsActivity" />
+
         </activity>
         <activity android:name=".view.SecundaryActivity">
+        </activity>
+        <activity android:name=".view.activity.ChooseUprazneniaActivity">
         </activity>
 
     </application>

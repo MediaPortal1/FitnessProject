@@ -35,8 +35,8 @@ public class UprazneniaAddMeasure extends  DialogFragment implements AdapterView
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().setTitle(getString(R.string.measure_upraznenia));
-        View view=inflater.inflate(R.layout.fragment_upraznenia_add_custom_measure,null);
-        listView=(ListView)view.findViewById(R.id.listView_upraznenia_add_custom_measure);
+        View view=inflater.inflate(R.layout.fragment_dialog_choose,null);
+        listView=(ListView)view.findViewById(R.id.listView_fragment_dialog_choose);
         listView.setOnItemClickListener(UprazneniaAddMeasure.this);
         presenter.setMeasureCursor();
         return view;
