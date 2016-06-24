@@ -60,7 +60,7 @@
         </activity>
         <activity android:name=".view.SecundaryActivity">
         </activity>
-        <activity android:name=".view.activity.ChooseUprazneniaActivity">
+        <activity android:name=".view.activity.UprazneniaListTrainingsActivity">
         </activity>
 
     </application>

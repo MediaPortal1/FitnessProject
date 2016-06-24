@@ -15,7 +15,7 @@ import com.diplom.app.fitnessproject.presenter.behavior.ItemListFactory;
 import com.diplom.app.fitnessproject.presenter.interfaces.DialogResultSetter;
 import com.diplom.app.fitnessproject.presenter.interfaces.OnDialogResult;
 import com.diplom.app.fitnessproject.presenter.interfaces.TrainingsAddCustomInterface;
-import com.diplom.app.fitnessproject.view.activity.ChooseUprazneniaActivity;
+import com.diplom.app.fitnessproject.view.activity.UprazneniaListTrainingsActivity;
 import com.diplom.app.fitnessproject.view.fragments.AddTimeDialog;
 import com.diplom.app.fitnessproject.view.fragments.TrainingsAddCustomChooseCat;
 import com.diplom.app.fitnessproject.view.fragments.UprazneniaAddComplexCommentDialog;
@@ -81,7 +81,7 @@ public class TrainingsAddCustomPresenter implements TrainingsAddCustomInterface,
                 showRest();
                 break;
             case 3://UPRAZNENIA
-                context.startActivity(new Intent(context, ChooseUprazneniaActivity.class));
+                context.startActivity(new Intent(context, UprazneniaListTrainingsActivity.class));
                 break;
         }
     }

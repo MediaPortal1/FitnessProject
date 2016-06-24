@@ -20,7 +20,8 @@
     <string name="title.add.training">Добавить тренировочную программу</string>
     <string name="title.trainings">Тренировочные програмы</string>
     <string name="title.secundary">Таймер и секундомер</string>
-    <string name="title.choose.upraznenia">Добавить упражнения</string>
+    <string name="title.upraznia.list.trainings">Добавить упражнения</string>
+    <string name="title.choose.upraznenia">Выбрать упражнения</string>
     <!-- FRAGMENTS-->
     <string name="title.tab.upraznenia">Упражнения</string>
     <string name="title.tab.complex">Комплексы упражнений</string>

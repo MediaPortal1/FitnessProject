@@ -1,27 +1,22 @@
 package com.diplom.app.fitnessproject.view.activity;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.diplom.app.fitnessproject.R;
-import com.diplom.app.fitnessproject.presenter.TrainingsAddChooseUprazneniaPresenter;
-import com.diplom.app.fitnessproject.presenter.interfaces.TrainingsAddChooseUprazneniaInterface;
-import com.diplom.app.fitnessproject.view.interfaces.ChooseUprazneniaView;
+import com.diplom.app.fitnessproject.presenter.UprazneniaAddActivityPresenter;
+import com.diplom.app.fitnessproject.presenter.interfaces.PagesViewInteface;
+import com.diplom.app.fitnessproject.presenter.interfaces.UprazneniaAddInterface;
 
-public class ChooseUprazneniaActivity extends AppCompatActivity implements ChooseUprazneniaView{
 
-    private ListView listview;
-    private Button btnAddUpr;
-    private TextView txtview;
-    private TrainingsAddChooseUprazneniaInterface presenter; // PRESENTER
+public class ChooseUprazneniaActivity extends AppCompatActivity {
+
+    private PagesViewInteface pagesViewPresenter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,47 +24,19 @@ public class ChooseUprazneniaActivity extends AppCompatActivity implements Choos
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_upraznenia);
 
-        /*
-        INIT TOOLBAR
-         */
+        //TOOLBAR
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar_choose_upraznenia);
+        toolbar.setTitle(getString(R.string.title_choose_upraznenia));
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.title_choose_upraznenia));
+
+        //PRESENTER
+        //TODO
+
         //
-
-        /*
-        INIT COMPONENTS
-         */
-        listview=(ListView)findViewById(R.id.listview_choose_upraznenia);
-        btnAddUpr =(Button)findViewById(R.id.button_choose_upraznenia);
-        txtview=(TextView)findViewById(R.id.textView_choose_upraznenia);
-        //
-
-        /*
-        PRESENTER
-         */
-        presenter=new TrainingsAddChooseUprazneniaPresenter(getApplicationContext(),this);
-        //
-
-        //ONCLICK
-        btnAddUpr.setOnClickListener((View.OnClickListener) presenter);
-
+        viewPager=(ViewPager)findViewById(R.id.viewpager_choose_upraznenia);
+        //viewPager.setAdapter(pagesViewPresenter.getTabPagerAdapter());
+        TabLayout tabLayout=(TabLayout)findViewById(R.id.tablayout_choose_upraznenia);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
-    @Override
-    public void setAdapter(BaseAdapter adapter) {
-      listview.setAdapter(adapter);
-    }
-
-    @Override
-    public void setListVisible(boolean visible) {
-        if(visible){
-            listview.setVisibility(View.VISIBLE);
-            txtview.setVisibility(View.INVISIBLE);
-        }
-        else{
-            listview.setVisibility(View.INVISIBLE);
-            txtview.setVisibility(View.VISIBLE);
-        }
-    }
 }
